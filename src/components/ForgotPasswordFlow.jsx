@@ -69,7 +69,7 @@ const ClockIcon = ({ size = 16 }) => (
   </svg>
 );
 
-const API_BASE = "http://localhost:5000/api/auth";
+const API_BASE = "const API_URL = import.meta.env.VITE_API_URL;";
 
 export default function ForgotPasswordFlow({
   onNavigate,
@@ -769,8 +769,8 @@ export default function ForgotPasswordFlow({
                 {resendCooldown > 0
                   ? `${lang === "ta" ? "மீண்டும் அனுப்ப" : "Resend code in"} ${resendCooldown} seconds`
                   : lang === "ta"
-                  ? "மீண்டும் குறியீட்டை அனுப்புக"
-                  : "Resend Code"}
+                    ? "மீண்டும் குறியீட்டை அனுப்புக"
+                    : "Resend Code"}
               </button>
             </div>
 
