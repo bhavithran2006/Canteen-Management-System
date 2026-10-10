@@ -1,0 +1,197 @@
+/* ==========================================================================
+   Refactored Reusable Hero Banner Component
+   Used across all main pages:
+   - Dark green gradient overlay (#073B30) on the left
+   - Modern cafeteria background image covering the entire banner
+   - Small golden (#F5B800) uppercase section label
+   - Large bold white heading with golden accent words
+   - Clean description text
+   - Responsive positioning, no distortion or cutoffs
+   ========================================================================== */
+
+.ref-global-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1024 / 165;
+  min-height: 140px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(7, 59, 48, 0.12);
+  background-color: #073B30;
+  isolation: isolate;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.ref-global-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 1;
+  filter: brightness(0.92) saturate(1.15);
+}
+
+.ref-global-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 59, 48, 0.96) 0%,
+    rgba(7, 59, 48, 0.88) 32%,
+    rgba(7, 59, 48, 0.5) 60%,
+    rgba(7, 59, 48, 0.12) 88%,
+    rgba(7, 59, 48, 0.04) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ref-global-hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 18px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Back button on top-left */
+.ref-hero-back-pill {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(7, 59, 48, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 4;
+}
+
+.ref-hero-back-pill:hover {
+  background: rgba(7, 59, 48, 0.9);
+  border-color: #F5B800;
+  color: #F5B800;
+  transform: translateX(-2px);
+}
+
+/* Small golden uppercase section label */
+.ref-hero-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #F5B800;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+/* Large bold white heading */
+.ref-hero-heading {
+  font-family: var(--font-display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 26px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.18;
+  letter-spacing: -0.4px;
+}
+
+.ref-hero-heading .gold-text {
+  color: #F5B800;
+}
+
+/* Short description below heading */
+.ref-hero-desc {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 6px;
+  margin-bottom: 0;
+  line-height: 1.4;
+  max-width: 580px;
+}
+
+/* Golden underline accent */
+.ref-hero-accent-bar {
+  width: 44px;
+  height: 4px;
+  background-color: #F5B800;
+  border-radius: 2px;
+  margin-top: 8px;
+}
+
+/* Top-right badge (e.g. ● LIVE) */
+.ref-hero-badge-wrap {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  z-index: 4;
+}
+
+.ref-hero-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(7, 59, 48, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  color: #ffffff;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ref-hero-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: refLivePulse 2s infinite;
+}
+
+@keyframes refLivePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ── RESPONSIVE DESIGN ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ref-global-hero {
+    aspect-ratio: auto;
+    min-height: 130px;
+    border-radius: 16px;
+  }
+  .ref-global-hero-content {
+    padding: 14px 18px;
+  }
+  .ref-hero-heading {
+    font-size: 20px;
+  }
+  .ref-hero-desc {
+    font-size: 12px;
+  }
+  .ref-hero-badge-wrap {
+    top: 12px;
+    right: 14px;
+  }
+}

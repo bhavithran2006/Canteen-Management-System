@@ -1,0 +1,490 @@
+/* ==========================================================================
+   Admin Home Page Styling
+   Campus Canteen Theme:
+   - Dark Forest Green (#073B30)
+   - Golden Yellow (#F5B800)
+   - Warm Cream (#F6F3EA)
+   ========================================================================== */
+
+.adm-home-page {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--page-bg, #F6F3EA);
+  color: var(--text, #111827);
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  padding: 24px 32px 60px;
+  box-sizing: border-box;
+}
+
+.adm-home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ── 1. Hero Overview Banner ────────────────────────────────────────────── */
+.adm-home-hero {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(7, 59, 48, 0.12);
+  background-color: #073B30;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  isolation: isolate;
+}
+
+.adm-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  z-index: 1;
+  filter: brightness(0.95) saturate(1.1);
+  pointer-events: none;
+}
+
+.adm-hero-grad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #073B30 0%,
+    rgba(7, 59, 48, 0.98) 35%,
+    rgba(7, 59, 48, 0.85) 55%,
+    rgba(7, 59, 48, 0.4) 80%,
+    rgba(7, 59, 48, 0.1) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.adm-hero-content {
+  position: relative;
+  z-index: 3;
+  padding: 28px 36px;
+  max-width: 780px;
+}
+
+.adm-hero-tag {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #F5B800;
+  margin-bottom: 6px;
+}
+
+.adm-hero-heading {
+  font-size: 30px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+}
+
+.adm-hero-heading .highlight-gold {
+  color: #F5B800;
+  text-shadow: 0 2px 12px rgba(245, 184, 0, 0.3);
+}
+
+.adm-hero-sub {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 16px 0;
+  line-height: 1.45;
+}
+
+.adm-hero-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.adm-quick-chip {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.adm-quick-chip:hover {
+  background: #F5B800;
+  color: #111827;
+  border-color: #F5B800;
+  transform: translateY(-2px);
+}
+
+/* ── 2. Statistics Grid ─────────────────────────────────────────────────── */
+.adm-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.adm-stat-box {
+  background: var(--surface, #ffffff);
+  border-radius: 20px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 18px rgba(7, 59, 48, 0.05);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.07));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.adm-stat-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(7, 59, 48, 0.1);
+}
+
+.adm-stat-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.adm-stat-icon-wrap.amber { background: rgba(245, 184, 0, 0.14); color: #D97706; }
+.adm-stat-icon-wrap.green { background: rgba(16, 185, 129, 0.14); color: #059669; }
+.adm-stat-icon-wrap.blue { background: rgba(59, 130, 246, 0.14); color: #2563EB; }
+.adm-stat-icon-wrap.purple { background: rgba(139, 92, 246, 0.14); color: #7C3AED; }
+
+.adm-stat-data {
+  flex: 1;
+}
+
+.adm-stat-num {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text, #111827);
+  line-height: 1.1;
+  font-family: var(--font-display, inherit);
+}
+
+.adm-stat-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-muted, #64748B);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.adm-stat-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.adm-stat-pill.green { background: rgba(16, 185, 129, 0.12); color: #059669; }
+.adm-stat-pill.amber { background: rgba(245, 184, 0, 0.14); color: #D97706; }
+
+/* ── 3. Operational Two-Column Grid ─────────────────────────────────────── */
+.adm-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.adm-card-panel {
+  background: var(--surface, #ffffff);
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 18px rgba(7, 59, 48, 0.05);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.07));
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.adm-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--surface-border, rgba(7, 59, 48, 0.07));
+}
+
+.adm-panel-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adm-panel-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text, #111827);
+  margin: 0;
+}
+
+.adm-panel-action-btn {
+  background: transparent;
+  border: none;
+  color: #B45309;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-panel-action-btn:hover {
+  color: #F5B800;
+  transform: translateX(2px);
+}
+
+/* Crowd list */
+.adm-crowd-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adm-crowd-row-card {
+  background: var(--surface-subtle, #FBF9F4);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.06));
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.adm-crowd-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.adm-canteen-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text, #111827);
+}
+
+.adm-canteen-sub {
+  font-size: 12px;
+  color: var(--text-muted, #64748B);
+}
+
+.adm-crowd-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adm-crowd-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.adm-crowd-badge.low { background: rgba(16, 185, 129, 0.12); color: #059669; }
+.adm-crowd-badge.medium { background: rgba(245, 184, 0, 0.15); color: #B45309; }
+.adm-crowd-badge.high { background: rgba(239, 68, 68, 0.12); color: #DC2626; }
+
+.adm-occupancy-tag {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-muted, #64748B);
+}
+
+/* Stock alert list */
+.adm-stock-alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adm-stock-alert-item {
+  background: var(--surface-subtle, #FBF9F4);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.06));
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.adm-stock-alert-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adm-alert-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D97706;
+}
+
+.adm-stock-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text, #111827);
+}
+
+.adm-stock-alert-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.adm-stock-qty {
+  font-size: 12px;
+  color: var(--text-muted, #64748B);
+  font-weight: 600;
+}
+
+.adm-stock-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.adm-stock-tag.critical { background: rgba(239, 68, 68, 0.12); color: #DC2626; }
+.adm-stock-tag.warning { background: rgba(245, 184, 0, 0.15); color: #B45309; }
+
+/* ── 4. Recent Orders Table ─────────────────────────────────────────────── */
+.adm-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.adm-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.adm-orders-table th {
+  padding: 10px 14px;
+  background-color: var(--surface-subtle, #F8F6F0);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-muted, #64748B);
+  border-bottom: 1px solid var(--surface-border, rgba(7, 59, 48, 0.08));
+}
+
+.adm-orders-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--surface-border, rgba(7, 59, 48, 0.05));
+  color: var(--text, #1E293B);
+  vertical-align: middle;
+}
+
+.adm-orders-table tr:hover td {
+  background-color: rgba(7, 59, 48, 0.02);
+}
+
+.adm-token-badge {
+  background: rgba(245, 184, 0, 0.18);
+  color: #B45309;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.adm-ord-id {
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted, #64748B);
+}
+
+.adm-cust-name {
+  font-weight: 700;
+  color: var(--text, #111827);
+}
+
+.adm-items-line {
+  color: var(--text, #334155);
+  font-size: 12.5px;
+}
+
+.adm-canteen-tag {
+  font-size: 12px;
+  color: var(--text-muted, #64748B);
+}
+
+.adm-amt {
+  color: #073B30;
+  font-size: 13.5px;
+}
+
+.adm-status-chip {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 8px;
+  letter-spacing: 0.3px;
+}
+
+.adm-status-chip.placed { background: rgba(245, 184, 0, 0.16); color: #B45309; }
+.adm-status-chip.prep { background: rgba(139, 92, 246, 0.16); color: #7C3AED; }
+.adm-status-chip.ready { background: rgba(16, 185, 129, 0.16); color: #059669; }
+.adm-status-chip.completed { background: rgba(7, 59, 48, 0.1); color: #073B30; }
+
+.adm-table-btn {
+  background: #ffffff;
+  border: 1.5px solid #F5B800;
+  color: #B45309;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-table-btn:hover {
+  background: #F5B800;
+  color: #111827;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .adm-stats-row { grid-template-columns: repeat(2, 1fr); }
+  .adm-dual-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .adm-home-page { padding: 16px 14px 40px; }
+  .adm-stats-row { grid-template-columns: 1fr; }
+}

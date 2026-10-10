@@ -1,0 +1,637 @@
+/* ==========================================================================
+   Refactored Cart Page Styling
+   Matches design reference Image 5:
+   - Modern hero banner ("Your cart - Review & select canteen")
+   - Clean white cart item cards with dish images, vegetarian tags, stepper, delete
+   - "Pair with Fresh Juice!" recommendation row with Add buttons
+   - Promo code input with dark forest green Apply button
+   - "PAY WITH" 4-column method cards (UPI, Card, Cash, Wallet)
+   - Dark forest green (#073B30) sticky bottom checkout bar with golden button
+   ========================================================================== */
+
+.ref-cart-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 18px 24px 100px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+}
+
+/* ── CART ITEMS LIST ─────────────────────────────────────────────────────── */
+.ref-cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ref-cart-item-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(7, 59, 48, 0.08);
+  border-radius: 18px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 18px rgba(7, 59, 48, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ref-cart-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(7, 59, 48, 0.08);
+}
+
+.ref-cart-item-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex: 1;
+}
+
+.ref-cart-dish-thumb {
+  width: 76px;
+  height: 76px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: #f1f5f9;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ref-cart-dish-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ref-cart-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ref-cart-dish-name {
+  font-size: 17px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.ref-cart-veg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ref-cart-nonveg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ref-cart-dish-desc {
+  font-size: 12.5px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Stepper, Price & Delete Action */
+.ref-cart-item-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.ref-cart-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.ref-cart-step-btn {
+  background: transparent;
+  border: none;
+  color: #334155;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.ref-cart-step-btn:hover {
+  background-color: #e2e8f0;
+  color: #073B30;
+}
+
+.ref-cart-step-qty {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+  min-width: 16px;
+  text-align: center;
+}
+
+.ref-cart-dish-price {
+  font-size: 20px;
+  font-weight: 900;
+  color: #111827;
+  min-width: 60px;
+  text-align: right;
+}
+
+.ref-cart-delete-btn {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.ref-cart-delete-btn:hover {
+  background-color: #fee2e2;
+  transform: scale(1.1);
+}
+
+/* ── "PAIR WITH FRESH JUICE!" SECTION ───────────────────────────────────── */
+.ref-juice-section {
+  background-color: #fef9ed;
+  border: 1px solid #fde68a;
+  border-radius: 20px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ref-juice-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ref-juice-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #fef08a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.ref-juice-header-info h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ref-juice-header-info p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 2px 0 0;
+}
+
+.ref-juice-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.ref-juice-item-card {
+  background-color: #ffffff;
+  border: 1px solid #fde68a;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ref-juice-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.ref-juice-card-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ref-juice-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.ref-juice-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ref-juice-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-top: 2px;
+}
+
+.ref-juice-add-btn {
+  background-color: #F5B800;
+  color: #111827;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(245, 184, 0, 0.3);
+}
+
+.ref-juice-add-btn:hover {
+  background-color: #e0a700;
+  transform: scale(1.05);
+}
+
+/* ── PROMO CODE SECTION ─────────────────────────────────────────────────── */
+.ref-promo-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(7, 59, 48, 0.08);
+  border-radius: 18px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 12px rgba(7, 59, 48, 0.03);
+}
+
+.ref-promo-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.ref-promo-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.ref-promo-input {
+  flex: 1;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background-color: #f8fafc;
+}
+
+.ref-promo-input:focus {
+  border-color: #073B30;
+  background-color: #ffffff;
+}
+
+.ref-promo-apply-btn {
+  background-color: #073B30;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ref-promo-apply-btn:hover {
+  background-color: #0b4f41;
+}
+
+/* ── PAY WITH SECTION ───────────────────────────────────────────────────── */
+.ref-pay-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ref-pay-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #111827;
+  margin: 0;
+}
+
+.ref-pay-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.ref-pay-card {
+  background-color: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.ref-pay-card:hover {
+  border-color: #F5B800;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.ref-pay-card.is-selected {
+  border-color: #F5B800;
+  background-color: #fffdf5;
+  box-shadow: 0 4px 16px rgba(245, 184, 0, 0.15);
+}
+
+.ref-pay-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.ref-pay-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ref-pay-icon-box.upi {
+  background-color: #fffbeb;
+  border: 1px solid #fef3c7;
+}
+
+.ref-pay-icon-box.card {
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+}
+
+.ref-pay-icon-box.cash {
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+}
+
+.ref-pay-icon-box.wallet {
+  background-color: #f5f3ff;
+  border: 1px solid #ede9fe;
+}
+
+.ref-pay-card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ref-pay-method-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.ref-pay-method-desc {
+  font-size: 11px;
+  color: #64748b;
+  margin: 2px 0 0;
+  line-height: 1.3;
+}
+
+/* Radio button indicator */
+.ref-pay-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.ref-pay-card.is-selected .ref-pay-radio {
+  border-color: #F5B800;
+  background-color: transparent;
+}
+
+.ref-pay-radio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #F5B800;
+}
+
+/* ── BOTTOM STICKY CHECKOUT BAR ─────────────────────────────────────────── */
+.ref-cart-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 990;
+  background-color: #073B30;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -6px 28px rgba(0, 0, 0, 0.25);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.ref-sticky-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ref-sticky-cart-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(245, 184, 0, 0.15);
+  border: 1px solid rgba(245, 184, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F5B800;
+  font-size: 18px;
+}
+
+.ref-sticky-total-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ref-sticky-total-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ref-sticky-total-amount {
+  font-size: 24px;
+  font-weight: 900;
+  color: #F5B800;
+  line-height: 1.1;
+}
+
+.ref-sticky-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.ref-sticky-checkout-btn {
+  background-color: #F5B800;
+  color: #111827;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 28px;
+  font-size: 14.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(245, 184, 0, 0.4);
+  white-space: nowrap;
+}
+
+.ref-sticky-checkout-btn:hover {
+  background-color: #e0a700;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 184, 0, 0.5);
+}
+
+.ref-sticky-checkout-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ref-pay-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ref-juice-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .ref-cart-container {
+    padding: 14px 14px 140px;
+  }
+  .ref-cart-item-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ref-cart-item-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .ref-pay-grid {
+    grid-template-columns: 1fr;
+  }
+  .ref-cart-sticky-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .ref-sticky-center {
+    display: none;
+  }
+  .ref-sticky-checkout-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

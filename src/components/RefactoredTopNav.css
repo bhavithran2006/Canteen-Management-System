@@ -1,0 +1,329 @@
+/* ==========================================================================
+   Refactored Global Navigation Bar Styling
+   Matches design reference:
+   - Dark forest green (#073B30) background
+   - Golden yellow (#F5B800) active pill highlight
+   - Student role indicator badge
+   - Rounded pills, subtle hover effects, responsive mobile nav
+   ========================================================================== */
+
+.ref-nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: #073B30;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+}
+
+.ref-nav-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* ── LEFT: Logo & Role Badge ────────────────────────────────────────────── */
+.ref-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.ref-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.ref-nav-brand:hover {
+  transform: scale(1.02);
+}
+
+.ref-brand-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #F5B800;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(245, 184, 0, 0.4);
+}
+
+.ref-brand-text {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+
+.brand-campus {
+  color: #ffffff;
+}
+
+.brand-canteen {
+  color: #F5B800;
+}
+
+/* Role Indicator Pill */
+.ref-profile-wrap {
+  position: relative;
+}
+
+.ref-role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #124D3F;
+  border: 1px solid #1E6B58;
+  color: #4ADE80;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ref-role-pill:hover {
+  background-color: #175e4d;
+  border-color: #288c74;
+}
+
+.ref-role-pill.is-admin {
+  background-color: rgba(245, 184, 0, 0.18);
+  border-color: rgba(245, 184, 0, 0.4);
+  color: #F5B800;
+}
+
+/* Profile Dropdown Menu */
+.ref-profile-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 230px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  z-index: 1200;
+  animation: refDropIn 0.2s ease;
+}
+
+@keyframes refDropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ref-drop-user-info {
+  padding: 6px 16px 8px;
+}
+
+.ref-drop-name {
+  font-weight: 800;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.ref-drop-email {
+  font-size: 11.5px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.ref-drop-sub {
+  font-size: 11px;
+  color: #073B30;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.ref-drop-divider {
+  height: 1px;
+  background-color: #f1f5f9;
+  margin: 6px 0;
+}
+
+.ref-drop-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #334155;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ref-drop-item:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.ref-drop-item.text-danger {
+  color: #ef4444;
+}
+
+.ref-drop-item.text-danger:hover {
+  background-color: #fef2f2;
+}
+
+/* ── CENTER: Navigation Options ─────────────────────────────────────────── */
+.ref-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 4px;
+}
+
+.ref-nav-center::-webkit-scrollbar {
+  display: none;
+}
+
+.ref-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  color: #E2E8F0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  caret-color: transparent !important;
+  outline: none;
+}
+
+.ref-nav-btn * {
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  caret-color: transparent !important;
+}
+
+.ref-nav-btn:focus,
+.ref-nav-btn:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.ref-nav-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.09);
+  transform: translateY(-1px);
+}
+
+.ref-nav-btn.active-pill {
+  background-color: #F5B800;
+  color: #111827;
+  font-weight: 800;
+  box-shadow: 0 2px 12px rgba(245, 184, 0, 0.4);
+}
+
+.ref-nav-btn.active-pill:hover {
+  background-color: #e6ac00;
+  color: #000000;
+}
+
+.ref-cart-badge {
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 1px 7px;
+  border-radius: 12px;
+  margin-left: 2px;
+}
+
+/* ── RIGHT: Dark Mode Toggle & Logout ───────────────────────────────────── */
+.ref-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.ref-outline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ref-outline-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ── RESPONSIVE DESIGN ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ref-nav-btn span {
+    font-size: 12.5px;
+  }
+  .ref-nav-container {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ref-nav-container {
+    flex-wrap: wrap;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  .ref-nav-center {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 4px 0 2px;
+  }
+  .ref-nav-right .ref-outline-btn span {
+    display: none;
+  }
+  .ref-nav-right .ref-outline-btn {
+    padding: 6px 10px;
+  }
+}

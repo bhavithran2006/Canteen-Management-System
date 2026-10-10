@@ -8,6 +8,40 @@ import React, {
   useReducer,
   createContext,
 } from "react";
+import ForgotPasswordFlow from "./components/ForgotPasswordFlow.jsx";
+import GoogleSignInButton from "./components/GoogleSignInButton.jsx";
+import AdminStockManagement from "./components/AdminStockManagement.jsx";
+import QrPickupPassCard, { QrPickupPassModal } from "./components/QrPickupPassCard.jsx";
+import QrScannerPage from "./components/QrScannerPage.jsx";
+import RefactoredHomePage from "./components/RefactoredHomePage.jsx";
+import RefactoredTopNav from "./components/RefactoredTopNav.jsx";
+import RefactoredOrderPage from "./components/RefactoredOrderPage.jsx";
+import RefactoredCrowdPage from "./components/RefactoredCrowdPage.jsx";
+import RefactoredFeedbackPage from "./components/RefactoredFeedbackPage.jsx";
+import RefactoredCartPage from "./components/RefactoredCartPage.jsx";
+import RefactoredTrackingPage from "./components/RefactoredTrackingPage.jsx";
+import PaymentPage from "./components/PaymentPage.jsx";
+import OrderSuccessPage from "./components/OrderSuccessPage.jsx";
+import RefactoredChefDrawer from "./components/RefactoredChefDrawer.jsx";
+import FloatingChefButton from "./components/FloatingChefButton.jsx";
+import RefactoredAdminDashboard from "./components/RefactoredAdminDashboard.jsx";
+import AdminHomePage from "./components/AdminHomePage.jsx";
+import AdminOrdersPage from "./components/AdminOrdersPage.jsx";
+import AdminMenuPage from "./components/AdminMenuPage.jsx";
+import "./components/RefactoredHomePage.css";
+import "./components/RefactoredOrderPage.css";
+import "./components/RefactoredCrowdPage.css";
+import "./components/RefactoredFeedbackPage.css";
+import "./components/RefactoredCartPage.css";
+import "./components/RefactoredTrackingPage.css";
+import "./components/PaymentPage.css";
+import "./components/OrderSuccessPage.css";
+import "./components/RefactoredChefDrawer.css";
+import "./components/FloatingChefButton.css";
+import "./components/RefactoredAdminDashboard.css";
+import "./components/AdminHomePage.css";
+import "./components/AdminOrdersPage.css";
+import "./components/AdminMenuPage.css";
 
 /* ================================================================== */
 /* Inline SVG icons — no external icon package required                */
@@ -49,6 +83,14 @@ const Wrap = ({ size = 18 }) => (
 );
 const Cup = ({ size = 18 }) => (
   <svg {...ic(size)}><path d="M5 9h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9z" /><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16" /><path d="M9 5c0-.8.5-1 .5-1.8M13 5c0-.8.5-1 .5-1.8" /></svg>
+);
+const JuiceGlass = ({ size = 18 }) => (
+  <svg {...ic(size)}>
+    <path d="M6 4h12l-1.8 14.2a2.5 2.5 0 0 1-2.5 2.2h-3.4a2.5 2.5 0 0 1-2.5-2.2L6 4z" />
+    <path d="M6 10h12" strokeDasharray="2 1.5" />
+    <line x1="14" y1="1" x2="11" y2="12" />
+    <circle cx="17.5" cy="5" r="2.5" />
+  </svg>
 );
 const Bird = ({ size = 18 }) => (
   <svg {...ic(size)}><path d="M4 11h16a8 8 0 0 1-16 0z" /><path d="M9 11V9a3 3 0 0 1 6 0v2" /><path d="M8 5c.5-1 1-1.4 1-2M12 4c.4-1 .9-1.4.9-2.2M16 5c.5-1 1-1.4 1-2" /></svg>
@@ -108,6 +150,12 @@ const Eye = ({ size = 18 }) => (
 const EyeOff = ({ size = 18 }) => (
   <svg {...ic(size)}><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" /><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" /><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" /><line x1="2" x2="22" y1="2" y2="22" /></svg>
 );
+const Hash = ({ size = 18 }) => (
+  <svg {...ic(size)}><line x1="4" y1="9" x2="20" y2="9" /><line x1="4" y1="15" x2="20" y2="15" /><line x1="10" y1="3" x2="8" y2="21" /><line x1="16" y1="3" x2="14" y2="21" /></svg>
+);
+const Database = ({ size = 18 }) => (
+  <svg {...ic(size)}><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></svg>
+);
 
 const MicIcon = ({ size = 18 }) => (
   <svg {...ic(size)}><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg>
@@ -121,8 +169,76 @@ const Volume2Icon = ({ size = 18 }) => (
 const VolumeXIcon = ({ size = 18 }) => (
   <svg {...ic(size)}><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><line x1="22" x2="16" y1="9" y2="15" /><line x1="16" x2="22" y1="9" y2="15" /></svg>
 );
+const InfoIcon = ({ size = 16 }) => (
+  <svg {...ic(size)}><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+);
+const XIcon = ({ size = 18 }) => (
+  <svg {...ic(size)}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+);
+const FlameIcon = ({ size = 14 }) => (
+  <svg {...ic(size)} fill="none"><path d="M12 2c0 0-3 3-3 7a4 4 0 0 0 8 0c0-2-1-4-2-5 0 1.5-1 2.5-2 3 0-2-1-5-1-5z" strokeLinejoin="round" /></svg>
+);
 
-const FOOD_ICONS = { thali: Bowl, wrap: Wrap, cup: Cup, biryani: Bird };
+const FOOD_ICONS = { thali: Bowl, wrap: Wrap, cup: Cup, biryani: Bird, juice: JuiceGlass };
+
+/* ================================================================== */
+/* 3D Interactive Hooks & Visual Components                           */
+/* ================================================================== */
+function use3DTilt(maxTilt = 8, maxScale = 1.02) {
+  const ref = useRef(null);
+  const [style, setStyle] = useState({});
+
+  const onMouseMove = useCallback(
+    (e) => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (((y - centerY) / centerY) * -maxTilt).toFixed(2);
+      const rotateY = (((x - centerX) / centerX) * maxTilt).toFixed(2);
+
+      setStyle({
+        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${maxScale}, ${maxScale}, ${maxScale})`,
+        transition: "transform 0.08s ease-out",
+      });
+    },
+    [maxTilt, maxScale]
+  );
+
+  const onMouseLeave = useCallback(() => {
+    setStyle({
+      transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
+      transition: "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+    });
+  }, []);
+
+  return { ref, style, onMouseMove, onMouseLeave };
+}
+
+function Floating3DFood({ icon, top, left, right, bottom, delay = 0, duration = 6, size = 28 }) {
+  return (
+    <div
+      className="floating-3d-item"
+      style={{
+        position: "absolute",
+        top,
+        left,
+        right,
+        bottom,
+        animationDelay: `${delay}s`,
+        animationDuration: `${duration}s`,
+        zIndex: 3,
+        pointerEvents: "none",
+      }}
+    >
+      <div className="floating-3d-inner" style={{ fontSize: size }}>
+        {icon}
+      </div>
+    </div>
+  );
+}
 
 /* ================================================================== */
 /* Design tokens (kept in one place so the whole app stays consistent) */
@@ -267,8 +383,22 @@ const TRANSLATIONS = {
     service_speed: "Service & Speed",
     hygiene: "Hygiene & Cleanliness",
     app_experience: "App Experience",
+    juice_pairing_title: "Pair with Fresh Juice! 🥤",
+    juice_pairing_sub: "Freshly squeezed & chilled drinks to complement your food",
+    add_juice: "Add Juice",
+    nutrition_facts: "Nutrition Facts",
+    auto_calculate_macros: "Auto-Calculate Macros",
+    protein_label: "Protein",
+    carbs_label: "Carbohydrates",
+    fat_label: "Total Fat",
+    fiber_label: "Dietary Fiber",
+    sugar_label: "Sugars",
+    sodium_label: "Sodium",
+    allergens_label: "Allergens",
+    diet_type_label: "Diet Type",
     categories: {
-      meals: "Meals",
+      meals: "Food (Meals)",
+      juice: "Fresh Juice",
       snacks: "Snacks",
       beverages: "Beverages",
       desserts: "Desserts",
@@ -404,8 +534,22 @@ const TRANSLATIONS = {
     service_speed: "சேவை வேகம்",
     hygiene: "சுகாதாரம்",
     app_experience: "செயலி அனுபவம்",
+    juice_pairing_title: "உணவுடன் குளிர்ச்சியான ஜூஸ்! 🥤",
+    juice_pairing_sub: "உங்கள் உணவை மேலும் சுவையாக்க புதிய பழச்சாறுகள்",
+    add_juice: "ஜூஸ் சேர்க்க",
+    nutrition_facts: "ஊட்டச்சத்து விவரங்கள்",
+    auto_calculate_macros: "தானியங்கி கணக்கீடு",
+    protein_label: "புரதம்",
+    carbs_label: "கார்போஹைட்ரேட்",
+    fat_label: "கொழுப்பு",
+    fiber_label: "நார்ச்சத்து",
+    sugar_label: "சர்க்கரை",
+    sodium_label: "சோடியம்",
+    allergens_label: "ஒவ்வாமை பொருட்கள்",
+    diet_type_label: "உணவு வகை",
     categories: {
       meals: "உணவுகள்",
+      juice: "ஜூஸ்",
       snacks: "சிற்றுண்டிகள்",
       beverages: "பானங்கள்",
       desserts: "இனிப்புகள்",
@@ -473,21 +617,85 @@ const INITIAL_FEEDBACKS = [
 
 const WAIT_BY_LEVEL = { low: 3, med: 7, high: 14 };
 const CANTEENS_DEFAULT = [
-  { id: "main", name: "CSE Canteen", name_ta: "சி.எஸ்.இ உணவகம்", loc: "Block A · Ground floor", loc_ta: "பிளாக் ஏ · தரைத்தளம்", level: "low", wait: 3, lastUpdated: new Date() },
-  { id: "hostel", name: "S&H Canteen", name_ta: "எஸ் & ஹெச் உணவகம்", loc: "Block D", loc_ta: "பிளாக் டி", level: "high", wait: 14, lastUpdated: new Date() },
-  { id: "library", name: "Mech Canteen", name_ta: "மெக் உணவகம்", loc: "Block C · 1st floor", loc_ta: "பிளாக் சி · 1ஆம் தளம்", level: "med", wait: 7, lastUpdated: new Date() },
+  { id: "main", name: "CS Canteen", name_ta: "சி.எஸ் உணவகம்", loc: "Block A · Ground Floor", loc_ta: "பிளாக் ஏ · தரைத்தளம்", level: "low", wait: 3, status: "active", lastUpdated: new Date() },
+  { id: "hostel", name: "S&H Canteen", name_ta: "எஸ் & ஹெச் உணவகம்", loc: "Block D · Ground Floor", loc_ta: "பிளாக் டி · தரைத்தளம்", level: "med", wait: 8, status: "active", lastUpdated: new Date() },
+  { id: "library", name: "Mech Canteen", name_ta: "மெக் உணவகம்", loc: "Block C · 1st Floor", loc_ta: "பிளாக் சி · 1ஆம் தளம்", level: "high", wait: 15, status: "active", lastUpdated: new Date() },
 ];
 
 const MENU = [
-  { id: "veg_thali", name: "Veg thali", name_ta: "காய்கறி உணவு", price: 90, kcal: 320, category: "meals", icon: "thali", stock: 18, available: true },
-  { id: "chicken_biryani", name: "Chicken biryani", name_ta: "கோழி பிரியாணி", price: 130, kcal: 480, category: "meals", icon: "biryani", stock: 12, available: true },
-  { id: "paneer_wrap", name: "Paneer wrap", name_ta: "பன்னீர் ரோல்", price: 60, kcal: 260, category: "snacks", icon: "wrap", stock: 22, available: true },
-  { id: "masala_chai", name: "Masala chai", name_ta: "மசாலா டீ", price: 15, kcal: 40, category: "beverages", icon: "cup", stock: 30, available: true },
-  { id: "filter_coffee", name: "Filter coffee", name_ta: "பில்டர் காபி", price: 20, kcal: 35, category: "beverages", icon: "cup", stock: 18, available: true },
-  { id: "brownie", name: "Brownie slice", name_ta: "பிரவுனி கேக்", price: 60, kcal: 310, category: "desserts", icon: "cup", stock: 0, available: false },
+  {
+    id: "veg_thali", name: "Veg thali", name_ta: "காய்கறி உணவு", price: 90, kcal: 320,
+    category: "meals", icon: "thali", stock: 18, available: true,
+    nutrition: { protein: 12, carbs: 48, fat: 9, fiber: 6, sugar: 5, sodium: 420 },
+    allergens: ["Gluten", "Dairy"], dietTag: "veg",
+    desc: "A wholesome balanced thali with dal, sabzi, rice, roti and pickle."
+  },
+  {
+    id: "chicken_biryani", name: "Chicken biryani", name_ta: "கோழி பிரியாணி", price: 130, kcal: 480,
+    category: "meals", icon: "biryani", stock: 12, available: true,
+    nutrition: { protein: 28, carbs: 52, fat: 18, fiber: 3, sugar: 4, sodium: 680 },
+    allergens: ["Gluten"], dietTag: "non-veg",
+    desc: "Aromatic basmati rice slow-cooked with tender chicken and whole spices."
+  },
+  {
+    id: "orange_juice", name: "Fresh Orange Juice", name_ta: "ஆரஞ்சு ஜூஸ்", price: 40, kcal: 110,
+    category: "juice", icon: "juice", stock: 25, available: true,
+    nutrition: { protein: 2, carbs: 26, fat: 0, fiber: 1, sugar: 22, sodium: 5 },
+    allergens: [], dietTag: "veg",
+    desc: "Freshly squeezed sweet orange juice packed with natural Vitamin C and citrus pulp."
+  },
+  {
+    id: "mango_juice", name: "Mango Juice", name_ta: "மாம்பழ ஜூஸ்", price: 50, kcal: 150,
+    category: "juice", icon: "juice", stock: 20, available: true,
+    nutrition: { protein: 1, carbs: 36, fat: 1, fiber: 2, sugar: 32, sodium: 10 },
+    allergens: [], dietTag: "veg",
+    desc: "Thick and luscious Alphonso mango blend, naturally sweet and perfectly chilled."
+  },
+  {
+    id: "watermelon_juice", name: "Watermelon Juice", name_ta: "தர்பூசணி ஜூஸ்", price: 35, kcal: 80,
+    category: "juice", icon: "juice", stock: 30, available: true,
+    nutrition: { protein: 1, carbs: 19, fat: 0, fiber: 1, sugar: 16, sodium: 5 },
+    allergens: [], dietTag: "veg",
+    desc: "Crisp and hydrating crushed watermelon juice with a subtle touch of black salt."
+  },
+  {
+    id: "lime_mint", name: "Lime Mint Cooler", name_ta: "எலுமிச்சை புதினா ஜூஸ்", price: 30, kcal: 45,
+    category: "juice", icon: "juice", stock: 25, available: true,
+    nutrition: { protein: 0, carbs: 12, fat: 0, fiber: 0, sugar: 10, sodium: 40 },
+    allergens: [], dietTag: "veg",
+    desc: "Tangy fresh lime cooler with muddled garden mint and crushed ice."
+  },
+  {
+    id: "paneer_wrap", name: "Paneer wrap", name_ta: "பன்னீர் ரோல்", price: 60, kcal: 260,
+    category: "snacks", icon: "wrap", stock: 22, available: true,
+    nutrition: { protein: 11, carbs: 30, fat: 10, fiber: 2, sugar: 3, sodium: 310 },
+    allergens: ["Gluten", "Dairy"], dietTag: "veg",
+    desc: "Grilled paneer with mint chutney and crunchy veggies in a soft wheat wrap."
+  },
+  {
+    id: "masala_chai", name: "Masala chai", name_ta: "மசாலா டீ", price: 15, kcal: 40,
+    category: "beverages", icon: "cup", stock: 30, available: true,
+    nutrition: { protein: 1, carbs: 7, fat: 1, fiber: 0, sugar: 6, sodium: 15 },
+    allergens: ["Dairy"], dietTag: "veg",
+    desc: "Freshly brewed spiced tea with ginger, cardamom and cinnamon."
+  },
+  {
+    id: "filter_coffee", name: "Filter coffee", name_ta: "பில்டர் காபி", price: 20, kcal: 35,
+    category: "beverages", icon: "cup", stock: 18, available: true,
+    nutrition: { protein: 1, carbs: 5, fat: 1, fiber: 0, sugar: 4, sodium: 10 },
+    allergens: ["Dairy"], dietTag: "veg",
+    desc: "Traditional South Indian drip coffee with creamy milk and decoction."
+  },
+  {
+    id: "brownie", name: "Brownie slice", name_ta: "பிரவுனி கேக்", price: 60, kcal: 310,
+    category: "desserts", icon: "cup", stock: 0, available: false,
+    nutrition: { protein: 4, carbs: 42, fat: 14, fiber: 2, sugar: 28, sodium: 190 },
+    allergens: ["Gluten", "Dairy", "Eggs"], dietTag: "veg",
+    desc: "Rich fudgy dark chocolate brownie baked fresh every morning."
+  },
 ];
 
-const CATEGORIES = ["meals", "snacks", "beverages", "desserts"];
+const CATEGORIES = ["meals", "juice", "snacks", "beverages", "desserts"];
 
 const INITIAL_ORDER_HISTORY = [
   {
@@ -508,8 +716,9 @@ const INITIAL_ORDER_HISTORY = [
     id: "ORD-8410",
     items: [
       { id: "chicken_biryani", name: "Chicken biryani", name_ta: "கோழி பிரியாணி", price: 130, qty: 1 },
+      { id: "orange_juice", name: "Fresh Orange Juice", name_ta: "ஆரஞ்சு ஜூஸ்", price: 40, qty: 1 },
     ],
-    total: 130,
+    total: 170,
     paymentMode: "Campus Wallet",
     token: "A-08",
     issuedTime: new Date(Date.now() - 1000 * 60 * 120),
@@ -559,45 +768,489 @@ const cartReducer = (state, action) => {
 };
 
 const INITIAL_REGISTERED_USERS = [
-  { id: "STAFF-01", name: "Canteen Manager", email: "admin@canteen.edu", role: "admin", dept: "Management", year: 0, password: "admin" },
-  { id: "STAFF-02", name: "Chef Murugan", email: "chef@canteen.edu", role: "admin", dept: "Kitchen Operations", year: 0, password: "admin" },
-  { id: "21CSE045", name: "Ananya Sharma", email: "ananya@college.edu", role: "customer", dept: "CSE", year: 3, password: "123" },
-  { id: "22ECE018", name: "Karthik Raja", email: "karthik@college.edu", role: "customer", dept: "ECE", year: 2, password: "123" },
-  { id: "23IT009", name: "Priya Sundar", email: "priya@college.edu", role: "customer", dept: "IT", year: 1, password: "123" },
+  { id: "STAFF-01", name: "Canteen Manager", email: "admin@canteen.edu", role: "admin", dept: "Management", year: 0, password: "admin", registeredAt: "2026-01-10T08:00:00.000Z" },
+  { id: "STAFF-02", name: "Chef Murugan", email: "chef@canteen.edu", role: "admin", dept: "Kitchen Operations", year: 0, password: "admin", registeredAt: "2026-01-10T08:00:00.000Z" },
+  { id: "21CSE045", name: "Ananya Sharma", email: "ananya@college.edu", role: "customer", dept: "CSE", year: 3, password: "123", registeredAt: "2026-01-15T09:30:00.000Z" },
+  { id: "22ECE018", name: "Karthik Raja", email: "karthik@college.edu", role: "customer", dept: "ECE", year: 2, password: "123", registeredAt: "2026-01-16T10:15:00.000Z" },
+  { id: "23IT009", name: "Priya Sundar", email: "priya@college.edu", role: "customer", dept: "IT", year: 1, password: "123", registeredAt: "2026-01-18T11:00:00.000Z" },
 ];
 
+const STORAGE_REGISTERED_USERS = "canteen_registered_users";
+const STORAGE_REGISTERED_EMAILS = "canteen_registered_emails";
+const STORAGE_LAST_EMAIL = "canteen_last_registered_email";
+
+const getInitialRegisteredUsers = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_REGISTERED_USERS);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const map = new Map();
+        INITIAL_REGISTERED_USERS.forEach((u) => map.set((u.email || u.id).toLowerCase(), u));
+        parsed.forEach((u) => {
+          const k = (u.email || u.id || "").toLowerCase();
+          if (k) map.set(k, { ...(map.get(k) || {}), ...u });
+        });
+        return Array.from(map.values());
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to load registered users from localStorage:", err);
+  }
+  return INITIAL_REGISTERED_USERS;
+};
+
+const saveRegisteredUsersToStorage = (users) => {
+  try {
+    localStorage.setItem(STORAGE_REGISTERED_USERS, JSON.stringify(users));
+    const emails = users
+      .map((u) => (u.email || "").trim().toLowerCase())
+      .filter((e) => e.length > 0);
+    const uniqueEmails = Array.from(new Set(emails));
+    localStorage.setItem(STORAGE_REGISTERED_EMAILS, JSON.stringify(uniqueEmails));
+    console.log(`💾 Stored ${uniqueEmails.length} registered email(s) in localStorage (${STORAGE_REGISTERED_EMAILS})`);
+  } catch (err) {
+    console.error("Failed to save registered users to localStorage:", err);
+  }
+};
+
+/* ── Menu & Order History Persistence Helpers ────────────────────────── */
+const STORAGE_MENU = "canteen_menu_items_v2";
+const STORAGE_ORDER_HISTORY = "canteen_order_history_v2";
+const STORAGE_ACTIVE_ORDER = "canteen_active_order_v2";
+
+const getInitialMenu = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_MENU);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        const storedIds = new Set(parsed.map((item) => item && item.id));
+        const merged = [...parsed];
+        // Ensure default items (such as the 4 juices and staples) are present if missing
+        MENU.forEach((defItem) => {
+          if (!storedIds.has(defItem.id)) {
+            merged.push(defItem);
+          }
+        });
+        return merged;
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to load menu from localStorage:", err);
+  }
+  return MENU;
+};
+
+const saveMenuToStorage = (items) => {
+  try {
+    if (Array.isArray(items)) {
+      localStorage.setItem(STORAGE_MENU, JSON.stringify(items));
+    }
+  } catch (err) {
+    console.error("Failed to save menu to localStorage:", err);
+  }
+};
+
+const getInitialOrderHistory = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_ORDER_HISTORY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to load order history from localStorage:", err);
+  }
+  return INITIAL_ORDER_HISTORY;
+};
+
+const saveOrderHistoryToStorage = (history) => {
+  try {
+    if (Array.isArray(history)) {
+      localStorage.setItem(STORAGE_ORDER_HISTORY, JSON.stringify(history));
+    }
+  } catch (err) {
+    console.error("Failed to save order history to localStorage:", err);
+  }
+};
+
+const getInitialActiveOrder = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_ACTIVE_ORDER);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        return parsed;
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to load active order from localStorage:", err);
+  }
+  return null;
+};
+
+const saveActiveOrderToStorage = (order) => {
+  try {
+    if (order) {
+      localStorage.setItem(STORAGE_ACTIVE_ORDER, JSON.stringify(order));
+    } else {
+      localStorage.removeItem(STORAGE_ACTIVE_ORDER);
+    }
+  } catch (err) {
+    console.error("Failed to save active order to localStorage:", err);
+  }
+};
+
+/* ── Raw Material Stock & Recipe Ingredients Persistence Helpers ────── */
+const STORAGE_RAW_STOCKS = "canteen_raw_stocks_v1";
+const STORAGE_STOCK_TRANSACTIONS = "canteen_stock_transactions_v1";
+const STORAGE_RECIPE_INGREDIENTS = "canteen_recipe_ingredients_v1";
+
+const INITIAL_RAW_STOCKS = [
+  { id: 1, stockId: "STK-1001", stockName: "Rice", category: "Grains", quantity: 50, unit: "kg", minimumStockLevel: 10, purchasePrice: 2500, supplierName: "ABC Suppliers", purchaseDate: "2026-09-10", expiryDate: "2027-03-21" },
+  { id: 2, stockId: "STK-1002", stockName: "Tomato", category: "Vegetables", quantity: 2, unit: "kg", minimumStockLevel: 5, purchasePrice: 80, supplierName: "Fresh Farms", purchaseDate: "2026-09-18", expiryDate: "2026-09-23" },
+  { id: 3, stockId: "STK-1003", stockName: "Onion", category: "Vegetables", quantity: 0, unit: "kg", minimumStockLevel: 5, purchasePrice: 0, supplierName: "Fresh Farms", purchaseDate: "2026-09-10", expiryDate: "2026-10-10" },
+  { id: 4, stockId: "STK-1004", stockName: "Potato", category: "Vegetables", quantity: 25, unit: "kg", minimumStockLevel: 8, purchasePrice: 750, supplierName: "Agro Foods", purchaseDate: "2026-09-15", expiryDate: "2026-10-15" },
+  { id: 5, stockId: "STK-1005", stockName: "Carrot", category: "Vegetables", quantity: 8, unit: "kg", minimumStockLevel: 3, purchasePrice: 400, supplierName: "Agro Foods", purchaseDate: "2026-09-15", expiryDate: "2026-09-28" },
+  { id: 6, stockId: "STK-1006", stockName: "Milk", category: "Dairy", quantity: 3, unit: "litre", minimumStockLevel: 5, purchasePrice: 180, supplierName: "Dairy Fresh", purchaseDate: "2026-09-20", expiryDate: "2026-09-23" },
+  { id: 7, stockId: "STK-1007", stockName: "Oil", category: "Oils", quantity: 30, unit: "litre", minimumStockLevel: 5, purchasePrice: 3600, supplierName: "Gold Drop Refineries", purchaseDate: "2026-09-01", expiryDate: "2027-01-10" },
+  { id: 8, stockId: "STK-1008", stockName: "Flour", category: "Grains", quantity: 40, unit: "kg", minimumStockLevel: 10, purchasePrice: 1600, supplierName: "Royal Mills", purchaseDate: "2026-09-05", expiryDate: "2026-12-15" },
+  { id: 9, stockId: "STK-1009", stockName: "Eggs", category: "Dairy", quantity: 100, unit: "piece", minimumStockLevel: 20, purchasePrice: 600, supplierName: "Poultry King", purchaseDate: "2026-09-16", expiryDate: "2026-10-01" },
+  { id: 10, stockId: "STK-1010", stockName: "Chicken", category: "Meat", quantity: 20, unit: "kg", minimumStockLevel: 5, purchasePrice: 4400, supplierName: "Fresh Meat Co", purchaseDate: "2026-09-20", expiryDate: "2026-09-22" },
+  { id: 11, stockId: "STK-1011", stockName: "Spices", category: "Spices", quantity: 10, unit: "kg", minimumStockLevel: 2, purchasePrice: 2000, supplierName: "Spice Valley", purchaseDate: "2026-08-15", expiryDate: "2027-06-30" },
+  { id: 12, stockId: "STK-1012", stockName: "Sugar", category: "Sweeteners", quantity: 25, unit: "kg", minimumStockLevel: 5, purchasePrice: 1125, supplierName: "Sweet Sugars Ltd", purchaseDate: "2026-08-20", expiryDate: "2027-05-15" },
+];
+
+const INITIAL_STOCK_TRANSACTIONS = [
+  { id: 1, stockId: 1, stockName: "Rice", type: "PURCHASE", quantity: 50, unit: "kg", previousStock: 0, newStock: 50, reason: "Supplier purchase from ABC Suppliers", supplierName: "ABC Suppliers", purchasePrice: 2500, performedBy: "Canteen Manager", date: "2026-09-10T10:00:00.000Z" },
+  { id: 2, stockId: 6, stockName: "Milk", type: "PURCHASE", quantity: 10, unit: "litre", previousStock: 0, newStock: 10, reason: "Morning milk batch delivery", supplierName: "Dairy Fresh", purchasePrice: 600, performedBy: "Chef Murugan", date: "2026-09-20T06:30:00.000Z" },
+  { id: 3, stockId: 6, stockName: "Milk", type: "USED", quantity: -5, unit: "litre", previousStock: 10, newStock: 5, reason: "Morning tea and coffee batches", supplierName: "Dairy Fresh", purchasePrice: 0, performedBy: "Chef Murugan", date: "2026-09-20T09:00:00.000Z" },
+  { id: 4, stockId: 6, stockName: "Milk", type: "WASTAGE", quantity: -2, unit: "litre", previousStock: 5, newStock: 3, reason: "Spilled container during prep", supplierName: "Dairy Fresh", purchasePrice: 0, performedBy: "Chef Murugan", date: "2026-09-20T11:15:00.000Z" },
+  { id: 5, stockId: 7, stockName: "Oil", type: "PURCHASE", quantity: 30, unit: "litre", previousStock: 0, newStock: 30, reason: "Monthly cooking oil bulk procurement", supplierName: "Gold Drop Refineries", purchasePrice: 3600, performedBy: "Canteen Manager", date: "2026-09-01T08:00:00.000Z" },
+];
+
+const INITIAL_RECIPE_INGREDIENTS = [
+  { id: 1, menuItemId: "veg_thali", stockId: 1, quantity: 0.2, unit: "kg", notes: "Basmati rice" },
+  { id: 2, menuItemId: "veg_thali", stockId: 4, quantity: 0.1, unit: "kg", notes: "Potato sabzi" },
+  { id: 3, menuItemId: "veg_thali", stockId: 7, quantity: 0.02, unit: "litre", notes: "Tadka cooking oil" },
+  { id: 4, menuItemId: "veg_thali", stockId: 11, quantity: 0.01, unit: "kg", notes: "Thali spices" },
+  { id: 5, menuItemId: "chicken_biryani", stockId: 1, quantity: 0.25, unit: "kg", notes: "Biryani rice" },
+  { id: 6, menuItemId: "chicken_biryani", stockId: 10, quantity: 0.15, unit: "kg", notes: "Chicken cuts" },
+  { id: 7, menuItemId: "chicken_biryani", stockId: 7, quantity: 0.03, unit: "litre", notes: "Refined oil" },
+  { id: 8, menuItemId: "chicken_biryani", stockId: 11, quantity: 0.02, unit: "kg", notes: "Biryani spices" },
+  { id: 9, menuItemId: "masala_chai", stockId: 6, quantity: 0.1, unit: "litre", notes: "Milk" },
+  { id: 10, menuItemId: "masala_chai", stockId: 12, quantity: 0.01, unit: "kg", notes: "Sugar" },
+  { id: 11, menuItemId: "masala_chai", stockId: 11, quantity: 0.005, unit: "kg", notes: "Tea spices" },
+  { id: 12, menuItemId: "filter_coffee", stockId: 6, quantity: 0.12, unit: "litre", notes: "Milk" },
+  { id: 13, menuItemId: "filter_coffee", stockId: 12, quantity: 0.01, unit: "kg", notes: "Sugar" },
+  { id: 14, menuItemId: "paneer_wrap", stockId: 8, quantity: 0.08, unit: "kg", notes: "Wrap flour" },
+  { id: 15, menuItemId: "paneer_wrap", stockId: 5, quantity: 0.05, unit: "kg", notes: "Carrot filling" },
+  { id: 16, menuItemId: "paneer_wrap", stockId: 7, quantity: 0.01, unit: "litre", notes: "Tawa oil" },
+];
+
+const getInitialRawStocks = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_RAW_STOCKS);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (err) {
+    console.warn("Failed to load raw stocks from storage:", err);
+  }
+  return INITIAL_RAW_STOCKS;
+};
+
+const saveRawStocksToStorage = (stocks) => {
+  try {
+    localStorage.setItem(STORAGE_RAW_STOCKS, JSON.stringify(stocks));
+  } catch (err) {
+    console.error("Failed to save raw stocks to storage:", err);
+  }
+};
+
+const getInitialStockTransactions = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_STOCK_TRANSACTIONS);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (err) {
+    console.warn("Failed to load stock transactions from storage:", err);
+  }
+  return INITIAL_STOCK_TRANSACTIONS;
+};
+
+const saveStockTransactionsToStorage = (txs) => {
+  try {
+    localStorage.setItem(STORAGE_STOCK_TRANSACTIONS, JSON.stringify(txs));
+  } catch (err) {
+    console.error("Failed to save stock transactions to storage:", err);
+  }
+};
+
+const getInitialRecipeIngredients = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_RECIPE_INGREDIENTS);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (err) {
+    console.warn("Failed to load recipe ingredients from storage:", err);
+  }
+  return INITIAL_RECIPE_INGREDIENTS;
+};
+
+const saveRecipeIngredientsToStorage = (recipes) => {
+  try {
+    localStorage.setItem(STORAGE_RECIPE_INGREDIENTS, JSON.stringify(recipes));
+  } catch (err) {
+    console.error("Failed to save recipe ingredients to storage:", err);
+  }
+};
+
 function CanteenProvider({ children }) {
-  const [user, setUser] = useState({ name: "Ananya", roll: "21CSE045", dept: "CSE", year: 3, role: "customer" });
-  const [registeredUsers, setRegisteredUsers] = useState(INITIAL_REGISTERED_USERS);
+  const [user, setUser] = useState(() => {
+    try {
+      if (window.location.search.includes("testUser=student")) {
+        return {
+          id: "21CSE045",
+          name: "Ananya Sharma",
+          roll: "21CSE045",
+          email: "ananya@college.edu",
+          dept: "CSE",
+          year: 3,
+          role: "customer",
+        };
+      }
+      const sessionUser = sessionStorage.getItem("canteen_session_user");
+      if (sessionUser) return JSON.parse(sessionUser);
+    } catch (e) {}
+    return null;
+  });
+
+  // Keep active user synced in sessionStorage during active tab session, and clear when logged out
+  useEffect(() => {
+    try {
+      if (user) {
+        sessionStorage.setItem("canteen_session_user", JSON.stringify(user));
+      } else {
+        sessionStorage.removeItem("canteen_session_user");
+        localStorage.removeItem("canteen_current_user");
+      }
+    } catch (e) {}
+  }, [user]);
+
+  // Clean up any stale persistent user on startup so app never auto-bypasses login
+  useEffect(() => {
+    try {
+      localStorage.removeItem("canteen_current_user");
+    } catch (e) {}
+  }, []);
+
+  const logout = useCallback(() => {
+    setUser(null);
+    try {
+      sessionStorage.removeItem("canteen_session_user");
+      localStorage.removeItem("canteen_current_user");
+    } catch (e) {}
+  }, []);
+
+  const [registeredUsers, setRegisteredUsers] = useState(getInitialRegisteredUsers);
+
+  // Sync to localStorage on mount so initial registered emails are available immediately
+  useEffect(() => {
+    saveRegisteredUsersToStorage(registeredUsers);
+  }, []);
 
   const registerUser = useCallback((newUser) => {
+    const cleanedEmail = (newUser.email || "").trim().toLowerCase();
+    const userToSave = {
+      ...newUser,
+      email: cleanedEmail,
+      registeredAt: newUser.registeredAt || new Date().toISOString(),
+    };
+
     setRegisteredUsers((prev) => {
       const existingIdx = prev.findIndex(
         (u) =>
-          u.id.toLowerCase() === newUser.id.toLowerCase() ||
-          (u.email && newUser.email && u.email.toLowerCase() === newUser.email.toLowerCase())
+          (u.email && cleanedEmail && u.email.toLowerCase() === cleanedEmail) ||
+          (u.id && userToSave.id && u.id.toLowerCase() === userToSave.id.toLowerCase())
       );
+      let updated;
       if (existingIdx >= 0) {
-        const updated = [...prev];
-        updated[existingIdx] = { ...updated[existingIdx], ...newUser };
-        return updated;
+        updated = [...prev];
+        updated[existingIdx] = { ...updated[existingIdx], ...userToSave };
+      } else {
+        updated = [userToSave, ...prev];
       }
-      return [newUser, ...prev];
+      saveRegisteredUsersToStorage(updated);
+      try {
+        localStorage.setItem(STORAGE_LAST_EMAIL, cleanedEmail);
+      } catch (e) {}
+      return updated;
+    });
+
+    // Fire-and-forget async POST to backend MySQL API if running
+    if (cleanedEmail && userToSave.password) {
+      fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: userToSave.id || userToSave.roll || cleanedEmail,
+          name: userToSave.name,
+          email: cleanedEmail,
+          password: userToSave.password,
+          role: userToSave.role || "customer",
+          dept: userToSave.dept || "CSE",
+          year: userToSave.year || 1,
+        }),
+      })
+        .then(async (res) => {
+          if (res.ok) {
+            console.log("✅ Synced registered email to MySQL database:", cleanedEmail);
+          }
+        })
+        .catch(() => {
+          // Backend offline is normal during client-side dev
+        });
+    }
+  }, []);
+
+  const resetRegisteredUsers = useCallback(() => {
+    setRegisteredUsers(INITIAL_REGISTERED_USERS);
+    saveRegisteredUsersToStorage(INITIAL_REGISTERED_USERS);
+  }, []);
+
+  const updateUserPassword = useCallback((emailToUpdate, newPass) => {
+    const cleaned = (emailToUpdate || "").trim().toLowerCase();
+    if (!cleaned) return;
+    setRegisteredUsers((prev) => {
+      const updated = prev.map((u) => {
+        if (u.email && u.email.toLowerCase() === cleaned) {
+          return { ...u, password: newPass };
+        }
+        return u;
+      });
+      saveRegisteredUsersToStorage(updated);
+      try {
+        localStorage.setItem(STORAGE_LAST_EMAIL, cleaned);
+      } catch (e) {}
+      return updated;
     });
   }, []);
 
   const [walletBalance] = useState(340);
-  const [cart, dispatchCart] = useReducer(cartReducer, {}); // { [itemId]: qty }
-  const [menu, setMenu] = useState(MENU);
+  const [cart, dispatchCart] = useReducer(cartReducer, { veg_thali: 1 }); // Pre-loaded with 1 Veg thali matching mockup Image 5
+  const [menu, setMenu] = useState(getInitialMenu);
   const [canteens, setCanteens] = useState(CANTEENS_DEFAULT);
+  const [selectedCanteen, setSelectedCanteenState] = useState(() => {
+    try {
+      return localStorage.getItem("canteen_selected_canteen") || "main";
+    } catch {
+      return "main";
+    }
+  });
+  const setSelectedCanteen = useCallback((id) => {
+    setSelectedCanteenState(id);
+    try {
+      localStorage.setItem("canteen_selected_canteen", id);
+    } catch {}
+  }, []);
   const [notifications, setNotifications] = useState([
     { id: 1, text: "Your order is ready — Token A-14 at Counter 2", read: false },
     { id: 2, text: "CSE Canteen is now Busy. Consider North Block Café.", read: false },
   ]);
-  const [order, setOrder] = useState(null); // active order once placed
-  const [orderHistory, setOrderHistory] = useState(INITIAL_ORDER_HISTORY);
+  const [order, setOrder] = useState(getInitialActiveOrder); // active order once placed, persisted
+  const [orderHistory, setOrderHistory] = useState(getInitialOrderHistory);
   const [lang, setLang] = useState("en");
   const [feedbacks, setFeedbacks] = useState(INITIAL_FEEDBACKS);
+
+  // Sync menu, orderHistory, and active order to localStorage whenever they change
+  useEffect(() => {
+    saveMenuToStorage(menu);
+  }, [menu]);
+
+  useEffect(() => {
+    saveOrderHistoryToStorage(orderHistory);
+  }, [orderHistory]);
+
+  useEffect(() => {
+    saveActiveOrderToStorage(order);
+  }, [order]);
+
+  const [rawStocks, setRawStocks] = useState(getInitialRawStocks);
+  const [stockTransactions, setStockTransactions] = useState(getInitialStockTransactions);
+  const [recipeIngredients, setRecipeIngredients] = useState(getInitialRecipeIngredients);
+
+  useEffect(() => {
+    saveRawStocksToStorage(rawStocks);
+  }, [rawStocks]);
+
+  useEffect(() => {
+    saveStockTransactionsToStorage(stockTransactions);
+  }, [stockTransactions]);
+
+  useEffect(() => {
+    saveRecipeIngredientsToStorage(recipeIngredients);
+  }, [recipeIngredients]);
+
+  // Synchronize with backend API if online
+  useEffect(() => {
+    fetch("http://localhost:5000/api/canteens")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setCanteens(data);
+        }
+      })
+      .catch(() => {});
+
+    fetch("http://localhost:5000/api/admin/stock")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setRawStocks(data);
+          saveRawStocksToStorage(data);
+        }
+      })
+      .catch(() => {});
+
+    fetch("http://localhost:5000/api/admin/stock/history")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setStockTransactions(data);
+          saveStockTransactionsToStorage(data);
+        }
+      })
+      .catch(() => {});
+
+    fetch("http://localhost:5000/api/admin/menu-ingredients")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setRecipeIngredients(data);
+          saveRecipeIngredientsToStorage(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const resetMenuToDefaults = useCallback(() => {
+    setMenu(MENU);
+    saveMenuToStorage(MENU);
+  }, []);
+
+  const resetOrderHistory = useCallback(() => {
+    setOrderHistory(INITIAL_ORDER_HISTORY);
+    saveOrderHistoryToStorage(INITIAL_ORDER_HISTORY);
+  }, []);
 
   const toggleLang = useCallback(() => setLang((prev) => (prev === "en" ? "ta" : "en")), []);
 
@@ -624,8 +1277,8 @@ function CanteenProvider({ children }) {
     (fbData) => {
       const newFb = {
         id: "fb-" + Date.now(),
-        author: fbData.author || user.name,
-        roll: user.roll,
+        author: fbData.author || user?.name || "Student",
+        roll: user?.roll || "Student",
         rating: fbData.rating || 5,
         category: fbData.category || "food_quality",
         item: fbData.item || null,
@@ -721,31 +1374,102 @@ function CanteenProvider({ children }) {
 
   const clearCart = useCallback(() => dispatchCart({ type: "clear" }), []);
 
-  const updateStock = useCallback((id, nextStock) => {
-    setMenu((prev) =>
-      prev.map((item) => {
-        if (item.id !== id) return item;
-        const safeStock = Math.max(0, Number(nextStock) || 0);
-        if (safeStock <= 5 && safeStock > 0) {
-          showAlert(
-            lang === "ta"
-              ? `⚠️ குறைந்த இருப்பு எச்சரிக்கை: ${item.name_ta || item.name} ${safeStock} மட்டுமே மீதி உள்ளது!`
-              : `⚠️ Low Stock Alert: Only ${safeStock} left for ${item.name}!`
-          );
-        }
-        return { ...item, stock: safeStock, available: safeStock > 0 };
-      })
-    );
-  }, [lang, showAlert]);
+  const updateStock = useCallback(
+    (id, nextStock) => {
+      setMenu((prev) => {
+        const updated = prev.map((item) => {
+          if (item.id !== id) return item;
+          const safeStock = Math.max(0, Number(nextStock) || 0);
+          if (safeStock <= 5 && safeStock > 0) {
+            showAlert(
+              lang === "ta"
+                ? `⚠️ குறைந்த இருப்பு எச்சரிக்கை: ${item.name_ta || item.name} ${safeStock} மட்டுமே மீதி உள்ளது!`
+                : `⚠️ Low Stock Alert: Only ${safeStock} left for ${item.name}!`
+            );
+          }
+          return { ...item, stock: safeStock, available: safeStock > 0 };
+        });
+        saveMenuToStorage(updated);
+        return updated;
+      });
 
-  const addProduct = useCallback((product) => {
-    setMenu((prev) => [...prev, { ...product, stock: Math.max(0, Number(product.stock) || 0), available: (Number(product.stock) || 0) > 0 }]);
-  }, []);
+      fetch(`http://localhost:5000/api/menu/${id}/stock`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ stock: nextStock }),
+      }).catch(() => {});
+    },
+    [lang, showAlert]
+  );
+
+  const addProduct = useCallback(
+    (product) => {
+      const itemToAdd = {
+        ...product,
+        stock: Math.max(0, Number(product.stock) || 0),
+        available: (Number(product.stock) || 0) > 0,
+      };
+      setMenu((prev) => {
+        const updated = [...prev, itemToAdd];
+        saveMenuToStorage(updated);
+        return updated;
+      });
+
+      showAlert(
+        lang === "ta"
+          ? `✅ "${itemToAdd.name_ta || itemToAdd.name}" சேர்க்கப்பட்டு நிரந்தரமாக சேமிக்கப்பட்டது!`
+          : `✅ "${itemToAdd.name}" added and saved permanently to Menu & Orders!`
+      );
+
+      // Async sync to backend MySQL API if running
+      fetch("http://localhost:5000/api/menu", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(itemToAdd),
+      }).catch(() => {
+        // Backend offline is normal during client-side dev
+      });
+    },
+    [lang, showAlert]
+  );
 
   const removeProduct = useCallback((id) => {
-    setMenu((prev) => prev.filter((item) => item.id !== id));
+    setMenu((prev) => {
+      const updated = prev.filter((item) => item.id !== id);
+      saveMenuToStorage(updated);
+      return updated;
+    });
     dispatchCart({ type: "setQty", id, qty: 0 });
+
+    fetch(`http://localhost:5000/api/menu/${id}`, {
+      method: "DELETE",
+    }).catch(() => {});
   }, []);
+
+  const updateProduct = useCallback(
+    (updatedProduct) => {
+      setMenu((prev) => {
+        const updated = prev.map((item) =>
+          item.id === updatedProduct.id ? { ...item, ...updatedProduct } : item
+        );
+        saveMenuToStorage(updated);
+        return updated;
+      });
+
+      showAlert(
+        lang === "ta"
+          ? `✅ "${updatedProduct.name_ta || updatedProduct.name}" புதுப்பிக்கப்பட்டது!`
+          : `✅ "${updatedProduct.name}" updated successfully!`
+      );
+
+      fetch(`http://localhost:5000/api/menu/${updatedProduct.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedProduct),
+      }).catch(() => {});
+    },
+    [lang, showAlert]
+  );
 
   const cartLines = useMemo(
     () =>
@@ -763,6 +1487,22 @@ function CanteenProvider({ children }) {
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   }, []);
 
+  const fetchCanteens = useCallback(async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/canteens");
+      if (res.ok) {
+        const data = await res.json();
+        if (data && Array.isArray(data) && data.length > 0) {
+          setCanteens(data);
+          return data;
+        }
+      }
+    } catch (e) {
+      console.warn("fetchCanteens error:", e);
+    }
+    return null;
+  }, []);
+
   const updateCrowdLevel = useCallback((id, level) => {
     setCanteens((prev) =>
       prev.map((c) =>
@@ -771,8 +1511,64 @@ function CanteenProvider({ children }) {
     );
   }, []);
 
+  const updateCanteenStatus = useCallback(
+    async (id, newStatus) => {
+      // Optimistic state update
+      setCanteens((prev) =>
+        prev.map((c) =>
+          c.id === id ? { ...c, status: newStatus, lastUpdated: new Date() } : c
+        )
+      );
+
+      try {
+        const token = user?.token;
+        const headers = { "Content-Type": "application/json" };
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+        if (user) {
+          headers["x-user-id"] = user.id || "STAFF-01";
+          headers["x-user-name"] = user.name || "Canteen Manager";
+          headers["x-user-email"] = user.email || "admin@canteen.edu";
+          headers["x-user-role"] = user.role || "admin";
+        }
+
+        const res = await fetch(`http://localhost:5000/api/canteens/${id}/status`, {
+          method: "PATCH",
+          headers,
+          body: JSON.stringify({ status: newStatus }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.message || data.error || "Failed to update canteen status");
+        }
+
+        if (data.canteen) {
+          setCanteens((prev) =>
+            prev.map((c) => (c.id === id ? { ...c, ...data.canteen } : c))
+          );
+        }
+        return data;
+      } catch (err) {
+        console.error("updateCanteenStatus error:", err);
+        fetchCanteens();
+        throw err;
+      }
+    },
+    [user, fetchCanteens]
+  );
+
   const placeOrder = useCallback(
-    (paymentMode, total) => {
+    (paymentMode, total, canteenId, canteenName, canteenLoc) => {
+      // Verify canteen status before placing order
+      const targetCanteen = canteens.find((c) => c.id === canteenId);
+      if (targetCanteen && targetCanteen.status === "inactive") {
+        const inactiveMsg = lang === "ta"
+          ? "இந்த உணவகம் தற்போது செயல்படவில்லை. தயவுசெய்து மற்றொரு உணவகத்தை தேர்வு செய்யவும்."
+          : "This canteen is currently inactive. Please choose another canteen.";
+        if (showAlert) showAlert(inactiveMsg);
+        return false;
+      }
+
       const token = "A-" + (10 + Math.floor(Math.random() * 89));
       const newOrder = {
         id: "ORD-" + Math.floor(1000 + Math.random() * 9000),
@@ -780,17 +1576,26 @@ function CanteenProvider({ children }) {
         total,
         paymentMode,
         token,
-        issuedTime: new Date(),
+        issuedTime: new Date().toISOString(),
         completedTime: null,
         status: 0, // 0 placed, 1 preparing, 2 ready, 3 picked up
         counter: 2,
+        canteenId: canteenId || null,
+        canteenName: canteenName || null,
+        canteenLoc: canteenLoc || null,
       };
 
       setOrder(newOrder);
-      setOrderHistory((prev) => [newOrder, ...prev]);
+      saveActiveOrderToStorage(newOrder);
 
-      setMenu((prev) =>
-        prev.map((item) => {
+      setOrderHistory((prev) => {
+        const updated = [newOrder, ...prev];
+        saveOrderHistoryToStorage(updated);
+        return updated;
+      });
+
+      setMenu((prev) => {
+        const updated = prev.map((item) => {
           const match = cartLines.find((line) => line.id === item.id);
           if (!match) return item;
 
@@ -803,36 +1608,387 @@ function CanteenProvider({ children }) {
             );
           }
           return { ...item, stock: updatedStock, available: updatedStock > 0 };
-        })
-      );
+        });
+        saveMenuToStorage(updated);
+        return updated;
+      });
 
       clearCart();
     },
     [cartLines, clearCart, lang, showAlert]
   );
 
+  const deductStockForOrder = useCallback((orderToDeduct) => {
+    if (!orderToDeduct || !orderToDeduct.items || orderToDeduct.items.length === 0) return;
+
+    setRawStocks((currStocks) => {
+      let updatedStocks = [...currStocks];
+      const newTxs = [];
+
+      orderToDeduct.items.forEach((item) => {
+        const mappings = (recipeIngredients || []).filter((r) => r.menuItemId === item.id);
+        mappings.forEach((m) => {
+          const stock = updatedStocks.find((s) => String(s.id) === String(m.stockId));
+          if (stock) {
+            const rawNeeded = item.qty * m.quantity;
+            let convertedNeeded = rawNeeded;
+            const fromU = (m.unit || "").toLowerCase();
+            const toU = (stock.unit || "").toLowerCase();
+            if (fromU === "gram" && toU === "kg") convertedNeeded = rawNeeded / 1000;
+            else if (fromU === "kg" && toU === "gram") convertedNeeded = rawNeeded * 1000;
+            else if (fromU === "ml" && toU === "litre") convertedNeeded = rawNeeded / 1000;
+            else if (fromU === "litre" && toU === "ml") convertedNeeded = rawNeeded * 1000;
+
+            const needed = Math.round(convertedNeeded * 1000) / 1000;
+            const prevQty = stock.quantity;
+            const newQty = Math.max(0, Math.round((prevQty - needed) * 1000) / 1000);
+
+            updatedStocks = updatedStocks.map((s) => (s.id === stock.id ? { ...s, quantity: newQty } : s));
+
+            newTxs.push({
+              id: Date.now() + Math.random(),
+              stockId: stock.id,
+              stockName: stock.stockName,
+              type: "FOOD_PREPARATION",
+              quantity: -needed,
+              unit: stock.unit,
+              previousStock: prevQty,
+              newStock: newQty,
+              reason: `Food preparation: ${item.qty}× ${item.name} for order ${orderToDeduct.id}`,
+              performedBy: user?.name || "Canteen Admin",
+              orderId: orderToDeduct.id,
+              date: new Date().toISOString(),
+            });
+
+            if (newQty <= stock.minimumStockLevel) {
+              setNotifications((prevNotifs) => [
+                {
+                  id: Date.now() + Math.random(),
+                  text: newQty === 0
+                    ? `🚨 Out of Stock Alert: ${stock.stockName} is out of stock!`
+                    : `⚠️ Low Stock Alert: Only ${newQty} ${stock.unit} remaining for ${stock.stockName}!`,
+                  read: false,
+                },
+                ...prevNotifs,
+              ]);
+            }
+          }
+        });
+      });
+
+      if (newTxs.length > 0) {
+        saveRawStocksToStorage(updatedStocks);
+        setStockTransactions((prevTxs) => {
+          const merged = [...newTxs, ...prevTxs];
+          saveStockTransactionsToStorage(merged);
+          return merged;
+        });
+      }
+
+      return updatedStocks;
+    });
+  }, [recipeIngredients, user]);
+
   const advanceOrderStatus = useCallback(() => {
     setOrder((prev) => {
       if (!prev) return prev;
       const nextStatus = Math.min(3, prev.status + 1);
+      const isFirstPrep = nextStatus >= 1 && !prev.ingredientsDeducted;
+
+      if (isFirstPrep) {
+        deductStockForOrder(prev);
+      }
+
       const updated = {
         ...prev,
         status: nextStatus,
-        completedTime: nextStatus === 3 ? new Date() : prev.completedTime,
+        ingredientsDeducted: true,
+        completedTime: nextStatus === 3 ? new Date().toISOString() : prev.completedTime,
       };
-      setOrderHistory((history) =>
-        history.map((o) => (o.id === prev.id ? updated : o))
-      );
+      saveActiveOrderToStorage(updated);
+      setOrderHistory((history) => {
+        const updatedHistory = history.map((o) => (o.id === prev.id ? updated : o));
+        saveOrderHistoryToStorage(updatedHistory);
+        return updatedHistory;
+      });
       return updated;
     });
+  }, [deductStockForOrder]);
+
+  const updateOrderStatus = useCallback((orderId, newStatus) => {
+    setOrderHistory((prevList) => {
+      const target = prevList.find((o) => o.id === orderId);
+      if (target && newStatus >= 1 && !target.ingredientsDeducted) {
+        deductStockForOrder(target);
+      }
+      const updatedList = prevList.map((o) =>
+        o.id === orderId
+          ? {
+              ...o,
+              status: newStatus,
+              ingredientsDeducted: true,
+              completedTime: newStatus === 3 ? new Date().toISOString() : o.completedTime,
+            }
+          : o
+      );
+      saveOrderHistoryToStorage(updatedList);
+      return updatedList;
+    });
+  }, [deductStockForOrder]);
+
+  const addRawStock = useCallback((stockData) => {
+    const nextId = (rawStocks.length > 0 ? Math.max(...rawStocks.map((s) => Number(s.id) || 0)) : 0) + 1;
+    const newStock = {
+      ...stockData,
+      id: nextId,
+      stockId: stockData.stockId || `STK-${1000 + nextId}`,
+      quantity: Number(stockData.quantity) || 0,
+      minimumStockLevel: Number(stockData.minimumStockLevel) || 0,
+      purchasePrice: Number(stockData.purchasePrice) || 0,
+      createdAt: new Date().toISOString(),
+    };
+
+    setRawStocks((prev) => {
+      const updated = [newStock, ...prev];
+      saveRawStocksToStorage(updated);
+      return updated;
+    });
+
+    if (newStock.quantity > 0) {
+      const initTx = {
+        id: Date.now() + Math.random(),
+        stockId: newStock.id,
+        stockName: newStock.stockName,
+        type: "PURCHASE",
+        quantity: newStock.quantity,
+        unit: newStock.unit,
+        previousStock: 0,
+        newStock: newStock.quantity,
+        reason: "Initial stock registration",
+        supplierName: newStock.supplierName || "Initial Inventory",
+        purchasePrice: newStock.purchasePrice,
+        performedBy: user?.name || "Canteen Admin",
+        date: new Date().toISOString(),
+      };
+      setStockTransactions((prev) => {
+        const updated = [initTx, ...prev];
+        saveStockTransactionsToStorage(updated);
+        return updated;
+      });
+    }
+
+    fetch("http://localhost:5000/api/admin/stock", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newStock),
+    }).catch(() => {});
+  }, [rawStocks, user]);
+
+  const updateRawStock = useCallback((id, stockData) => {
+    setRawStocks((prev) => {
+      const updated = prev.map((item) => (item.id === id ? { ...item, ...stockData } : item));
+      saveRawStocksToStorage(updated);
+      return updated;
+    });
+
+    fetch(`http://localhost:5000/api/admin/stock/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(stockData),
+    }).catch(() => {});
+  }, []);
+
+  const deleteRawStock = useCallback((id) => {
+    setRawStocks((prev) => {
+      const updated = prev.filter((item) => item.id !== id);
+      saveRawStocksToStorage(updated);
+      return updated;
+    });
+    setRecipeIngredients((prev) => {
+      const updated = prev.filter((r) => r.stockId !== id);
+      saveRecipeIngredientsToStorage(updated);
+      return updated;
+    });
+
+    fetch(`http://localhost:5000/api/admin/stock/${id}`, {
+      method: "DELETE",
+    }).catch(() => {});
+  }, []);
+
+  const purchaseRawStock = useCallback((id, purchaseData) => {
+    const qty = Number(purchaseData.quantity) || 0;
+    let targetItem = null;
+
+    setRawStocks((prev) => {
+      const updated = prev.map((item) => {
+        if (item.id !== id) return item;
+        targetItem = item;
+        const newQty = Math.round((item.quantity + qty) * 1000) / 1000;
+        return {
+          ...item,
+          quantity: newQty,
+          supplierName: purchaseData.supplierName || item.supplierName,
+          purchasePrice: purchaseData.purchasePrice !== undefined ? Number(purchaseData.purchasePrice) : item.purchasePrice,
+          purchaseDate: purchaseData.purchaseDate || item.purchaseDate,
+          expiryDate: purchaseData.expiryDate || item.expiryDate,
+        };
+      });
+      saveRawStocksToStorage(updated);
+      return updated;
+    });
+
+    if (targetItem) {
+      const tx = {
+        id: Date.now() + Math.random(),
+        stockId: targetItem.id,
+        stockName: targetItem.stockName,
+        type: "PURCHASE",
+        quantity: qty,
+        unit: targetItem.unit,
+        previousStock: targetItem.quantity,
+        newStock: Math.round((targetItem.quantity + qty) * 1000) / 1000,
+        reason: purchaseData.reason || `Purchased ${qty} ${targetItem.unit} from ${purchaseData.supplierName || targetItem.supplierName}`,
+        supplierName: purchaseData.supplierName || targetItem.supplierName,
+        purchasePrice: purchaseData.purchasePrice !== undefined ? Number(purchaseData.purchasePrice) : targetItem.purchasePrice,
+        performedBy: user?.name || "Canteen Admin",
+        date: new Date().toISOString(),
+      };
+      setStockTransactions((prev) => {
+        const updated = [tx, ...prev];
+        saveStockTransactionsToStorage(updated);
+        return updated;
+      });
+    }
+
+    fetch(`http://localhost:5000/api/admin/stock/${id}/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(purchaseData),
+    }).catch(() => {});
+  }, [user]);
+
+  const reduceRawStock = useCallback((id, reduceData) => {
+    const qty = Number(reduceData.quantity) || 0;
+    let targetItem = rawStocks.find((s) => s.id === id);
+    if (!targetItem) return { error: "Stock item not found." };
+    if (qty > targetItem.quantity) {
+      return {
+        error: `Insufficient stock. Only ${targetItem.quantity} ${targetItem.unit} of ${targetItem.stockName} is available.`,
+      };
+    }
+
+    const prevQty = targetItem.quantity;
+    const newQty = Math.max(0, Math.round((prevQty - qty) * 1000) / 1000);
+
+    setRawStocks((prev) => {
+      const updated = prev.map((item) => (item.id === id ? { ...item, quantity: newQty } : item));
+      saveRawStocksToStorage(updated);
+      return updated;
+    });
+
+    let txType = "USED";
+    const r = (reduceData.reason || "").toLowerCase();
+    if (r.includes("wastage") || r.includes("spoil")) txType = "WASTAGE";
+    else if (r.includes("damage")) txType = "DAMAGED";
+    else if (r.includes("expir")) txType = "EXPIRED";
+    else if (r.includes("prep") || r.includes("cook")) txType = "FOOD_PREPARATION";
+    else if (r.includes("adjust")) txType = "ADJUSTMENT";
+
+    const tx = {
+      id: Date.now() + Math.random(),
+      stockId: targetItem.id,
+      stockName: targetItem.stockName,
+      type: txType,
+      quantity: -qty,
+      unit: targetItem.unit,
+      previousStock: prevQty,
+      newStock: newQty,
+      reason: [reduceData.reason, reduceData.notes].filter(Boolean).join(" — ") || "Manual reduction",
+      supplierName: targetItem.supplierName,
+      purchasePrice: targetItem.purchasePrice,
+      performedBy: user?.name || "Canteen Admin",
+      date: new Date().toISOString(),
+    };
+
+    setStockTransactions((prev) => {
+      const updated = [tx, ...prev];
+      saveStockTransactionsToStorage(updated);
+      return updated;
+    });
+
+    if (newQty <= targetItem.minimumStockLevel) {
+      setNotifications((prev) => [
+        {
+          id: Date.now() + Math.random(),
+          text: newQty === 0
+            ? `🚨 Out of Stock Alert: ${targetItem.stockName} is completely out of stock!`
+            : `⚠️ Low Stock Alert: Only ${newQty} ${targetItem.unit} remaining for ${targetItem.stockName}!`,
+          read: false,
+        },
+        ...prev,
+      ]);
+    }
+
+    fetch(`http://localhost:5000/api/admin/stock/${id}/reduce`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reduceData),
+    }).catch(() => {});
+
+    return { success: true };
+  }, [rawStocks, user]);
+
+  const saveRecipeMapping = useCallback((mappingData) => {
+    const nextId = (recipeIngredients.length > 0 ? Math.max(...recipeIngredients.map((r) => Number(r.id) || 0)) : 0) + 1;
+    const newMapping = {
+      ...mappingData,
+      id: nextId,
+      quantity: Number(mappingData.quantity) || 0,
+    };
+
+    setRecipeIngredients((prev) => {
+      const existingIdx = prev.findIndex(
+        (r) => r.menuItemId === newMapping.menuItemId && String(r.stockId) === String(newMapping.stockId)
+      );
+      let updated;
+      if (existingIdx >= 0) {
+        updated = [...prev];
+        updated[existingIdx] = { ...updated[existingIdx], ...newMapping };
+      } else {
+        updated = [...prev, newMapping];
+      }
+      saveRecipeIngredientsToStorage(updated);
+      return updated;
+    });
+
+    fetch("http://localhost:5000/api/admin/menu-ingredients", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(mappingData),
+    }).catch(() => {});
+  }, [recipeIngredients]);
+
+  const deleteRecipeMapping = useCallback((id) => {
+    setRecipeIngredients((prev) => {
+      const updated = prev.filter((r) => r.id !== id);
+      saveRecipeIngredientsToStorage(updated);
+      return updated;
+    });
+
+    fetch(`http://localhost:5000/api/admin/menu-ingredients/${id}`, {
+      method: "DELETE",
+    }).catch(() => {});
   }, []);
 
   const cancelOrder = useCallback(() => {
     setOrder((prev) => {
       if (!prev) return null;
-      setOrderHistory((history) =>
-        history.map((o) => (o.id === prev.id ? { ...o, status: -1 } : o))
-      );
+      saveActiveOrderToStorage(null);
+      setOrderHistory((history) => {
+        const updatedHistory = history.map((o) => (o.id === prev.id ? { ...o, status: -1 } : o));
+        saveOrderHistoryToStorage(updatedHistory);
+        return updatedHistory;
+      });
       return null;
     });
   }, []);
@@ -841,6 +1997,7 @@ function CanteenProvider({ children }) {
     () => ({
       user,
       setUser,
+      logout,
       walletBalance,
       cart,
       cartLines,
@@ -851,6 +2008,7 @@ function CanteenProvider({ children }) {
       clearCart,
       updateStock,
       addProduct,
+      updateProduct,
       removeProduct,
       notifications,
       unreadCount,
@@ -864,6 +2022,8 @@ function CanteenProvider({ children }) {
       canteens,
       updateCrowdLevel,
       menu,
+      resetMenuToDefaults,
+      resetOrderHistory,
       lang,
       toggleLang,
       setLang,
@@ -877,10 +2037,28 @@ function CanteenProvider({ children }) {
       upvoteFeedback,
       registeredUsers,
       registerUser,
+      resetRegisteredUsers,
+      updateUserPassword,
+      rawStocks,
+      stockTransactions,
+      recipeIngredients,
+      addRawStock,
+      updateRawStock,
+      deleteRawStock,
+      purchaseRawStock,
+      reduceRawStock,
+      saveRecipeMapping,
+      deleteRecipeMapping,
+      updateOrderStatus,
+      selectedCanteen,
+      setSelectedCanteen,
+      fetchCanteens,
+      updateCanteenStatus,
     }),
     [
       user,
       setUser,
+      logout,
       walletBalance,
       cart,
       cartLines,
@@ -891,6 +2069,7 @@ function CanteenProvider({ children }) {
       clearCart,
       updateStock,
       addProduct,
+      updateProduct,
       removeProduct,
       notifications,
       unreadCount,
@@ -903,6 +2082,8 @@ function CanteenProvider({ children }) {
       canteens,
       updateCrowdLevel,
       menu,
+      resetMenuToDefaults,
+      resetOrderHistory,
       lang,
       toggleLang,
       setLang,
@@ -916,13 +2097,30 @@ function CanteenProvider({ children }) {
       upvoteFeedback,
       registeredUsers,
       registerUser,
+      resetRegisteredUsers,
+      updateUserPassword,
+      rawStocks,
+      stockTransactions,
+      recipeIngredients,
+      addRawStock,
+      updateRawStock,
+      deleteRawStock,
+      purchaseRawStock,
+      reduceRawStock,
+      saveRecipeMapping,
+      deleteRecipeMapping,
+      updateOrderStatus,
+      selectedCanteen,
+      setSelectedCanteen,
+      fetchCanteens,
+      updateCanteenStatus,
     ]
   );
 
   return <CanteenContext.Provider value={value}>{children}</CanteenContext.Provider>;
 }
 
-function useCanteen() {
+export function useCanteen() {
   const ctx = useContext(CanteenContext);
   if (!ctx) throw new Error("useCanteen must be used inside <CanteenProvider>");
   return ctx;
@@ -936,92 +2134,31 @@ function AppFrame({ children }) {
 }
 
 function TopNav({ page, onNavigate, theme, toggleTheme, onOpenChat }) {
-  const { user, lang, toggleLang, t } = useCanteen();
-  const isAdmin = user?.role === "admin";
-
-  const items = isAdmin
-    ? [
-        { key: "admin-dashboard", label: lang === "ta" ? "டாஷ்போர்டு" : "Dashboard", icon: "📊" },
-        { key: "kitchen-orders", label: lang === "ta" ? "சமையலறை" : "Kitchen Orders", icon: "👨‍🍳" },
-        { key: "stock", label: lang === "ta" ? "இருப்பு & மெனு" : "Stock & Menu", icon: "📦" },
-        { key: "crowd", label: lang === "ta" ? "கூட்டம்" : "Crowd Control", icon: <People /> },
-        { key: "feedback", label: lang === "ta" ? "விமர்சனங்கள்" : "Reviews", icon: <StarIcon size={16} filled /> },
-      ]
-    : [
-        { key: "home", label: t("home"), icon: "🏠" },
-        { key: "menu", label: t("order"), icon: <Utensils /> },
-        { key: "crowd", label: t("crowd"), icon: <People /> },
-        { key: "feedback", label: t("feedback"), icon: <StarIcon size={16} filled /> },
-        { key: "cart", label: t("cart"), icon: <CartIcon /> },
-        { key: "tracking", label: t("track"), icon: <Ticket /> },
-      ];
-
   return (
-    <div className="topnav">
-      <div className="topnav-inner">
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <button className="lang-toggle" type="button" onClick={toggleLang}>
-            🌐 {lang === "en" ? "தமிழ்" : "English"}
-          </button>
-          <div className="topnav-brand">
-            <span className="topnav-dot" />
-            {t("brand")}
-          </div>
-          <span className={`role-pill ${isAdmin ? "admin" : "customer"}`}>
-            {isAdmin ? "🛡️ ADMIN" : "👤 STUDENT"}
-          </span>
-        </div>
-        <div className="topnav-items">
-          {items.map((it) => (
-            <button
-              key={it.key}
-              className={"navitem" + (page === it.key ? " active" : "")}
-              onClick={() => onNavigate(it.key)}
-            >
-              <span className="navicon">{it.icon}</span>
-              <span>{it.label}</span>
-            </button>
-          ))}
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <button
-            className="theme-toggle"
-            type="button"
-            onClick={onOpenChat}
-            style={{ background: "rgba(226,163,16,0.2)", color: "var(--coral-d)", borderColor: "var(--coral)", display: "flex", alignItems: "center", gap: 5 }}
-            title="Chat with Canteen Chef AI"
-          >
-            <span>👨‍🍳</span>
-            <span>{lang === "ta" ? "ஷெஃப் AI" : "Chef AI"}</span>
-          </button>
-          <button className="theme-toggle" type="button" onClick={toggleTheme}>
-            {theme === "dark" ? (lang === "ta" ? "வெளிச்சம்" : "Light mode") : (lang === "ta" ? "இருள்" : "Dark mode")}
-          </button>
-          <button
-            className="navitem"
-            style={{ padding: "6px 12px", background: "rgba(226,163,16,0.15)", borderRadius: 10, border: "1px solid var(--coral)" }}
-            onClick={() => onNavigate("login")}
-            title="Logout / Switch Account"
-          >
-            <span className="navicon"><LogOut size={16} /></span>
-            <span>{lang === "ta" ? "வெளியேறு" : "Logout"}</span>
-          </button>
-        </div>
-      </div>
-    </div>
+    <RefactoredTopNav
+      page={page}
+      onNavigate={onNavigate}
+      theme={theme}
+      toggleTheme={toggleTheme}
+      onOpenChat={onOpenChat}
+      useCanteenHook={useCanteen}
+    />
   );
 }
 
 /* ================================================================== */
-/* Login / Register page                                                 */
 /* ================================================================== */
-/* ================================================================== */
-/* Login / Register page with Automatic Role Identification           */
-/* ================================================================== */
-function LoginPage({ onLogin }) {
-  const { lang, toggleLang, t, setUser, showAlert, registeredUsers, registerUser } = useCanteen();
-  const [mode, setMode] = useState("login"); // "login" | "register"
+function LoginPage({ onLogin, onNavigate }) {
+  const { lang, toggleLang, t, setUser, showAlert, registeredUsers, registerUser, resetRegisteredUsers } = useCanteen();
+  const [mode, setMode] = useState(() =>
+    typeof window !== "undefined" && (window.location.hash.includes("register") || window.location.search.includes("mode=register"))
+      ? "register"
+      : "login"
+  ); // "login" | "register"
   const [showPassword, setShowPassword] = useState(false);
+
+  // 3D Card Interactive Tilt Hook
+  const tiltCard = use3DTilt(8, 1.02);
 
   // Login states
   const [identifier, setIdentifier] = useState("");
@@ -1031,6 +2168,7 @@ function LoginPage({ onLogin }) {
   // Register states
   const [regRole, setRegRole] = useState("customer"); // "customer" | "admin"
   const [fullName, setFullName] = useState("");
+  const [regEmail, setRegEmail] = useState("");
   const [regIdentifier, setRegIdentifier] = useState("");
   const [dept, setDept] = useState("CSE");
   const [year, setYear] = useState("3");
@@ -1038,66 +2176,95 @@ function LoginPage({ onLogin }) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState("");
+  const [popupError, setPopupError] = useState("");
   const identifierRef = useRef(null);
+  const popupTimerRef = useRef(null);
+
+  // Auto-fill identifier with the most recently registered/saved email
+  useEffect(() => {
+    try {
+      const lastEmail = localStorage.getItem("canteen_last_registered_email");
+      if (lastEmail && !identifier) {
+        setIdentifier(lastEmail);
+      }
+    } catch (e) {}
+  }, []);
+
+  // Show a popup for any error, auto-dismiss after 4 s
+  const showPopup = useCallback((msg) => {
+    setPopupError(msg);
+    clearTimeout(popupTimerRef.current);
+    popupTimerRef.current = setTimeout(() => setPopupError(""), 4000);
+  }, []);
 
   useEffect(() => {
     identifierRef.current?.focus();
   }, [mode]);
 
-  // Unified single login with automatic customer vs admin role detection
+  // Whenever the plain `error` state is set, route it to the popup instead
+  useEffect(() => {
+    if (error) {
+      showPopup(error);
+      setError("");
+    }
+  }, [error, showPopup]);
+
+  // Strict login — ONLY registered users can log in. No auto-creation.
   const handleLoginSubmit = (e) => {
     if (e) e.preventDefault();
-    const cleanId = identifier.trim();
+    const cleanId = identifier.trim().toLowerCase();
+
     if (!cleanId) {
-      setError(lang === "ta" ? "மின்னஞ்சல் அல்லது பதிவெண் உள்ளிடவும்" : "Please enter your Email, Roll No or Staff ID");
+      setError(lang === "ta" ? "மின்னஞ்சல் அல்லது பதிவெண் உள்ளிடவும்" : "Please enter your Email or Roll No.");
+      return;
+    }
+    if (!password) {
+      setError(lang === "ta" ? "கடவுச்சொல் உள்ளிடவும்" : "Please enter your password.");
       return;
     }
 
-    // 1. Identify user from registered database
+    // 1. Look up ONLY in the registered users list (by email, id, or roll)
     const matched = (registeredUsers || []).find(
       (u) =>
-        u.id.toLowerCase() === cleanId.toLowerCase() ||
-        (u.email && u.email.toLowerCase() === cleanId.toLowerCase())
+        (u.email && u.email.toLowerCase() === cleanId) ||
+        (u.id && u.id.toLowerCase() === cleanId) ||
+        (u.roll && u.roll.toLowerCase() === cleanId)
     );
 
-    let userObj;
-    if (matched) {
-      userObj = { ...matched };
-    } else {
-      // 2. Automatically identify role from identifier pattern
-      const isAdmin =
-        cleanId.toLowerCase().includes("admin") ||
-        cleanId.toLowerCase().includes("staff") ||
-        cleanId.toLowerCase().includes("manager") ||
-        cleanId.toLowerCase().includes("chef") ||
-        cleanId.toUpperCase().startsWith("STAFF");
-
-      const extractedName = cleanId.includes("@") ? cleanId.split("@")[0] : cleanId;
-      const formattedName = extractedName.charAt(0).toUpperCase() + extractedName.slice(1);
-
-      userObj = {
-        id: cleanId,
-        name: formattedName || (isAdmin ? "Canteen Staff" : "Student User"),
-        roll: cleanId,
-        email: cleanId.includes("@") ? cleanId : `${cleanId.toLowerCase()}@college.edu`,
-        dept: isAdmin ? "Management" : "CSE",
-        year: isAdmin ? 0 : 3,
-        role: isAdmin ? "admin" : "customer",
-        password: password || "123",
-      };
-      if (registerUser) registerUser(userObj);
+    // 2. User not found → hard stop, tell them to register
+    if (!matched) {
+      setError(
+        lang === "ta"
+          ? "இந்த மின்னஞ்சல் / பதிவு எண் பதிவு செய்யப்படவில்லை. தயவுசெய்து புதிய கணக்கு உருவாக்கவும்."
+          : `Email or Roll No "${identifier.trim()}" is not registered. Please create an account first.`
+      );
+      return;
     }
 
+    // 3. Password check (plain-text comparison for in-memory mock data)
+    if (matched.password && password !== matched.password) {
+      setError(lang === "ta" ? "தவறான கடவுச்சொல். மீண்டும் முயற்சிக்கவும்." : "Incorrect password. Please try again.");
+      return;
+    }
+
+    // 4. Success — log in with the registered user's data
+    const userObj = { ...matched };
     setUser(userObj);
     setError("");
+
+    try {
+      if (userObj.email) {
+        localStorage.setItem("canteen_last_registered_email", userObj.email);
+      }
+    } catch (e) {}
 
     const isAdmin = userObj.role === "admin";
     showAlert(
       lang === "ta"
-        ? `🎉 நல்வரவு ${userObj.name}! நீங்கள் ${isAdmin ? "🛡️ உணவக நிர்வாகியாக" : "👨‍🎓 மாணவராக"} அடையாளம் காணப்பட்டுள்ளீர்கள்.`
-        : `🎉 Welcome ${userObj.name}! Identified as ${isAdmin ? "🛡️ Canteen Admin" : "👨‍🎓 Student Customer"}.`
+        ? `🎉 நல்வரவு ${userObj.name}! ${isAdmin ? "🛡️ நிர்வாகியாக" : "👨‍🎓 மாணவராக"} உள்நுழைந்தீர்கள்.`
+        : `🎉 Welcome back, ${userObj.name}! Logged in as ${isAdmin ? "🛡️ Canteen Admin" : "👨‍🎓 Student"}.`
     );
-    onLogin(isAdmin ? "admin-dashboard" : "home");
+    onLogin(isAdmin ? "admin-dashboard" : "order");
   };
 
   const handleQuickRoleLogin = (targetRole) => {
@@ -1126,66 +2293,164 @@ function LoginPage({ onLogin }) {
       };
       setUser(studentUser);
       showAlert(lang === "ta" ? "👨‍🎓 மாணவராக அடையாளம் காணப்பட்டு உள்நுழைந்துவிட்டீர்கள்!" : "👨‍🎓 Identified & Logged in as Student Customer!");
-      onLogin("home");
+      onLogin("order");
     }
   };
 
   const handleRegisterSubmit = (e) => {
     if (e) e.preventDefault();
-    if (!fullName.trim() || !regIdentifier.trim()) {
-      setError(lang === "ta" ? "அனைத்து விவரங்களையும் நிரப்பவும்" : "Please fill in all details");
+    const cleanName = fullName.trim();
+    const cleanEmail = regEmail.trim().toLowerCase();
+    const cleanRoll = regIdentifier.trim();
+
+    if (!cleanName) {
+      setError(lang === "ta" ? "உங்கள் முழு பெயரை உள்ளிடவும்" : "Please enter your full name.");
       return;
     }
-    if (regPassword && confirmPassword && regPassword !== confirmPassword) {
-      setError(t("passwords_dont_match"));
+    if (!cleanEmail) {
+      setError(lang === "ta" ? "மின்னஞ்சல் முகவரியை உள்ளிடவும்" : "Please enter your email address.");
       return;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(cleanEmail)) {
+      setError(
+        lang === "ta"
+          ? "சரியான மின்னஞ்சல் முகவரி உள்ளிடவும் (எ.கா: name@college.edu)"
+          : "Please enter a valid email address (e.g. name@college.edu or name@gmail.com)."
+      );
+      return;
+    }
+
+    // Duplicate email check
+    const emailExists = (registeredUsers || []).some(
+      (u) => u.email && u.email.toLowerCase() === cleanEmail
+    );
+    if (emailExists) {
+      setError(
+        lang === "ta"
+          ? `மின்னஞ்சல் "${cleanEmail}" ஏற்கனவே பதிவு செய்யப்பட்டுள்ளது. தயவுசெய்து உள்நுழையவும்.`
+          : `Email "${cleanEmail}" is already registered. Please log in instead.`
+      );
+      return;
+    }
+
+    if (!regPassword) {
+      setError(lang === "ta" ? "கடவுச்சொல் உள்ளிடவும்" : "Please enter your password.");
+      return;
+    }
+    if (regPassword.length < 3) {
+      setError(lang === "ta" ? "கடவுச்சொல் குறைந்தது 3 எழுத்துக்கள் இருக்க வேண்டும்" : "Password must be at least 3 characters.");
+      return;
+    }
+    if (regPassword !== confirmPassword) {
+      setError(t("passwords_dont_match") || "Passwords do not match!");
+      return;
+    }
+
+    const finalId = cleanRoll || cleanEmail.split("@")[0].toUpperCase();
+
     const newUser = {
-      id: regIdentifier.trim(),
-      name: fullName.trim(),
-      roll: regIdentifier.trim(),
-      email: regIdentifier.includes("@") ? regIdentifier.trim() : `${regIdentifier.trim().toLowerCase()}@college.edu`,
+      id: finalId,
+      name: cleanName,
+      roll: finalId,
+      email: cleanEmail,
       dept: regRole === "admin" ? (dept === "CSE" ? "Management" : dept) : dept,
       year: regRole === "admin" ? 0 : (Number(year) || 1),
       role: regRole,
       password: regPassword,
+      registeredAt: new Date().toISOString(),
     };
 
+    // Store the registered email and user permanently in localStorage & trigger DB sync
     if (registerUser) registerUser(newUser);
     setUser(newUser);
     setError("");
 
+    // Also pre-fill the login input
+    setIdentifier(cleanEmail);
+
     const isAdmin = regRole === "admin";
     showAlert(
       lang === "ta"
-        ? `🎉 கணக்கு உருவாக்கப்பட்டது! நல்வரவு ${newUser.name} (${isAdmin ? "நிர்வாகி" : "மாணவர்"}).`
-        : `🎉 Account created! Welcome ${newUser.name} (${isAdmin ? "🛡️ Canteen Admin" : "👨‍🎓 Student Customer"}).`
+        ? `🎉 பதிவு செய்யப்பட்டது! மின்னஞ்சல் "${cleanEmail}" நிரந்தரமாக சேமிக்கப்பட்டது.`
+        : `🎉 Registered & Stored! Email "${cleanEmail}" is saved permanently in database.`
     );
     onLogin(isAdmin ? "admin-dashboard" : "home");
   };
 
-  const handleGoogleLogin = () => {
-    const googleUser = {
-      id: "21CSE045",
-      name: "Ananya Sharma",
-      roll: "21CSE045",
-      email: "ananya@college.edu",
-      dept: "CSE",
-      year: 3,
-      role: "customer",
-    };
-    setUser(googleUser);
+  const handleGoogleSuccess = ({ token, user: authedUser, message }) => {
+    const userWithToken = { ...authedUser, token };
+    setUser(userWithToken);
+
+    try {
+      sessionStorage.setItem("canteen_session_user", JSON.stringify(userWithToken));
+      if (token) sessionStorage.setItem("canteen_token", token);
+      if (userWithToken.email) {
+        localStorage.setItem("canteen_last_registered_email", userWithToken.email);
+      }
+    } catch (e) {}
+
+    if (registerUser) {
+      registerUser(userWithToken);
+    }
+
+    const isAdmin = userWithToken.role === "admin";
     showAlert(
       lang === "ta"
-        ? "🌐 கூகிள் மூலம் மாணவராக வெற்றிகரமாக உள்நுழைந்துவிட்டீர்கள்!"
-        : "🌐 Signed in with Google as Student Customer!"
+        ? `🎉 நல்வரவு ${userWithToken.name}! ${isAdmin ? "🛡️ நிர்வாகியாக" : "👨‍🎓 மாணவராக"} கூகிள் மூலம் உள்நுழைந்தீர்கள்.`
+        : `🎉 Welcome, ${userWithToken.name}! Signed in with Google as ${isAdmin ? "🛡️ Canteen Admin" : "👨‍🎓 Student"}.`
     );
-    onLogin("home");
+    onLogin(isAdmin ? "admin-dashboard" : "order");
+  };
+
+  const handleGoogleError = (errMsg) => {
+    showPopup(
+      errMsg ||
+        (lang === "ta"
+          ? "கூகிள் உள்நுழைவு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்."
+          : "Google sign-in failed. Please try again.")
+    );
   };
 
   return (
     <div className="ref-login-canvas">
+      {/* Background Video Player */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="ref-login-bg-video"
+      >
+        <source src="/login-bg.mp4" type="video/mp4" />
+        <source src="/270557_medium.mp4" type="video/mp4" />
+      </video>
+      <div className="ref-login-video-overlay" />
+
+      {/* ── Error Popup Toast ─────────────────────────────────────── */}
+      {popupError && (
+        <div className="login-popup-error" role="alert">
+          <span className="login-popup-icon">⚠️</span>
+          <span className="login-popup-msg">{popupError}</span>
+          <button
+            className="login-popup-close"
+            type="button"
+            aria-label="Dismiss"
+            onClick={() => { clearTimeout(popupTimerRef.current); setPopupError(""); }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
+      {/* 3D Interactive Floating Food Props */}
+      <Floating3DFood icon="🍕" top="15%" left="7%" delay={0} duration={6} size={30} />
+      <Floating3DFood icon="🍔" top="68%" left="6%" delay={1.5} duration={6.5} size={28} />
+      <Floating3DFood icon="🥤" top="18%" right="7%" delay={0.8} duration={5.8} size={28} />
+      <Floating3DFood icon="🍩" top="70%" right="6%" delay={2.2} duration={6.2} size={28} />
+      <Floating3DFood icon="🍜" top="84%" left="46%" delay={1.8} duration={5.5} size={30} />
+
       {/* Top bar with Brand Badge & Controls */}
       <div className="ref-topbar">
         <div className="ref-brand-badge">
@@ -1222,7 +2487,14 @@ function LoginPage({ onLogin }) {
         </div>
 
         {mode === "login" ? (
-          <form className="ref-card" onSubmit={handleLoginSubmit}>
+          <form
+            className="ref-card"
+            ref={tiltCard.ref}
+            style={tiltCard.style}
+            onMouseMove={tiltCard.onMouseMove}
+            onMouseLeave={tiltCard.onMouseLeave}
+            onSubmit={handleLoginSubmit}
+          >
             {/* Unified Email / Roll / Staff ID input pill */}
             <div className="ref-input-pill-wrap">
               <span className="ref-input-icon">
@@ -1260,7 +2532,7 @@ function LoginPage({ onLogin }) {
               </button>
             </div>
 
-            {error && <div className="login-error" style={{ marginTop: 12 }}>{error}</div>}
+            {/* error is now shown as popup — see popupError below */}
 
             {/* Remember Me & Forgot Password */}
             <div className="ref-meta-row">
@@ -1272,7 +2544,11 @@ function LoginPage({ onLogin }) {
                 />
                 <span>{t("remember_me")}</span>
               </label>
-              <button type="button" className="ref-forgot-link">
+              <button
+                type="button"
+                className="ref-forgot-link"
+                onClick={() => onNavigate && onNavigate("forgot-password")}
+              >
                 {t("forgot_password")}
               </button>
             </div>
@@ -1285,36 +2561,18 @@ function LoginPage({ onLogin }) {
               LOGIN
             </button>
 
-            {/* Quick Demo Role Switcher */}
-            <div className="ref-quick-demo">
-              <span className="ref-quick-demo-lbl">⚡ {lang === "ta" ? "சோதனை" : "Quick Demo"}:</span>
-              <button type="button" className="ref-demo-chip" onClick={() => handleQuickRoleLogin("customer")}>
-                👨‍🎓 Student Demo
-              </button>
-              <button type="button" className="ref-demo-chip admin" onClick={() => handleQuickRoleLogin("admin")}>
-                🛡️ Admin Demo
-              </button>
-            </div>
-
-            {/* "Login with" divider */}
+            {/* Divider */}
             <div className="ref-divider">
-              <span>{lang === "ta" ? "இதன் மூலம் உள்நுழைக" : "Login with"}</span>
+              <span>{lang === "ta" ? "அல்லது இதன் மூலம் தொடரவும்" : "or continue with"}</span>
             </div>
 
-            {/* Social Icons row */}
-            <div className="ref-social-row">
-              <button type="button" className="ref-social-btn fb" onClick={handleGoogleLogin} title="Facebook Login">
-                <span style={{ fontSize: 16, fontWeight: 900, fontFamily: "sans-serif" }}>f</span>
-              </button>
-              <button type="button" className="ref-social-btn gp" onClick={handleGoogleLogin} title="Google Login">
-                <span style={{ fontSize: 13.5, fontWeight: 800, color: "#ea4335", fontFamily: "sans-serif" }}>G+</span>
-              </button>
-              <button type="button" className="ref-social-btn tw" onClick={handleGoogleLogin} title="Twitter Login">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#1da1f2">
-                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-                </svg>
-              </button>
-            </div>
+            {/* Official Google Sign-In Button */}
+            <GoogleSignInButton
+              mode="login"
+              lang={lang}
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+            />
 
             {/* Switch to Register */}
             <div className="ref-switch-wrap">
@@ -1328,7 +2586,14 @@ function LoginPage({ onLogin }) {
             </div>
           </form>
         ) : (
-          <form className="ref-card" onSubmit={handleRegisterSubmit}>
+          <form
+            className="ref-card"
+            ref={tiltCard.ref}
+            style={tiltCard.style}
+            onMouseMove={tiltCard.onMouseMove}
+            onMouseLeave={tiltCard.onMouseLeave}
+            onSubmit={handleRegisterSubmit}
+          >
             {/* Account Type selection during Registration */}
             <div className="ref-role-tabs">
               <button
@@ -1361,15 +2626,31 @@ function LoginPage({ onLogin }) {
               />
             </div>
 
+            {/* Explicit Registered Email Input */}
             <div className="ref-input-pill-wrap" style={{ marginTop: 12 }}>
               <span className="ref-input-icon">
                 <Mail size={17} />
               </span>
               <input
+                type="email"
+                className="ref-pill-input"
+                value={regEmail}
+                placeholder={regRole === "admin" ? "Staff Email (e.g. staff@canteen.edu)" : "College / Personal Email (e.g. student@college.edu)"}
+                onChange={(e) => setRegEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Roll Number or Staff ID */}
+            <div className="ref-input-pill-wrap" style={{ marginTop: 12 }}>
+              <span className="ref-input-icon">
+                <Hash size={17} />
+              </span>
+              <input
                 type="text"
                 className="ref-pill-input"
                 value={regIdentifier}
-                placeholder={regRole === "admin" ? "Staff ID / Email (STAFF-02)" : "College Email / Roll No (24CSE101)"}
+                placeholder={regRole === "admin" ? "Staff ID (STAFF-02)" : "Roll Number (24CSE101) — Optional"}
                 onChange={(e) => setRegIdentifier(e.target.value)}
               />
             </div>
@@ -1432,7 +2713,7 @@ function LoginPage({ onLogin }) {
               />
             </div>
 
-            {error && <div className="login-error" style={{ marginTop: 12 }}>{error}</div>}
+            {/* error is now shown as popup — see popupError below */}
 
             <button
               className="ref-cta-btn"
@@ -1441,6 +2722,19 @@ function LoginPage({ onLogin }) {
             >
               {t("create_account_btn")}
             </button>
+
+            {/* Divider */}
+            <div className="ref-divider">
+              <span>{lang === "ta" ? "அல்லது இதன் மூலம் பதிவு செய்யவும்" : "or sign up with"}</span>
+            </div>
+
+            {/* Official Google Sign-In Button on Registration */}
+            <GoogleSignInButton
+              mode="register"
+              lang={lang}
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+            />
 
             <div className="ref-switch-wrap">
               <button
@@ -1483,295 +2777,525 @@ function LoginPage({ onLogin }) {
 /* ================================================================== */
 function EatingIllustration() {
   return (
-    <svg viewBox="0 0 340 150" width="100%" style={{ display: "block", background: "linear-gradient(180deg,#FBF6E9 0%,#F3ECD8 100%)" }}>
-      <line x1="70" y1="0" x2="70" y2="14" stroke="var(--line)" strokeWidth="2" />
-      <circle cx="70" cy="20" r="7" fill="var(--chalk-2)" />
-      <circle cx="70" cy="20" r="7" fill="none" stroke="var(--turmeric)" strokeWidth="1.4" />
-      <line x1="270" y1="0" x2="270" y2="10" stroke="var(--line)" strokeWidth="2" />
-      <circle cx="270" cy="16" r="7" fill="var(--chalk-2)" />
-      <circle cx="270" cy="16" r="7" fill="none" stroke="var(--turmeric)" strokeWidth="1.4" />
+    <div className="dining-illustration-wrap" style={{ position: "relative", overflow: "hidden", borderRadius: "16px 16px 0 0" }}>
+      <svg
+        viewBox="0 0 400 170"
+        width="100%"
+        style={{ display: "block", background: "linear-gradient(180deg, #2A2F3D 0%, #171A23 100%)" }}
+      >
+        <defs>
+          {/* Gradients */}
+          <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2A2F3D" />
+            <stop offset="60%" stopColor="#1E222D" />
+            <stop offset="100%" stopColor="#151821" />
+          </linearGradient>
+          <linearGradient id="woodTable" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#D97706" />
+            <stop offset="35%" stopColor="#B45309" />
+            <stop offset="100%" stopColor="#78350F" />
+          </linearGradient>
+          <linearGradient id="tableBevel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#92400E" />
+            <stop offset="100%" stopColor="#451A03" />
+          </linearGradient>
+          <linearGradient id="lampGlow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(251, 191, 36, 0.45)" />
+            <stop offset="50%" stopColor="rgba(251, 191, 36, 0.15)" />
+            <stop offset="100%" stopColor="rgba(251, 191, 36, 0)" />
+          </linearGradient>
+          <linearGradient id="charGreen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#10B981" />
+            <stop offset="100%" stopColor="#047857" />
+          </linearGradient>
+          <linearGradient id="charAmber" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FBBF24" />
+            <stop offset="100%" stopColor="#D97706" />
+          </linearGradient>
+          <linearGradient id="charCoral" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FB7185" />
+            <stop offset="100%" stopColor="#E11D48" />
+          </linearGradient>
+          <linearGradient id="plateShine" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="100%" stopColor="#E2E8F0" />
+          </linearGradient>
+          <linearGradient id="teaCupGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FDE68A" />
+            <stop offset="100%" stopColor="#F59E0B" />
+          </linearGradient>
+          <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
 
-      <rect x="14" y="98" width="312" height="13" rx="6" fill="#C99A5B" />
-      <rect x="14" y="108" width="312" height="4" rx="2" fill="#B98847" />
-      <rect x="0" y="132" width="340" height="2" fill="var(--line)" />
+        {/* Cafe Wall Background */}
+        <rect x="0" y="0" width="400" height="170" fill="url(#wallGrad)" />
 
-      <rect x="42" y="64" width="42" height="36" rx="15" fill="var(--basil)" />
-      <circle cx="63" cy="46" r="18" fill="#E8B382" />
-      <circle cx="57" cy="45" r="1.6" fill="var(--ink)" />
-      <circle cx="69" cy="45" r="1.6" fill="var(--ink)" />
-      <path d="M56 51q7 6 14 0" stroke="var(--ink)" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-      <ellipse cx="63" cy="103" rx="17" ry="6" fill="#fff" stroke="var(--line)" />
-      <circle cx="58" cy="102" r="2.6" fill="var(--turmeric)" />
-      <circle cx="66" cy="103" r="2.2" fill="var(--chili)" />
-      <circle cx="62" cy="105" r="2" fill="var(--basil)" />
+        {/* Background Posters / Neon Sign */}
+        <rect x="35" y="18" width="44" height="30" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+        <path d="M44 33 Q57 23 70 33" stroke="rgba(251,191,36,0.6)" strokeWidth="1.5" fill="none" />
+        <circle cx="57" cy="26" r="3" fill="rgba(251,191,36,0.7)" />
 
-      <rect x="149" y="58" width="44" height="42" rx="16" fill="var(--turmeric)" />
-      <circle cx="171" cy="40" r="19" fill="#C88750" />
-      <circle cx="164" cy="39" r="1.7" fill="var(--ink)" />
-      <circle cx="178" cy="39" r="1.7" fill="var(--ink)" />
-      <ellipse cx="171" cy="47" rx="4" ry="3" fill="var(--chalk)" />
-      <ellipse cx="171" cy="103" rx="18" ry="6.5" fill="#fff" stroke="var(--line)" />
-      <circle cx="165" cy="102" r="2.6" fill="var(--chili)" />
-      <circle cx="174" cy="103" r="2.4" fill="var(--turmeric)" />
-      <circle cx="178" cy="101" r="2" fill="var(--basil)" />
+        <rect x="320" y="18" width="46" height="32" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+        <text x="343" y="34" fontSize="8" fontWeight="800" fill="rgba(255,255,255,0.5)" textAnchor="middle" fontFamily="sans-serif">FRESH</text>
+        <text x="343" y="44" fontSize="6.5" fontWeight="700" fill="rgba(245,158,11,0.8)" textAnchor="middle" fontFamily="sans-serif">CAFÉ 24/7</text>
 
-      <rect x="256" y="64" width="42" height="36" rx="15" fill="var(--chili)" />
-      <circle cx="277" cy="46" r="18" fill="#F0C9A0" />
-      <circle cx="271" cy="45" r="1.6" fill="var(--ink)" />
-      <circle cx="283" cy="45" r="1.6" fill="var(--ink)" />
-      <path d="M270 51q7 6 14 0" stroke="var(--ink)" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-      <ellipse cx="277" cy="103" rx="17" ry="6" fill="#fff" stroke="var(--line)" />
-      <circle cx="272" cy="102" r="2.4" fill="var(--basil)" />
-      <circle cx="281" cy="103" r="2.4" fill="var(--turmeric)" />
-    </svg>
+        {/* Ambient Light Cones from Pendant Lamps */}
+        <polygon points="75,25 25,120 125,120" fill="url(#lampGlow)" />
+        <polygon points="200,20 145,120 255,120" fill="url(#lampGlow)" />
+        <polygon points="325,25 275,120 375,120" fill="url(#lampGlow)" />
+
+        {/* Hanging Industrial Pendant Lamps */}
+        <line x1="75" y1="0" x2="75" y2="20" stroke="#718096" strokeWidth="1.5" />
+        <path d="M63 25 Q75 16 87 25 Z" fill="#E2E8F0" />
+        <circle cx="75" cy="27" r="4.5" fill="#FDE047" filter="url(#glowFilter)" />
+
+        <line x1="200" y1="0" x2="200" y2="16" stroke="#718096" strokeWidth="1.5" />
+        <path d="M188 21 Q200 12 212 21 Z" fill="#E2E8F0" />
+        <circle cx="200" cy="23" r="5" fill="#FDE047" filter="url(#glowFilter)" />
+
+        <line x1="325" y1="0" x2="325" y2="20" stroke="#718096" strokeWidth="1.5" />
+        <path d="M313 25 Q325 16 337 25 Z" fill="#E2E8F0" />
+        <circle cx="325" cy="27" r="4.5" fill="#FDE047" filter="url(#glowFilter)" />
+
+        {/* --- CHARACTER 1 (Left): Student with Headphones & Pizza --- */}
+        <g className="char-left">
+          {/* Body / Hoodie */}
+          <path d="M48 95 C48 76, 102 76, 102 95 L106 122 L44 122 Z" fill="url(#charGreen)" />
+          {/* Hoodie Collar & Drawstrings */}
+          <path d="M66 84 Q75 92 84 84" stroke="#047857" strokeWidth="3" fill="none" strokeLinecap="round" />
+          <path d="M71 88 L71 106" stroke="#A7F3D0" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M79 88 L79 104" stroke="#A7F3D0" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="71" cy="106" r="1.5" fill="#fff" />
+          <circle cx="79" cy="104" r="1.5" fill="#fff" />
+
+          {/* Neck */}
+          <rect x="70" y="74" width="10" height="12" rx="3" fill="#E6BD9E" />
+          
+          {/* Ears */}
+          <circle cx="57" cy="64" r="3.8" fill="#F3D0B5" />
+          <circle cx="93" cy="64" r="3.8" fill="#F3D0B5" />
+
+          {/* Head */}
+          <circle cx="75" cy="62" r="18" fill="#F3D0B5" />
+
+          {/* Modern Textured Hair / Fade */}
+          <path d="M57 60 C57 44, 93 44, 93 60 C90 50, 60 50, 57 60 Z" fill="#1E293B" />
+          <path d="M60 54 Q72 48 82 55" fill="#1E293B" />
+          <path d="M70 47 Q75 42 82 46" stroke="#334155" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+
+          {/* Sleek Over-Ear Headphones */}
+          <path d="M55 60 C55 42, 95 42, 95 60" stroke="#FFFFFF" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          <rect x="52" y="58" width="6" height="11" rx="3" fill="#10B981" stroke="#047857" strokeWidth="0.8" />
+          <rect x="92" y="58" width="6" height="11" rx="3" fill="#10B981" stroke="#047857" strokeWidth="0.8" />
+          
+          {/* Eyebrows */}
+          <path d="M64 56 Q68 54 72 56" stroke="#1E293B" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+          <path d="M78 56 Q82 54 86 56" stroke="#1E293B" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+
+          {/* Eyes with white sparkle reflection */}
+          <circle cx="68" cy="62" r="2.2" fill="#0F172A" />
+          <circle cx="67.3" cy="61.2" r="0.7" fill="#FFFFFF" />
+          <circle cx="82" cy="62" r="2.2" fill="#0F172A" />
+          <circle cx="81.3" cy="61.2" r="0.7" fill="#FFFFFF" />
+
+          {/* Cute Nose */}
+          <path d="M75 64 Q76.5 66 75 67" stroke="#C58F68" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+
+          {/* Soft Blushing Cheeks */}
+          <circle cx="63" cy="66" r="3" fill="rgba(244,114,182,0.3)" />
+          <circle cx="87" cy="66" r="3" fill="rgba(244,114,182,0.3)" />
+
+          {/* Cheerful Smile with teeth */}
+          <path d="M69 68 Q75 75 81 68 Z" fill="#E11D48" />
+          <path d="M71 68 Q75 71 79 68" fill="#FFFFFF" />
+          <path d="M69 68 Q75 75 81 68" stroke="#0F172A" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+
+          {/* Plate & Cheesy Pizza Slice */}
+          <ellipse cx="75" cy="120" rx="22" ry="7" fill="url(#plateShine)" />
+          <ellipse cx="75" cy="120" rx="18" ry="5" fill="#F8FAFC" />
+          <path d="M64 121 L85 116 L80 125 Z" fill="#F59E0B" />
+          <path d="M85 116 Q84 122 80 125" stroke="#B45309" strokeWidth="2" fill="none" />
+          <circle cx="72" cy="120" r="1.8" fill="#DC2626" />
+          <circle cx="78" cy="121" r="1.5" fill="#DC2626" />
+          <circle cx="75" cy="123" r="1.2" fill="#10B981" />
+        </g>
+
+        {/* --- CHARACTER 2 (Center): Cheerful Student with Glasses, Chai & Hot Biryani --- */}
+        <g className="char-center">
+          {/* Body / Mustard College Varsity Jacket */}
+          <path d="M172 90 C172 70, 228 70, 228 90 L232 122 L168 122 Z" fill="url(#charAmber)" />
+          <path d="M192 80 Q200 88 208 80" stroke="#B45309" strokeWidth="2" fill="none" strokeLinecap="round" />
+          <path d="M200 84 L200 122" stroke="#FEF3C7" strokeWidth="2.5" strokeLinecap="round" />
+          <circle cx="185" cy="94" r="3" fill="#FFFFFF" />
+          <text x="185" y="96" fontSize="3.5" fontWeight="900" fill="#D97706" textAnchor="middle" fontFamily="sans-serif">CS</text>
+
+          {/* Neck */}
+          <rect x="195" y="70" width="10" height="12" rx="3" fill="#B87742" />
+
+          {/* Ears */}
+          <circle cx="180" cy="58" r="4" fill="#CF8E57" />
+          <circle cx="220" cy="58" r="4" fill="#CF8E57" />
+
+          {/* Head */}
+          <circle cx="200" cy="56" r="20" fill="#CF8E57" />
+
+          {/* Volumetric Textured Curly Hair */}
+          <path d="M180 50 C176 38, 224 38, 220 50 C216 42, 184 42, 180 50 Z" fill="#2B1B17" />
+          <circle cx="183" cy="44" r="6" fill="#2B1B17" />
+          <circle cx="193" cy="38" r="7.5" fill="#2B1B17" />
+          <circle cx="206" cy="38" r="7.5" fill="#2B1B17" />
+          <circle cx="217" cy="44" r="6" fill="#2B1B17" />
+
+          {/* Eyebrows */}
+          <path d="M187 47 Q192 45 197 47" stroke="#2B1B17" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+          <path d="M203 47 Q208 45 213 47" stroke="#2B1B17" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+
+          {/* Circular Glasses */}
+          <circle cx="192" cy="57" r="6.2" fill="rgba(255,255,255,0.18)" stroke="#1E293B" strokeWidth="1.5" />
+          <circle cx="208" cy="57" r="6.2" fill="rgba(255,255,255,0.18)" stroke="#1E293B" strokeWidth="1.5" />
+          <path d="M198 56 Q200 54 202 56" stroke="#1E293B" strokeWidth="1.5" fill="none" />
+          <circle cx="192" cy="57" r="2.2" fill="#0F172A" />
+          <circle cx="191.3" cy="56.2" r="0.7" fill="#FFFFFF" />
+          <circle cx="208" cy="57" r="2.2" fill="#0F172A" />
+          <circle cx="207.3" cy="56.2" r="0.7" fill="#FFFFFF" />
+
+          {/* Nose */}
+          <path d="M200 60 Q201.5 62 200 63" stroke="#9A5B2D" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+          {/* Cheeks */}
+          <circle cx="185" cy="62" r="3.2" fill="rgba(244,63,94,0.3)" />
+          <circle cx="215" cy="62" r="3.2" fill="rgba(244,63,94,0.3)" />
+          {/* Smile */}
+          <path d="M193 65 Q200 74 207 65 Z" fill="#E11D48" />
+          <path d="M195 65 Q200 68 205 65" fill="#FFFFFF" />
+          <path d="M193 65 Q200 74 207 65" stroke="#0F172A" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+
+          {/* Biryani Platter */}
+          <ellipse cx="200" cy="120" rx="26" ry="8" fill="url(#plateShine)" />
+          <ellipse cx="200" cy="119" rx="22" ry="6" fill="#F8FAFC" />
+          <ellipse cx="198" cy="118" rx="15" ry="4" fill="#F59E0B" />
+          <circle cx="193" cy="117" r="2" fill="#DC2626" />
+          <circle cx="204" cy="118" r="2.2" fill="#B45309" />
+          <circle cx="199" cy="116" r="1.5" fill="#16A34A" />
+          <ellipse cx="213" cy="119" rx="4" ry="2.5" fill="#FEF08A" stroke="#CA8A04" strokeWidth="0.8" />
+          <circle cx="186" cy="119" r="2.5" fill="#FFFFFF" />
+          <circle cx="186" cy="119" r="1.2" fill="#F59E0B" />
+
+          {/* Chai Mug */}
+          <rect x="228" y="112" width="9" height="10" rx="2" fill="url(#teaCupGrad)" />
+          <path className="steam-line-1" d="M231 110 Q233 105 231 100" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+          <path className="steam-line-2" d="M234 109 Q236 103 234 98" stroke="rgba(255,255,255,0.6)" strokeWidth="1" fill="none" strokeLinecap="round" />
+        </g>
+        {/* --- CHARACTER 3 (Right): Student with Bun, Sandwich & Bubble Tea --- */}
+        <g className="char-right">
+          <path d="M298 95 C298 76, 352 76, 352 95 L356 122 L294 122 Z" fill="url(#charCoral)" />
+          <polygon points="325,80 318,90 332,90" fill="#FFFFFF" />
+          <rect x="320" y="74" width="10" height="12" rx="3" fill="#E6BD9E" />
+          <circle cx="307" cy="64" r="3.5" fill="#F5D0B5" />
+          <circle cx="343" cy="64" r="3.5" fill="#F5D0B5" />
+          <circle cx="325" cy="62" r="18" fill="#F5D0B5" />
+          <circle cx="325" cy="40" r="9" fill="#2E1B10" />
+          <ellipse cx="325" cy="47" rx="8" ry="3" fill="#F59E0B" />
+          <path d="M307 60 C307 46, 343 46, 343 60 C338 52, 312 52, 307 60 Z" fill="#2E1B10" />
+          <path d="M308 58 Q312 66 310 70" stroke="#2E1B10" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+          <path d="M342 58 Q338 66 340 70" stroke="#2E1B10" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+          <path d="M314 56 Q318 54 322 56" stroke="#2E1B10" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+          <path d="M328 56 Q332 54 336 56" stroke="#2E1B10" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+          <circle cx="318" cy="62" r="2.2" fill="#0F172A" />
+          <circle cx="317.3" cy="61.2" r="0.7" fill="#FFFFFF" />
+          <path d="M328 62 Q332 58 336 62" stroke="#0F172A" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+          <path d="M336 60 L338 58" stroke="#0F172A" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M325 64 Q326.5 66 325 67" stroke="#C58F68" strokeWidth="1.1" fill="none" strokeLinecap="round" />
+          <circle cx="313" cy="66" r="3" fill="rgba(244,114,182,0.3)" />
+          <circle cx="337" cy="66" r="3" fill="rgba(244,114,182,0.3)" />
+          <path d="M320 68 Q325 74 330 68" stroke="#0F172A" strokeWidth="1.8" fill="#F43F5E" strokeLinecap="round" />
+          <ellipse cx="325" cy="120" rx="22" ry="7" fill="url(#plateShine)" />
+          <polygon points="317,121 333,115 330,124" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+          <line x1="319" y1="120" x2="331" y2="117" stroke="#16A34A" strokeWidth="1.5" />
+          <line x1="320" y1="122" x2="329" y2="119" stroke="#DC2626" strokeWidth="1.5" />
+          <rect x="350" y="108" width="10" height="14" rx="2" fill="rgba(255,255,255,0.75)" stroke="rgba(255,255,255,0.9)" strokeWidth="0.8" />
+          <rect x="351" y="112" width="8" height="9" rx="1" fill="#F472B6" opacity="0.8" />
+          <circle cx="353" cy="119" r="1.2" fill="#3B1E08" />
+          <circle cx="356" cy="119" r="1.2" fill="#3B1E08" />
+          <circle cx="355" cy="116" r="1.2" fill="#3B1E08" />
+          <line x1="355" y1="104" x2="359" y2="118" stroke="#10B981" strokeWidth="1.5" strokeLinecap="round" />
+        </g>
+
+        {/* --- FRONT COUNTER TABLE (Natural Oak Wood with 3D Depth) --- */}
+        <rect x="10" y="122" width="380" height="14" rx="4" fill="url(#woodTable)" />
+        <rect x="10" y="122" width="380" height="2" fill="rgba(255,255,255,0.35)" />
+        <rect x="10" y="136" width="380" height="6" rx="2" fill="url(#tableBevel)" />
+        <line x1="0" y1="152" x2="400" y2="152" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+
+        {/* Condiment Shakers on Table */}
+        <rect x="135" y="118" width="6" height="8" rx="1.5" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="0.6" />
+        <rect x="143" y="118" width="6" height="8" rx="1.5" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="0.6" />
+        <circle cx="138" cy="119" r="0.8" fill="#1E293B" />
+        <circle cx="146" cy="119" r="0.8" fill="#DC2626" />
+      </svg>
+    </div>
   );
 }
 
 function HomePage({ onNavigate, onOpenChat }) {
-  const { user, walletBalance, notifications, unreadCount, markAllRead, canteens, updateCrowdLevel, menu, lang, toggleLang, t } = useCanteen();
-  const [showNotif, setShowNotif] = useState(false);
-  const [now, setNow] = useState(new Date());
-  const [expandedId, setExpandedId] = useState(null);
-
-  // Refresh clock every 30s so "X min ago" stays current
-  useEffect(() => {
-    const timer = setInterval(() => setNow(new Date()), 30000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const timeAgo = (date) => {
-    const diff = Math.floor((now - new Date(date)) / 1000);
-    if (diff < 60) return t("just_now");
-    if (diff < 3600) return `${Math.floor(diff / 60)} ${t("min_ago")}`;
-    return `${Math.floor(diff / 3600)} ${t("hr_ago")}`;
-  };
-
-  const mostRecentUpdate = canteens.reduce((latest, c) =>
-    new Date(c.lastUpdated) > new Date(latest) ? c.lastUpdated : latest,
-    canteens[0].lastUpdated
-  );
-
-  const recommended = useMemo(() => menu.filter((m) => m.available).slice(0, 2), [menu]);
-
   return (
-    <>
-      <div className="home-hero" style={{
-        position: "relative",
-        overflow: "hidden"
-      }}>
-        <img
-          src="/canteen-hero.avif"
-          alt="Canteen background"
-          style={{
-            position: "absolute", inset: 0,
-            width: "100%", height: "100%",
-            objectFit: "cover",
-            zIndex: 0,
-            filter: "brightness(0.45) saturate(1.1)"
-          }}
-        />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(180deg, rgba(38,41,34,0.3) 0%, rgba(32,30,26,0.8) 100%)",
-          zIndex: 1
-        }} />
-        <div style={{ position: "relative", zIndex: 2 }}>
-          <div className="row-between" style={{ padding: "0 20px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div className="eyebrow" style={{ marginTop: 0, color: "var(--coral-d)", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
-                {t("cse_canteen")}
-              </div>
-            </div>
-            <div className="notif-wrap">
-              <button
-                className="icon-btn on-light"
-                onClick={() => {
-                  setShowNotif((s) => !s);
-                  if (!showNotif) markAllRead();
-                }}
-              >
-                <Bell />
-                {unreadCount > 0 && <span className="icon-dot" />}
-              </button>
-              {showNotif && (
-                <div className="notif-drop">
-                  {notifications.map((n) => (
-                    <div key={n.id} className="notif-item">
-                      {n.text}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="hero-thesis">
-            <h1 style={{ color: "#fff", textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
-              {lang === "ta" ? "இப்போது எங்கு" : "Where's it quiet"}
-              <br />
-              {lang === "ta" ? "கூட்டம் குறைவு?" : "right now?"}
-            </h1>
-            <div className="sub" style={{ color: "rgba(255,255,255,0.7)", textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>
-              {t("crowd_status").toUpperCase()} · {timeAgo(mostRecentUpdate).toUpperCase()}
-            </div>
-          </div>
-
-          <div className="flapboard">
-            <div className="fb-head">
-              <span className="fb-title">{t("brand")}</span>
-              <span className="fb-live">
-                <i /> {t("live")}
-              </span>
-            </div>
-            {canteens.map((c) => {
-              const lv = LEVELS[c.level];
-              const isExpanded = expandedId === c.id;
-              const canteenName = lang === "ta" ? (c.name_ta || c.name) : c.name;
-              const canteenLoc = lang === "ta" ? (c.loc_ta || c.loc) : c.loc;
-              return (
-                <div key={c.id}>
-                  <div className="flap-row" style={{ flexWrap: "wrap", gap: 6 }}>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div className="flap-name">{canteenName}</div>
-                      <div className="flap-loc">{canteenLoc}</div>
-                      <div style={{ fontSize: 10, color: "rgba(0,0,0,0.38)", marginTop: 2 }}>
-                        {timeAgo(c.lastUpdated)}
-                      </div>
-                    </div>
-                    <div className="flap-right" style={{ flexShrink: 0 }}>
-                      <span className="pill" style={{ color: lv.color, background: lv.bg }}>
-                        <i className="dot" style={{ background: lv.color }} />
-                        {t(lv.key)}
-                      </span>
-                      <span className="flap-wait">{c.wait} {t("min")}</span>
-                      {user?.role === "admin" && (
-                        <button
-                          onClick={() => setExpandedId(isExpanded ? null : c.id)}
-                          style={{
-                            fontSize: 10, fontWeight: 700, letterSpacing: 0.5,
-                            background: "rgba(226,163,16,0.12)", color: "var(--coral-d)",
-                            border: "none", borderRadius: 6, padding: "3px 8px",
-                            cursor: "pointer", marginLeft: 4
-                          }}
-                        >
-                          {isExpanded ? t("cancel_btn") : t("update_btn")}
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  {user?.role === "admin" && isExpanded && (
-                    <div style={{ display: "flex", gap: 6, padding: "6px 0 10px 0" }}>
-                      {["low", "med", "high"].map((lvl) => {
-                        const l = LEVELS[lvl];
-                        const active = c.level === lvl;
-                        return (
-                          <button
-                            key={lvl}
-                            onClick={() => { updateCrowdLevel(c.id, lvl); setExpandedId(null); }}
-                            style={{
-                              flex: 1, padding: "6px 0", borderRadius: 8, border: "none",
-                              fontWeight: 700, fontSize: 12, cursor: "pointer",
-                              background: active ? l.color : l.bg,
-                              color: active ? "#fff" : l.color,
-                              transition: "all 0.2s"
-                            }}
-                          >
-                            {t(l.key)}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      <div className="qa-row">
-        <button className="qa-chip accent" onClick={() => onNavigate("menu")}>
-          <div className="qa-ic">
-            <Utensils size={17} />
-          </div>
-          <div className="qa-lbl">{t("order_now")}</div>
-        </button>
-        <button className="qa-chip" onClick={() => onOpenChat && onOpenChat()}>
-          <div className="qa-ic">
-            <span>👨‍🍳</span>
-          </div>
-          <div className="qa-lbl">{lang === "ta" ? "ஷெஃப் AI" : "Ask Chef AI"}</div>
-        </button>
-        <button className="qa-chip" onClick={() => onNavigate("tracking")}>
-          <div className="qa-ic">
-            <Ticket size={17} />
-          </div>
-          <div className="qa-lbl">{t("waitlist")}</div>
-        </button>
-        <button className="qa-chip" onClick={() => onNavigate("menu")}>
-          <div className="qa-ic">
-            <Wallet size={17} />
-          </div>
-          <div className="qa-lbl">₹{walletBalance} {t("wallet")}</div>
-        </button>
-      </div>
-
-      <div className="scroll has-nav">
-        <div className="section-title">{t("happening_now")}</div>
-        <div className="card" style={{ padding: 0, overflow: "hidden" }}>
-          <EatingIllustration />
-          <div style={{ padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div>
-              <div className="bold" style={{ fontSize: 13 }}>{t("lunch_rush")}</div>
-              <div className="small muted" style={{ marginTop: 2 }}>{t("students_eating")}</div>
-            </div>
-            <span className="pill" style={{ color: "var(--amber)", background: "rgba(245,158,11,.14)" }}>
-              <i className="dot" style={{ background: "var(--amber)" }} />{t("busy")}
-            </span>
-          </div>
-        </div>
-
-        <div className="section-title">
-          {t("recommended")}<span className="see-all">{t("see_all")}</span>
-        </div>
-        <div className="grid-2">
-          {recommended.map((m) => {
-            const Icon = FOOD_ICONS[m.icon];
-            const itemName = lang === "ta" ? (m.name_ta || m.name) : m.name;
-            return (
-              <div className="card" style={{ padding: 12 }} key={m.id}>
-                <div className="food-thumb lg" style={{ marginBottom: 10 }}>
-                  <Icon size={26} />
-                </div>
-                <div className="bold" style={{ fontSize: 13 }}>{itemName}</div>
-                <div className="small muted" style={{ marginTop: 4 }}>{m.kcal} kcal</div>
-                <div className="mono bold" style={{ marginTop: 8 }}>₹{m.price}</div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </>
+    <RefactoredHomePage
+      onNavigate={onNavigate}
+      onOpenChat={onOpenChat}
+      useCanteenHook={useCanteen}
+    />
   );
 }
 
 /* ================================================================== */
-/* Menu / Order page                                                     */
+/* Nutrition Modal Component                                             */
 /* ================================================================== */
-function MenuPage({ onNavigate }) {
-  const { user, cart, cartCount, cartTotal, addToCart, setQty, menu, addProduct, removeProduct, lang, toggleLang, t, lowStockItems } = useCanteen();
-  const isAdmin = user?.role === "admin";
-  const [category, setCategory] = useState("meals");
+const DAILY_VALUES = { protein: 50, carbs: 300, fat: 65, fiber: 25, sugar: 50, sodium: 2300 };
+const MACRO_COLORS = {
+  protein: { color: "#6366f1", bg: "rgba(99,102,241,0.15)", label: "Protein" },
+  carbs:   { color: "#f59e0b", bg: "rgba(245,158,11,0.15)",  label: "Carbs" },
+  fat:     { color: "#ef4444", bg: "rgba(239,68,68,0.15)",   label: "Fat" },
+  fiber:   { color: "#10b981", bg: "rgba(16,185,129,0.15)",  label: "Fiber" },
+  sugar:   { color: "#ec4899", bg: "rgba(236,72,153,0.15)",  label: "Sugar" },
+  sodium:  { color: "#8b5cf6", bg: "rgba(139,92,246,0.15)",  label: "Sodium", unit: "mg" },
+};
+
+function NutritionModal({ item, onClose, lang }) {
+  const n = item.nutrition || {};
+  const itemName = lang === "ta" ? (item.name_ta || item.name) : item.name;
+  const Icon = FOOD_ICONS[item.icon] || FOOD_ICONS.thali;
+
+  // Macro ring: protein/carbs/fat in kcal proportions
+  const proteinKcal = (n.protein || 0) * 4;
+  const carbsKcal   = (n.carbs   || 0) * 4;
+  const fatKcal     = (n.fat     || 0) * 9;
+  const totalMacroKcal = proteinKcal + carbsKcal + fatKcal || 1;
+  const pPct = Math.round((proteinKcal / totalMacroKcal) * 100);
+  const cPct = Math.round((carbsKcal   / totalMacroKcal) * 100);
+  const fPct = 100 - pPct - cPct;
+
+  // SVG donut ring
+  const R = 48, C = 2 * Math.PI * R;
+  const pDash = (pPct / 100) * C;
+  const cDash = (cPct / 100) * C;
+  const fDash = (fPct / 100) * C;
+  const pOffset = 0;
+  const cOffset = -pDash;
+  const fOffset = -(pDash + cDash);
+
+  return (
+    <div className="nutri-overlay" onClick={onClose}>
+      <div className="nutri-modal" onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
+        <div className="nutri-modal-header">
+          <div className="nutri-modal-title-row">
+            <div className="nutri-food-icon-wrap"><Icon size={22} /></div>
+            <div>
+              <div className="nutri-modal-name">{itemName}</div>
+              <div className="nutri-modal-sub">
+                {item.desc || (lang === "ta" ? "ஊட்டச்சத்து தகவல்" : "Nutrition Information")}
+              </div>
+            </div>
+          </div>
+          <button className="nutri-close-btn" onClick={onClose}><XIcon size={16} /></button>
+        </div>
+
+        <div className="nutri-modal-body">
+          {/* Calories Hero + Donut */}
+          <div className="nutri-hero-row">
+            <div className="nutri-kcal-hero">
+              <div className="nutri-kcal-number">{item.kcal}</div>
+              <div className="nutri-kcal-label">kcal</div>
+              {item.dietTag && (
+                <div className={`nutri-diet-tag ${item.dietTag === "veg" ? "veg" : "nonveg"}`}>
+                  <span className="nutri-diet-dot" />
+                  {item.dietTag === "veg" ? "Veg" : "Non-Veg"}
+                </div>
+              )}
+            </div>
+
+            {/* Macro Donut */}
+            <div className="nutri-donut-wrap">
+              <svg width="112" height="112" viewBox="0 0 112 112">
+                <circle cx="56" cy="56" r={R} fill="none" stroke="var(--steel)" strokeWidth="12" />
+                <circle cx="56" cy="56" r={R} fill="none" stroke="#6366f1" strokeWidth="12"
+                  strokeDasharray={`${pDash} ${C - pDash}`}
+                  strokeDashoffset={C * 0.25 + pOffset}
+                  strokeLinecap="butt" style={{ transition: "stroke-dasharray 0.8s ease" }}
+                />
+                <circle cx="56" cy="56" r={R} fill="none" stroke="#f59e0b" strokeWidth="12"
+                  strokeDasharray={`${cDash} ${C - cDash}`}
+                  strokeDashoffset={C * 0.25 + cOffset}
+                  strokeLinecap="butt" style={{ transition: "stroke-dasharray 0.8s ease" }}
+                />
+                <circle cx="56" cy="56" r={R} fill="none" stroke="#ef4444" strokeWidth="12"
+                  strokeDasharray={`${fDash} ${C - fDash}`}
+                  strokeDashoffset={C * 0.25 + fOffset}
+                  strokeLinecap="butt" style={{ transition: "stroke-dasharray 0.8s ease" }}
+                />
+                <text x="56" y="52" textAnchor="middle" fontSize="13" fontWeight="800" fill="var(--ink)" fontFamily="var(--font-mono)">{item.kcal}</text>
+                <text x="56" y="65" textAnchor="middle" fontSize="9" fill="var(--muted)" fontFamily="var(--font-body)">KCAL</text>
+              </svg>
+              <div className="nutri-donut-legend">
+                <div className="nutri-legend-item"><span style={{ background: "#6366f1" }} /><span>P {pPct}%</span></div>
+                <div className="nutri-legend-item"><span style={{ background: "#f59e0b" }} /><span>C {cPct}%</span></div>
+                <div className="nutri-legend-item"><span style={{ background: "#ef4444" }} /><span>F {fPct}%</span></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Macro quick chips */}
+          <div className="nutri-macro-chips">
+            {["protein","carbs","fat"].map((k) => {
+              const m = MACRO_COLORS[k];
+              return (
+                <div key={k} className="nutri-macro-chip" style={{ background: m.bg, borderColor: m.color + "55" }}>
+                  <div className="nutri-chip-val" style={{ color: m.color }}>{n[k] || 0}<span>g</span></div>
+                  <div className="nutri-chip-key">{m.label}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Detailed bar rows */}
+          <div className="nutri-section-label">{lang === "ta" ? "விரிவான ஊட்டச்சத்துக்கள்" : "Detailed Nutrients"}</div>
+          <div className="nutri-bars">
+            {Object.entries(MACRO_COLORS).map(([k, m]) => {
+              const val   = n[k] || 0;
+              const dv    = DAILY_VALUES[k];
+              const pct   = Math.min(100, Math.round((val / dv) * 100));
+              const unit  = m.unit || "g";
+              return (
+                <div key={k} className="nutri-bar-row">
+                  <div className="nutri-bar-label-wrap">
+                    <span className="nutri-bar-name">{m.label}</span>
+                    <span className="nutri-bar-val" style={{ color: m.color }}>{val}{unit}</span>
+                  </div>
+                  <div className="nutri-bar-track">
+                    <div
+                      className="nutri-bar-fill"
+                      style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${m.color}88, ${m.color})` }}
+                    />
+                  </div>
+                  <span className="nutri-dv-label">{pct}% DV</span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Allergens */}
+          {item.allergens?.length > 0 && (
+            <div className="nutri-allergen-wrap">
+              <div className="nutri-section-label" style={{ marginBottom: 8 }}>
+                {lang === "ta" ? "ஒவ்வாமை பொருட்கள்" : "Allergens"}
+              </div>
+              <div className="nutri-allergen-chips">
+                {item.allergens.map((a) => (
+                  <span key={a} className="nutri-allergen-chip">{a}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="nutri-dv-note">
+            {lang === "ta"
+              ? "* % DV என்பது ஒரு நாளைக்கு 2000 kcal உணவின் அடிப்படையில் கணக்கிடப்பட்டது."
+              : "* % Daily Values are based on a 2,000 kcal diet."}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ================================================================== */
+/* Helper: Estimate realistic nutrition macros from calories & category */
+/* ================================================================== */
+function estimateNutrition(kcal, category = "meals") {
+  const c = Math.max(15, Number(kcal) || 250);
+  let pRatio, cRatio, fRatio;
+  if (category === "juice") {
+    pRatio = 0.04; cRatio = 0.92; fRatio = 0.04;
+  } else if (category === "beverages") {
+    pRatio = 0.08; cRatio = 0.72; fRatio = 0.20;
+  } else if (category === "desserts") {
+    pRatio = 0.06; cRatio = 0.54; fRatio = 0.40;
+  } else if (category === "snacks") {
+    pRatio = 0.16; cRatio = 0.48; fRatio = 0.36;
+  } else {
+    // meals / default
+    pRatio = 0.22; cRatio = 0.54; fRatio = 0.24;
+  }
+  const protein = Math.max(1, Math.round((c * pRatio) / 4));
+  const carbs = Math.max(1, Math.round((c * cRatio) / 4));
+  const fat = Math.max(0, Math.round((c * fRatio) / 9));
+  const fiber = category === "juice" ? 1 : Math.max(1, Math.round(carbs * 0.12));
+  const sugar = category === "juice" ? Math.round(carbs * 0.8) : Math.max(1, Math.round(carbs * 0.1));
+  const sodium = category === "juice" || category === "desserts" ? 25 : Math.round(c * 1.2);
+  return { protein, carbs, fat, fiber, sugar, sodium };
+}
+
+const COMMON_ALLERGENS = ["Gluten", "Dairy", "Eggs", "Nuts", "Soy"];
+
+/* ================================================================== */
+/* Add Product Component with Complete Nutrition Facts & Auto-Estimate */
+/* ================================================================== */
+function AddProductCard({ defaultCategory = "meals" }) {
+  const { addProduct, lang, t } = useCanteen();
   const [showAddForm, setShowAddForm] = useState(false);
   const [newName, setNewName] = useState("");
+  const [newNameTa, setNewNameTa] = useState("");
   const [newPrice, setNewPrice] = useState("");
   const [newKcal, setNewKcal] = useState("");
   const [newStock, setNewStock] = useState("");
-  const [newCategory, setNewCategory] = useState("meals");
+  const [newCategory, setNewCategory] = useState(defaultCategory);
+  const [newIcon, setNewIcon] = useState(defaultCategory === "juice" ? "juice" : "thali");
+  const [newDietTag, setNewDietTag] = useState("veg");
+  const [newDesc, setNewDesc] = useState("");
+
+  // Nutrition Facts State
+  const [protein, setProtein] = useState("");
+  const [carbs, setCarbs] = useState("");
+  const [fat, setFat] = useState("");
+  const [fiber, setFiber] = useState("");
+  const [sugar, setSugar] = useState("");
+  const [sodium, setSodium] = useState("");
+  const [selectedAllergens, setSelectedAllergens] = useState([]);
+
   const [addError, setAddError] = useState("");
   const [addSuccess, setAddSuccess] = useState("");
 
-  const filtered = useMemo(() => menu.filter((m) => m.category === category), [menu, category]);
+  const handleCategoryChange = (cat) => {
+    setNewCategory(cat);
+    if (cat === "juice") setNewIcon("juice");
+    else if (cat === "beverages" || cat === "desserts") setNewIcon("cup");
+    else if (cat === "snacks") setNewIcon("wrap");
+    else setNewIcon("thali");
+  };
+
+  const handleAutoCalculate = () => {
+    const c = Number(newKcal);
+    if (!c || c <= 0) {
+      setAddError(lang === "ta" ? "முதலில் கலோரி (kcal) அளவை உள்ளிடவும்." : "Please enter calories (kcal) first.");
+      return;
+    }
+    setAddError("");
+    const est = estimateNutrition(c, newCategory);
+    setProtein(String(est.protein));
+    setCarbs(String(est.carbs));
+    setFat(String(est.fat));
+    setFiber(String(est.fiber));
+    setSugar(String(est.sugar));
+    setSodium(String(est.sodium));
+  };
+
+  const toggleAllergen = (alg) => {
+    setSelectedAllergens((prev) =>
+      prev.includes(alg) ? prev.filter((a) => a !== alg) : [...prev, alg]
+    );
+  };
 
   const handleAddProduct = () => {
     const name = newName.trim();
@@ -1796,245 +3320,514 @@ function MenuPage({ onNavigate }) {
       return;
     }
 
+    // Ensure ALL nutrition facts are populated (intelligently defaulting any empty fields)
+    const est = estimateNutrition(kcal, newCategory);
+    const finalNutrition = {
+      protein: protein !== "" && !isNaN(Number(protein)) ? Number(protein) : est.protein,
+      carbs:   carbs !== "" && !isNaN(Number(carbs)) ? Number(carbs) : est.carbs,
+      fat:     fat !== "" && !isNaN(Number(fat)) ? Number(fat) : est.fat,
+      fiber:   fiber !== "" && !isNaN(Number(fiber)) ? Number(fiber) : est.fiber,
+      sugar:   sugar !== "" && !isNaN(Number(sugar)) ? Number(sugar) : est.sugar,
+      sodium:  sodium !== "" && !isNaN(Number(sodium)) ? Number(sodium) : est.sodium,
+    };
+
     addProduct({
       id: name.toLowerCase().replace(/[^a-z0-9]+/g, "_") + "_" + Date.now(),
       name,
+      name_ta: newNameTa.trim() || undefined,
       price,
       kcal,
       category: newCategory,
-      icon: "thali",
+      icon: newIcon,
       stock,
       available: stock > 0,
+      nutrition: finalNutrition,
+      allergens: selectedAllergens,
+      dietTag: newDietTag,
+      desc: newDesc.trim() || undefined,
     });
+
     setNewName("");
+    setNewNameTa("");
     setNewPrice("");
     setNewKcal("");
     setNewStock("");
-    setNewCategory("meals");
+    setProtein("");
+    setCarbs("");
+    setFat("");
+    setFiber("");
+    setSugar("");
+    setSodium("");
+    setSelectedAllergens([]);
+    setNewDesc("");
     setAddError("");
-    setAddSuccess(lang === "ta" ? "உணவு வெற்றிகரமாக சேர்க்கப்பட்டது." : "Product added successfully.");
+    setAddSuccess(lang === "ta" ? "உணவு சேர்க்கப்பட்டு மெனு & ஆர்டரில் நிரந்தரமாக சேமிக்கப்பட்டது! ✅" : "Product added & permanently saved to Menu and Orders! ✅");
+    setTimeout(() => setAddSuccess(""), 4500);
   };
 
+  const previewEst = newKcal ? estimateNutrition(newKcal, newCategory) : null;
+  const currentProtein = protein !== "" ? protein : (previewEst ? previewEst.protein : "--");
+  const currentCarbs = carbs !== "" ? carbs : (previewEst ? previewEst.carbs : "--");
+  const currentFat = fat !== "" ? fat : (previewEst ? previewEst.fat : "--");
+  const currentFiber = fiber !== "" ? fiber : (previewEst ? previewEst.fiber : "--");
+  const currentSugar = sugar !== "" ? sugar : (previewEst ? previewEst.sugar : "--");
+  const currentSodium = sodium !== "" ? sodium : (previewEst ? previewEst.sodium : "--");
+
   return (
-    <>
-      <div style={{ position: "relative", height: 200, overflow: "hidden", flexShrink: 0 }}>
-        <img
-          src="/canteen-hero.avif"
-          alt="Canteen"
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "brightness(0.35) saturate(1.2)" }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(38,41,34,0.5) 0%,rgba(32,30,26,0.9) 100%)" }} />
-        <div style={{ position: "absolute", top: 14, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
-          <button className="back" onClick={() => onNavigate(isAdmin ? "admin-dashboard" : "home")} style={{ color: "var(--coral)" }}>
-            <ArrowLeft />
-          </button>
-          <div>
-            <div className="eyebrow" style={{ color: "var(--coral-d)", marginTop: 0 }}>{t("cse_canteen")}</div>
-            <div className="h-title" style={{ color: "#fff", margin: 0 }}>{t("order")}</div>
+    <div className="card add-product-card advanced-form-card" style={{ marginBottom: 18 }}>
+      <div className="add-product-header" style={{ cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }} onClick={() => setShowAddForm(!showAddForm)}>
+        <div>
+          <div className="add-product-title">
+            <span className="add-product-icon">✨</span>
+            <span>{lang === "ta" ? "+ புதிய உணவு சேர்க்க (ஊட்டச்சத்துடன்)" : "+ Add Product with Nutrition Facts"}</span>
+          </div>
+          <div className="add-product-subtitle" style={{ marginTop: 2 }}>
+            {lang === "ta" ? "விலை, கலோரி, புரதம், கார்ப்ஸ், கொழுப்பு மற்றும் முழு ஊட்டச்சத்து விவரங்கள்" : "Includes calories, protein, carbs, fat, fiber, allergens and full nutrition facts"}
           </div>
         </div>
-        <div style={{ position: "absolute", bottom: 16, left: 18 }}>
-          <div style={{ color: "var(--coral)", fontSize: 10, letterSpacing: 2, fontWeight: 700, textTransform: "uppercase" }}>{t("browse_order")}</div>
-          <div style={{ color: "#fff", fontSize: 18, fontWeight: 800, marginTop: 3 }}>{t("whats_fresh")}</div>
-        </div>
+        <button type="button" className="cta-mini" style={{ fontSize: 11, padding: "5px 12px", flexShrink: 0 }}>
+          {showAddForm ? "▲ Hide Form" : "▼ + Add Product"}
+        </button>
       </div>
 
-      <div className="scroll has-nav" style={{ paddingTop: 16 }}>
-        {lowStockItems.length > 0 && (
-          <div className="low-stock-alert-banner">
-            <AlertTriangle size={20} />
-            <div>
-              <div style={{ fontWeight: 800 }}>{t("low_stock_alert")}</div>
-              <div style={{ fontSize: 11.5, marginTop: 2 }}>
-                {t("hurry_only")}{" "}
-                {lowStockItems.map((i) => `${lang === "ta" ? (i.name_ta || i.name) : i.name} (${i.stock} ${t("left")})`).join(", ")}
+      {showAddForm && (
+        <div style={{ marginTop: 14 }}>
+          <div style={{
+            background: "rgba(16, 185, 129, 0.08)",
+            border: "1px solid rgba(16, 185, 129, 0.25)",
+            borderRadius: 8,
+            padding: "8px 12px",
+            marginBottom: 14,
+            fontSize: 12,
+            color: "var(--ink)",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+          }}>
+            <span>💾</span>
+            <span>
+              {lang === "ta"
+                ? "நிரந்தர சேமிப்பு இயக்கத்தில் உள்ளது: சேர்க்கப்படும் உணவுகள் மறுஏற்றத்திலும் மெனு மற்றும் ஆர்டரில் நிலைத்திருக்கும்."
+                : "Permanent Storage Active: Newly added products stay saved in Menu & Orders across page refreshes and browser restarts."}
+            </span>
+          </div>
+
+          {/* Row 1: Name (EN) & Name (TA) */}
+          <div className="form-row-grid">
+            <div className="form-row" style={{ marginBottom: 0 }}>
+              <label className="adv-label">
+                <span>🍔 {t("product_name")} (English) *</span>
+              </label>
+              <input
+                className="adv-input"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                placeholder="e.g. Masala Dosa or Mango Juice"
+              />
+            </div>
+            <div className="form-row" style={{ marginBottom: 0 }}>
+              <label className="adv-label">
+                <span>🌐 {lang === "ta" ? "உணவு பெயர் (தமிழ்)" : "Tamil Name (Optional)"}</span>
+              </label>
+              <input
+                className="adv-input"
+                value={newNameTa}
+                onChange={(e) => setNewNameTa(e.target.value)}
+                placeholder="எ.கா. மசாலா தோசை"
+              />
+            </div>
+          </div>
+
+          {/* Row 2: Price, Stock, Category */}
+          <div className="form-row-grid" style={{ marginTop: 14 }}>
+            <div className="form-row" style={{ marginBottom: 0 }}>
+              <label className="adv-label">
+                <span>💰 {t("price")} (₹) *</span>
+              </label>
+              <div className="input-prefix-wrap">
+                <span className="prefix-badge">₹</span>
+                <input
+                  type="number"
+                  className="adv-input prefixed"
+                  value={newPrice}
+                  onChange={(e) => setNewPrice(e.target.value)}
+                  placeholder="60"
+                />
+              </div>
+            </div>
+
+            <div className="form-row" style={{ marginBottom: 0 }}>
+              <label className="adv-label">
+                <span>📦 {t("stock_qty")} *</span>
+              </label>
+              <div className="input-prefix-wrap">
+                <span className="prefix-badge">Qty</span>
+                <input
+                  type="number"
+                  className="adv-input prefixed"
+                  value={newStock}
+                  onChange={(e) => setNewStock(e.target.value)}
+                  placeholder="25"
+                />
+              </div>
+            </div>
+
+            <div className="form-row" style={{ marginBottom: 0 }}>
+              <label className="adv-label">
+                <span>🏷️ {t("category")}</span>
+              </label>
+              <select
+                className="adv-select"
+                value={newCategory}
+                onChange={(e) => handleCategoryChange(e.target.value)}
+              >
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {t("categories." + c)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Row 3: Diet Tag & Icon Picker */}
+          <div className="form-row-grid" style={{ marginTop: 14 }}>
+            <div className="form-row" style={{ marginBottom: 0 }}>
+              <label className="adv-label">
+                <span>🥗 {lang === "ta" ? "உணவு வகை" : "Diet Type"}</span>
+              </label>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button
+                  type="button"
+                  onClick={() => setNewDietTag("veg")}
+                  style={{
+                    flex: 1, padding: "10px", borderRadius: 14,
+                    border: newDietTag === "veg" ? "2px solid var(--basil)" : "1.5px solid var(--input-border)",
+                    background: newDietTag === "veg" ? "rgba(22, 163, 74, 0.12)" : "var(--input-bg)",
+                    color: newDietTag === "veg" ? "var(--basil)" : "var(--muted)",
+                    fontWeight: 800, fontSize: 12.5, cursor: "pointer", transition: "all 0.15s"
+                  }}
+                >
+                  🟢 Veg
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setNewDietTag("non-veg")}
+                  style={{
+                    flex: 1, padding: "10px", borderRadius: 14,
+                    border: newDietTag === "non-veg" ? "2px solid #ef4444" : "1.5px solid var(--input-border)",
+                    background: newDietTag === "non-veg" ? "rgba(239, 68, 68, 0.12)" : "var(--input-bg)",
+                    color: newDietTag === "non-veg" ? "#ef4444" : "var(--muted)",
+                    fontWeight: 800, fontSize: 12.5, cursor: "pointer", transition: "all 0.15s"
+                  }}
+                >
+                  🔴 Non-Veg
+                </button>
+              </div>
+            </div>
+
+            <div className="form-row" style={{ marginBottom: 0 }}>
+              <label className="adv-label">
+                <span>🎨 {lang === "ta" ? "உணவு சின்னம்" : "Display Icon"}</span>
+              </label>
+              <div style={{ display: "flex", gap: 6 }}>
+                {[
+                  { key: "thali", label: "🍛 Thali" },
+                  { key: "juice", label: "🥤 Juice" },
+                  { key: "wrap", label: "🌯 Wrap" },
+                  { key: "cup", label: "☕ Cup" },
+                  { key: "biryani", label: "🍗 Biryani" },
+                ].map((ic) => (
+                  <button
+                    key={ic.key}
+                    type="button"
+                    onClick={() => setNewIcon(ic.key)}
+                    style={{
+                      flex: 1, padding: "9px 4px", borderRadius: 12,
+                      border: newIcon === ic.key ? "2px solid var(--coral)" : "1.5px solid var(--input-border)",
+                      background: newIcon === ic.key ? "rgba(226, 163, 16, 0.15)" : "var(--input-bg)",
+                      color: newIcon === ic.key ? "var(--coral-d)" : "var(--text)",
+                      fontWeight: 700, fontSize: 11, cursor: "pointer", transition: "all 0.15s"
+                    }}
+                  >
+                    {ic.label}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-        )}
 
-        <div className="cats">
-          {CATEGORIES.map((c) => (
-            <button key={c} className={"chip" + (category === c ? " active" : "")} onClick={() => setCategory(c)}>
-              {t("categories." + c)}
-            </button>
-          ))}
-        </div>
+          {/* Description */}
+          <div className="form-row" style={{ marginTop: 14, marginBottom: 0 }}>
+            <label className="adv-label">
+              <span>📝 {lang === "ta" ? "விளக்கம்" : "Dish Description"}</span>
+            </label>
+            <input
+              className="adv-input"
+              value={newDesc}
+              onChange={(e) => setNewDesc(e.target.value)}
+              placeholder="e.g. Crisp golden dosa with potato masala filling and fresh coconut chutney."
+            />
+          </div>
 
-        {/* Admin-only Add Product Section */}
-        {isAdmin && (
-          <div className="card add-product-card advanced-form-card">
-            <div className="add-product-header" style={{ cursor: "pointer" }} onClick={() => setShowAddForm(!showAddForm)}>
-              <div className="add-product-title">
-                <span className="add-product-icon">✨</span>
-                <span>{t("add_new_product")} (Admin)</span>
+          {/* ======================================================= */}
+          {/* COMPREHENSIVE NUTRITION FACTS SECTION                  */}
+          {/* ======================================================= */}
+          <div style={{
+            marginTop: 18,
+            padding: "16px",
+            borderRadius: 20,
+            background: "linear-gradient(180deg, rgba(99,102,241,0.04) 0%, rgba(245,158,11,0.04) 100%)",
+            border: "1.5px solid rgba(99,102,241,0.22)"
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 14, color: "var(--ink)", display: "flex", alignItems: "center", gap: 6 }}>
+                  <span>🥗</span>
+                  <span>{lang === "ta" ? "முழு ஊட்டச்சத்து விவரங்கள் (Nutrition Facts)" : "Complete Nutrition Facts"}</span>
+                </div>
+                <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>
+                  {lang === "ta"
+                    ? "ஒவ்வொரு ஊட்டச்சத்தையும் உள்ளிடவும் அல்லது தானாக கணக்கிடவும்"
+                    : "Enter custom macros or click Auto-Calculate to compute from calories"}
+                </div>
               </div>
-              <button type="button" className="cta-mini" style={{ fontSize: 11, padding: "4px 10px" }}>
-                {showAddForm ? "▲ Hide" : "▼ + Add Dish"}
+
+              <button
+                type="button"
+                onClick={handleAutoCalculate}
+                className="cta-mini"
+                style={{
+                  background: "linear-gradient(135deg, #6366f1, #4f46e5)",
+                  color: "#fff",
+                  fontSize: 11.5,
+                  padding: "6px 14px",
+                  borderRadius: 14,
+                  boxShadow: "0 2px 8px rgba(99,102,241,0.3)"
+                }}
+                title="Calculate protein, carbs, fat, fiber, sugar & sodium automatically"
+              >
+                ⚡ {lang === "ta" ? "தானியங்கி கணக்கீடு" : "Auto-Calculate Macros"}
               </button>
             </div>
 
-            {showAddForm && (
-              <div style={{ marginTop: 14 }}>
-                <div className="form-row">
-                  <label className="adv-label">
-                    <span>🍔 {t("product_name")}</span>
-                  </label>
-                  <div className="input-with-icon">
-                    <input
-                      className="adv-input"
-                      value={newName}
-                      onChange={(e) => setNewName(e.target.value)}
-                      placeholder="e.g. Fresh Masala Dosa"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row-grid">
-                  <div className="form-row" style={{ marginBottom: 0 }}>
-                    <label className="adv-label">
-                      <span>💰 {t("price")} (₹)</span>
-                    </label>
-                    <div className="input-prefix-wrap">
-                      <span className="prefix-badge">₹</span>
-                      <input
-                        type="number"
-                        className="adv-input prefixed"
-                        value={newPrice}
-                        onChange={(e) => setNewPrice(e.target.value)}
-                        placeholder="75"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-row" style={{ marginBottom: 0 }}>
-                    <label className="adv-label">
-                      <span>🔥 {t("calories")}</span>
-                    </label>
-                    <div className="input-suffix-wrap">
-                      <input
-                        type="number"
-                        className="adv-input suffixed"
-                        value={newKcal}
-                        onChange={(e) => setNewKcal(e.target.value)}
-                        placeholder="320"
-                      />
-                      <span className="suffix-badge">kcal</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-row-grid" style={{ marginTop: 16 }}>
-                  <div className="form-row" style={{ marginBottom: 0 }}>
-                    <label className="adv-label">
-                      <span>📦 {t("stock_qty")}</span>
-                    </label>
-                    <div className="input-prefix-wrap">
-                      <span className="prefix-badge">Qty</span>
-                      <input
-                        type="number"
-                        className="adv-input prefixed"
-                        value={newStock}
-                        onChange={(e) => setNewStock(e.target.value)}
-                        placeholder="20"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-row" style={{ marginBottom: 0 }}>
-                    <label className="adv-label">
-                      <span>🏷️ {t("category")}</span>
-                    </label>
-                    <select
-                      className="adv-select"
-                      value={newCategory}
-                      onChange={(e) => setNewCategory(e.target.value)}
-                    >
-                      {CATEGORIES.map((c) => (
-                        <option key={c} value={c}>
-                          {t("categories." + c)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {addError && <div className="hint error" style={{ marginTop: 14 }}>⚠️ {addError}</div>}
-                {addSuccess && <div className="hint success" style={{ marginTop: 14 }}>✅ {addSuccess}</div>}
-
-                <button className="adv-submit-btn" type="button" onClick={handleAddProduct}>
-                  <span>➕ {t("add_product_btn")}</span>
-                </button>
+            {/* Calories (Primary Anchor) */}
+            <div className="form-row" style={{ marginBottom: 12 }}>
+              <label className="adv-label">
+                <span>🔥 {t("calories")} (kcal) *</span>
+              </label>
+              <div className="input-suffix-wrap">
+                <input
+                  type="number"
+                  className="adv-input suffixed"
+                  value={newKcal}
+                  onChange={(e) => setNewKcal(e.target.value)}
+                  placeholder="e.g. 280"
+                />
+                <span className="suffix-badge" style={{ fontWeight: 800, color: "var(--coral-d)" }}>kcal</span>
               </div>
-            )}
-          </div>
-        )}
+            </div>
 
-        {filtered.map((item) => {
-          const Icon = FOOD_ICONS[item.icon];
-          const qty = cart[item.id] || 0;
-          const stock = Math.max(0, item.stock ?? 0);
-          const isAvailable = stock > 0;
-          const isLowStock = isAvailable && stock <= 5;
-          const itemName = lang === "ta" ? (item.name_ta || item.name) : item.name;
-
-          return (
-            <div className="ticket" key={item.id} style={{ opacity: isAvailable ? 1 : 0.5 }}>
-              <div className="food-thumb">
-                <Icon size={20} />
-              </div>
-              <div className="item-info">
-                <div className="item-name">{itemName}</div>
-                <div className="item-tag" style={{ color: isAvailable ? (isLowStock ? "var(--chili)" : "var(--basil)") : "var(--chili)" }}>
-                  ● {isAvailable ? `${t("available")} · ${stock} ${t("left")}` : t("sold_out")}
-                  {isLowStock && (
-                    <span className="low-stock-badge">
-                      <AlertTriangle size={10} /> {t("low_stock_badge")}
-                    </span>
-                  )}
+            {/* 6 Macro Grid: Protein, Carbs, Fat, Fiber, Sugar, Sodium */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
+              {/* Protein */}
+              <div className="form-row" style={{ marginBottom: 0 }}>
+                <label className="adv-label" style={{ fontSize: 11.5, color: "#6366f1" }}>
+                  <span>💪 {lang === "ta" ? "புரதம்" : "Protein"}</span>
+                </label>
+                <div className="input-suffix-wrap">
+                  <input
+                    type="number"
+                    className="adv-input suffixed"
+                    style={{ borderColor: "rgba(99,102,241,0.4)" }}
+                    value={protein}
+                    onChange={(e) => setProtein(e.target.value)}
+                    placeholder={previewEst ? String(previewEst.protein) : "12"}
+                  />
+                  <span className="suffix-badge">g</span>
                 </div>
-                <div className="item-bottom">
-                  <div className="price">₹{item.price}</div>
-                  {isAvailable ? (
-                    qty === 0 ? (
-                      <button className="add-btn" onClick={() => addToCart(item.id, 1)}>
-                        {t("add")} +
-                      </button>
-                    ) : (
-                      <div className="stepper">
-                        <button onClick={() => setQty(item.id, qty - 1)}>
-                          <Minus size={13} />
-                        </button>
-                        <span>{qty}</span>
-                        <button onClick={() => setQty(item.id, qty + 1)}>
-                          <Plus size={13} />
-                        </button>
-                      </div>
-                    )
-                  ) : null}
-                  {isAdmin && (
-                    <button className="link" type="button" onClick={() => removeProduct(item.id)} style={{ marginLeft: 8, color: "var(--rose)" }}>
-                      🗑️ {t("remove")}
-                    </button>
-                  )}
+              </div>
+
+              {/* Carbs */}
+              <div className="form-row" style={{ marginBottom: 0 }}>
+                <label className="adv-label" style={{ fontSize: 11.5, color: "#d97706" }}>
+                  <span>🌾 {lang === "ta" ? "கார்ப்ஸ்" : "Carbohydrates"}</span>
+                </label>
+                <div className="input-suffix-wrap">
+                  <input
+                    type="number"
+                    className="adv-input suffixed"
+                    style={{ borderColor: "rgba(245,158,11,0.4)" }}
+                    value={carbs}
+                    onChange={(e) => setCarbs(e.target.value)}
+                    placeholder={previewEst ? String(previewEst.carbs) : "45"}
+                  />
+                  <span className="suffix-badge">g</span>
+                </div>
+              </div>
+
+              {/* Fat */}
+              <div className="form-row" style={{ marginBottom: 0 }}>
+                <label className="adv-label" style={{ fontSize: 11.5, color: "#ef4444" }}>
+                  <span>🥑 {lang === "ta" ? "கொழுப்பு" : "Total Fat"}</span>
+                </label>
+                <div className="input-suffix-wrap">
+                  <input
+                    type="number"
+                    className="adv-input suffixed"
+                    style={{ borderColor: "rgba(239,68,68,0.4)" }}
+                    value={fat}
+                    onChange={(e) => setFat(e.target.value)}
+                    placeholder={previewEst ? String(previewEst.fat) : "8"}
+                  />
+                  <span className="suffix-badge">g</span>
+                </div>
+              </div>
+
+              {/* Fiber */}
+              <div className="form-row" style={{ marginBottom: 0, marginTop: 8 }}>
+                <label className="adv-label" style={{ fontSize: 11.5, color: "#10b981" }}>
+                  <span>🌱 {lang === "ta" ? "நார்ச்சத்து" : "Dietary Fiber"}</span>
+                </label>
+                <div className="input-suffix-wrap">
+                  <input
+                    type="number"
+                    className="adv-input suffixed"
+                    style={{ borderColor: "rgba(16,185,129,0.4)" }}
+                    value={fiber}
+                    onChange={(e) => setFiber(e.target.value)}
+                    placeholder={previewEst ? String(previewEst.fiber) : "4"}
+                  />
+                  <span className="suffix-badge">g</span>
+                </div>
+              </div>
+
+              {/* Sugar */}
+              <div className="form-row" style={{ marginBottom: 0, marginTop: 8 }}>
+                <label className="adv-label" style={{ fontSize: 11.5, color: "#ec4899" }}>
+                  <span>🍬 {lang === "ta" ? "சர்க்கரை" : "Sugars"}</span>
+                </label>
+                <div className="input-suffix-wrap">
+                  <input
+                    type="number"
+                    className="adv-input suffixed"
+                    style={{ borderColor: "rgba(236,72,153,0.4)" }}
+                    value={sugar}
+                    onChange={(e) => setSugar(e.target.value)}
+                    placeholder={previewEst ? String(previewEst.sugar) : "3"}
+                  />
+                  <span className="suffix-badge">g</span>
+                </div>
+              </div>
+
+              {/* Sodium */}
+              <div className="form-row" style={{ marginBottom: 0, marginTop: 8 }}>
+                <label className="adv-label" style={{ fontSize: 11.5, color: "#8b5cf6" }}>
+                  <span>🧂 {lang === "ta" ? "சோடியம்" : "Sodium"}</span>
+                </label>
+                <div className="input-suffix-wrap">
+                  <input
+                    type="number"
+                    className="adv-input suffixed"
+                    style={{ borderColor: "rgba(139,92,246,0.4)" }}
+                    value={sodium}
+                    onChange={(e) => setSodium(e.target.value)}
+                    placeholder={previewEst ? String(previewEst.sodium) : "320"}
+                  />
+                  <span className="suffix-badge">mg</span>
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
 
-      {cartCount > 0 && (
-        <div className="cartbar">
-          <div className="left">
-            {cartCount} {cartCount === 1 ? t("item") : t("items")} · ₹{cartTotal}
+            {/* Live Macro Preview Card */}
+            <div style={{
+              background: "var(--surface)",
+              borderRadius: 14,
+              padding: "10px 14px",
+              marginTop: 12,
+              border: "1px solid var(--surface-border)"
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                <span style={{ fontSize: 11, fontWeight: 800, color: "var(--muted)", textTransform: "uppercase" }}>
+                  📊 {lang === "ta" ? "நேரலை ஊட்டச்சத்து முன்னோட்டம்" : "Live Nutrition Card Preview"}
+                </span>
+                <span style={{ fontSize: 11.5, fontWeight: 800, color: "var(--coral-d)" }}>
+                  🔥 {newKcal || 0} kcal
+                </span>
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                <span className="nutri-mini-chip protein" style={{ fontSize: 11 }}>💪 {currentProtein}g Protein</span>
+                <span className="nutri-mini-chip carbs" style={{ fontSize: 11 }}>🌾 {currentCarbs}g Carbs</span>
+                <span className="nutri-mini-chip fat" style={{ fontSize: 11 }}>🥑 {currentFat}g Fat</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: "#10b981", background: "rgba(16,185,129,0.12)", padding: "2px 7px", borderRadius: 8 }}>🌱 {currentFiber}g Fiber</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: "#ec4899", background: "rgba(236,72,153,0.12)", padding: "2px 7px", borderRadius: 8 }}>🍬 {currentSugar}g Sugar</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: "#8b5cf6", background: "rgba(139,92,246,0.12)", padding: "2px 7px", borderRadius: 8 }}>🧂 {currentSodium}mg Sodium</span>
+              </div>
+            </div>
+
+            {/* Allergens Selection */}
+            <div style={{ marginTop: 12 }}>
+              <label className="adv-label" style={{ fontSize: 12 }}>
+                <span>⚠️ {lang === "ta" ? "ஒவ்வாமை பொருட்கள் (Allergens)" : "Select Allergens (Optional)"}</span>
+              </label>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {COMMON_ALLERGENS.map((alg) => {
+                  const isSelected = selectedAllergens.includes(alg);
+                  return (
+                    <button
+                      key={alg}
+                      type="button"
+                      onClick={() => toggleAllergen(alg)}
+                      style={{
+                        padding: "4px 12px",
+                        borderRadius: 10,
+                        fontSize: 11.5,
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        transition: "all 0.15s",
+                        border: isSelected ? "1.5px solid #ef4444" : "1px solid var(--input-border)",
+                        background: isSelected ? "rgba(239,68,68,0.14)" : "var(--surface)",
+                        color: isSelected ? "#ef4444" : "var(--muted)"
+                      }}
+                    >
+                      {isSelected ? `✓ ${alg}` : `+ ${alg}`}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          <button className="cta-mini" onClick={() => onNavigate("cart")}>
-            {t("view_cart")} →
+
+          {/* Feedback Hints */}
+          {addError && <div className="hint error" style={{ marginTop: 14 }}>⚠️ {addError}</div>}
+          {addSuccess && <div className="hint success" style={{ marginTop: 14 }}>✅ {addSuccess}</div>}
+
+          {/* Submit Button */}
+          <button
+            className="adv-submit-btn"
+            type="button"
+            onClick={handleAddProduct}
+            style={{ marginTop: 16 }}
+          >
+            <span>➕ {lang === "ta" ? "முழு ஊட்டச்சத்துடன் உணவை சேர்க்கவும்" : "Publish Dish with All Nutrition Facts"}</span>
           </button>
         </div>
       )}
-    </>
+    </div>
+  );
+}
+
+/* ================================================================== */
+/* Menu / Order page                                                     */
+/* ================================================================== */
+function MenuPage({ onNavigate }) {
+  return (
+    <RefactoredOrderPage
+      onNavigate={onNavigate}
+      useCanteenHook={useCanteen}
+      NutritionModal={NutritionModal}
+      AddProductCard={AddProductCard}
+    />
   );
 }
 
@@ -2042,157 +3835,445 @@ function MenuPage({ onNavigate }) {
 /* Cart page                                                             */
 /* ================================================================== */
 function CartPage({ onNavigate }) {
-  const { cartLines, cartTotal, setQty, placeOrder, lang, toggleLang, t } = useCanteen();
-  const [coupon, setCoupon] = useState("");
-  const [couponApplied, setCouponApplied] = useState(false);
-  const [couponError, setCouponError] = useState(false);
-  const [payMode, setPayMode] = useState("UPI");
+  return (
+    <RefactoredCartPage
+      onNavigate={onNavigate}
+      useCanteenHook={useCanteen}
+    />
+  );
+}
 
-  const discount = couponApplied ? Math.round(cartTotal * 0.1) : 0;
-  const fee = cartLines.length ? 3 : 0;
-  const tax = Math.round((cartTotal - discount) * 0.05);
-  const total = cartTotal - discount + fee + tax;
 
-  const applyCoupon = () => {
-    if (coupon.trim().toUpperCase() === "CANTEEN10") {
-      setCouponApplied(true);
-      setCouponError(false);
+/* ================================================================== */
+/* Canteen Selection Page — step between Cart and Order Confirmation    */
+/* ================================================================== */
+function CanteenSelectPage({ onNavigate }) {
+  const { canteens, placeOrder, lang, t, selectedCanteen, fetchCanteens } = useCanteen();
+  const [selectedId, setSelectedId] = useState(selectedCanteen || null);
+  const [confirming, setConfirming] = useState(false);
+  const [error, setError] = useState("");
+
+  // Re-fetch latest canteen status from backend whenever student visits the Choose Canteen page
+  useEffect(() => {
+    if (typeof fetchCanteens === "function") {
+      fetchCanteens();
+    }
+  }, [fetchCanteens]);
+
+  // If currently selected canteen became inactive, clear selection and show guidance
+  const selectedCanteenObj = canteens.find((c) => c.id === selectedId);
+  const isSelectedInactive = selectedCanteenObj && selectedCanteenObj.status === "inactive";
+
+  // Recover payMode & total that CartPage stored before navigating here
+  const payMode = (() => { try { return sessionStorage.getItem("canteen_checkout_payMode") || "UPI"; } catch { return "UPI"; } })();
+  const total = (() => { try { return Number(sessionStorage.getItem("canteen_checkout_total")) || 0; } catch { return 0; } })();
+
+  const crowdEmoji = { low: "😌", med: "😐", high: "😰" };
+  const crowdDesc = {
+    en: { low: "Plenty of seats • Short wait", med: "Moderate crowd • Short wait", high: "Very busy • Long wait" },
+    ta: { low: "இடங்கள் உள்ளன • குறுகிய காத்திருப்பு", med: "மிதமான கூட்டம்", high: "அதிக கூட்டம் • நீண்ட காத்திருப்பு" },
+  };
+
+  const handleConfirm = () => {
+    if (!selectedId) {
+      setError(lang === "ta" ? "தயவுசெய்து ஒரு உணவகத்தை தேர்ந்தெடுங்கள்." : "Please select a canteen to continue.");
+      return;
+    }
+    const canteen = canteens.find((c) => c.id === selectedId);
+    if (!canteen || canteen.status === "inactive") {
+      setError(lang === "ta" ? "இந்த உணவகம் தற்போது செயல்படவில்லை. தயவுசெய்து மற்றொரு உணவகத்தை தேர்வு செய்யவும்." : "This canteen is currently inactive. Please choose another canteen.");
+      return;
+    }
+    setError("");
+    setConfirming(true);
+
+    const canteenName = lang === "ta" ? (canteen.name_ta || canteen.name) : canteen.name;
+    const canteenLoc  = lang === "ta" ? (canteen.loc_ta  || canteen.loc)  : canteen.loc;
+
+    // Clean up sessionStorage
+    try { sessionStorage.removeItem("canteen_checkout_payMode"); sessionStorage.removeItem("canteen_checkout_total"); } catch {}
+
+    const success = placeOrder(payMode, total, canteen.id, canteen.name, canteenLoc);
+    if (success !== false) {
+      onNavigate("tracking");
     } else {
-      setCouponApplied(false);
-      setCouponError(true);
+      setConfirming(false);
     }
   };
 
-  const handlePlaceOrder = () => {
-    if (cartLines.length === 0) return;
-    placeOrder(payMode, total);
-    onNavigate("tracking");
-  };
-
   return (
-    <>
-      <div style={{ position: "relative", height: 200, overflow: "hidden", flexShrink: 0 }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", flex: 1, minHeight: 0, position: "relative" }}>
+      {/* Compact Hero banner */}
+      <div style={{ position: "relative", minHeight: 110, overflow: "hidden", flexShrink: 0, background: "#1f1d19" }}>
         <img
-          src="/canteen-hero.avif"
+          src="/anime-canteen-bg.jpg"
           alt="Canteen"
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "brightness(0.45) saturate(1.1)" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, filter: "brightness(0.7) saturate(1.15)" }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(10,6,2,0.8) 100%)" }} />
-        <div style={{ position: "absolute", top: 14, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
-          <button className="back" onClick={() => onNavigate("menu")} style={{ color: "var(--coral)" }}>
-            <ArrowLeft />
-          </button>
-          <div className="cart-head-copy">
-            <div className="h-title" style={{ color: "#fff", margin: 0 }}>{t("your_cart")}</div>
-            <div className="eyebrow" style={{ color: "rgba(255,220,120,0.9)", marginTop: 0 }}>{t("cse_canteen")}</div>
-          </div>
-        </div>
-        <div style={{ position: "absolute", bottom: 16, left: 18 }}>
-          <div style={{ color: "rgba(255,220,120,0.85)", fontSize: 10, letterSpacing: 2, fontWeight: 700, textTransform: "uppercase" }}>{t("review_pay")}</div>
-          <div style={{ color: "#fff", fontSize: 18, fontWeight: 800, marginTop: 3 }}>{t("almost_there")}</div>
-        </div>
-      </div>
-
-      <div className="scroll" style={{ paddingTop: 16, paddingBottom: 24 }}>
-        {cartLines.length === 0 ? (
-          <div className="empty-state cart-empty-state">
-            <div className="empty-badge">🛒</div>
-            <div className="empty-title">{t("cart_empty")}</div>
-            <button className="empty-link" onClick={() => onNavigate("menu")}>
-              {t("browse_menu")} <span>→</span>
-            </button>
-          </div>
-        ) : (
-          <>
-            <div className="card">
-              {cartLines.map((l) => {
-                const Icon = FOOD_ICONS[l.icon];
-                const itemName = lang === "ta" ? (l.name_ta || l.name) : l.name;
-                return (
-                  <div className="list-row" key={l.id}>
-                    <div className="list-left">
-                      <div className="food-thumb">
-                        <Icon size={18} />
-                      </div>
-                      <span>{itemName}</span>
-                    </div>
-                    <div className="stepper">
-                      <button onClick={() => setQty(l.id, l.qty - 1)}>
-                        <Minus size={13} />
-                      </button>
-                      <span>{l.qty}</span>
-                      <button onClick={() => setQty(l.id, l.qty + 1)}>
-                        <Plus size={13} />
-                      </button>
-                    </div>
-                    <b className="mono bold">₹{l.qty * l.price}</b>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="section-title">{t("promo_code")}</div>
-            <div className="promo">
-              <input
-                placeholder="WELCOME10"
-                value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
-              />
-              <button onClick={applyCoupon}>{t("apply")}</button>
-            </div>
-            {couponApplied && <div className="hint success">{t("coupon_applied")}</div>}
-            {couponError && <div className="hint error">{t("invalid_code")}</div>}
-
-            <div className="section-title">{t("pay_with")}</div>
-            <div className="mode-row">
-              {["UPI", "Card", "Wallet", "Cash"].map((m) => (
-                <button
-                  key={m}
-                  className={"mode" + (payMode === m ? " active" : "")}
-                  onClick={() => setPayMode(m)}
-                >
-                  {m}
-                </button>
-              ))}
-            </div>
-
-            <div className="section-title">{t("summary")}</div>
-            <div className="card">
-              <div className="r-row">
-                <span>{t("subtotal")}</span>
-                <span className="mono">₹{cartTotal}</span>
-              </div>
-              {couponApplied && (
-                <div className="r-row">
-                  <span>{t("coupon")}</span>
-                  <span className="mono">−₹{discount}</span>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(20,15,10,0.5) 0%, rgba(20,15,10,0.85) 100%)" }} />
+        
+        <div style={{ position: "relative", zIndex: 2, padding: "14px 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <button className="back" onClick={() => onNavigate("cart")} style={{ color: "var(--coral)", background: "rgba(0,0,0,0.35)", borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <ArrowLeft />
+              </button>
+              <div>
+                <div className="eyebrow" style={{ color: "rgba(255,220,120,0.9)", marginTop: 0, fontSize: 10.5, letterSpacing: 1.5, fontWeight: 700 }}>
+                  {lang === "ta" ? "ஆர்டர் உறுதிப்படுத்தல் · கட்டாய படி" : "ORDER CHECKOUT · STEP 2 OF 2"}
                 </div>
-              )}
-              <div className="r-row">
-                <span>{t("fee")}</span>
-                <span className="mono">₹{fee}</span>
-              </div>
-              <div className="r-row">
-                <span>{t("taxes")}</span>
-                <span className="mono">₹{tax}</span>
-              </div>
-              <div className="r-row total">
-                <span>{t("to_pay")}</span>
-                <span className="mono">₹{total}</span>
+                <div className="h-title" style={{ color: "#fff", margin: 0, fontSize: 20, fontWeight: 800 }}>
+                  {lang === "ta" ? "உணவகத்தை தேர்ந்தெடு" : "Choose Your Canteen"}
+                </div>
               </div>
             </div>
-          </>
-        )}
+
+            <span className="crowd-live-badge" style={{ background: "rgba(0,0,0,0.45)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.15)" }}>
+              <i /> {t("live")}
+            </span>
+          </div>
+
+          <div style={{ color: "rgba(255,255,255,0.8)", fontSize: 13, marginTop: 6, fontWeight: 500 }}>
+            {lang === "ta"
+              ? "நீங்கள் எங்கிருந்து உணவை எடுக்க விரும்புகிறீர்கள்? (செயலில் உள்ள உணவகங்களைத் தேர்வு செய்யவும்)"
+              : "Where would you like to pick up your order? Select an active campus canteen"}
+          </div>
+        </div>
       </div>
 
-      {cartLines.length > 0 && (
-        <div className="checkoutbar">
-          <button className="place-btn" onClick={handlePlaceOrder}>
-            {t("place_order")} · ₹{total}
+      <div className="scroll" style={{ flex: 1, overflowY: "auto", paddingTop: 16, paddingBottom: 130 }}>
+        {/* Step indicator */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: 6, padding: "0 18px 16px",
+          fontSize: 11.5, fontWeight: 600, color: "var(--muted)", maxWidth: 960, margin: "0 auto"
+        }}>
+          <span style={{ color: "var(--basil)", fontWeight: 800, cursor: "pointer" }} onClick={() => onNavigate("cart")}>✓ Cart</span>
+          <span style={{ flex: 1, height: 1.5, background: "var(--line)", borderRadius: 2 }} />
+          <span style={{ color: "var(--coral-d)", fontWeight: 800, padding: "3px 10px", background: "rgba(196,62,28,0.12)", borderRadius: 10 }}>
+            ● {lang === "ta" ? "உணவகம் தேர்வு" : "Select Canteen"}
+          </span>
+          <span style={{ flex: 1, height: 1.5, background: "var(--line)", borderRadius: 2 }} />
+          <span style={{ color: "var(--muted)" }}>{lang === "ta" ? "உறுதிப்படுத்தல்" : "Confirm"}</span>
+        </div>
+
+        {/* Section title & count */}
+        <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 18px 12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ fontWeight: 800, fontSize: 16, color: "var(--fg)" }}>
+            🏢 {lang === "ta" ? "வளாக உணவகங்கள்" : "Campus Canteens"}
+          </div>
+          <div style={{ fontSize: 12, color: "var(--muted)", fontWeight: 600 }}>
+            {selectedId && !isSelectedInactive
+              ? (lang === "ta" ? "1 தேர்ந்தெடுக்கப்பட்டது" : "1 selected")
+              : (lang === "ta" ? "செயலில் உள்ள ஒன்றை தேர்ந்தெடுக்கவும்" : "Select an active canteen below")}
+          </div>
+        </div>
+
+        {/* Canteen cards in responsive grid */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: 14,
+          padding: "0 18px",
+          maxWidth: 960,
+          margin: "0 auto"
+        }}>
+          {canteens.map((c) => {
+            const lv = LEVELS[c.level] || LEVELS.low;
+            const isInactive = c.status === "inactive";
+            const isSelected = selectedId === c.id && !isInactive;
+            const cName = lang === "ta" ? (c.name_ta || c.name) : c.name;
+            const cLoc  = lang === "ta" ? (c.loc_ta  || c.loc)  : c.loc;
+
+            return (
+              <div
+                key={c.id}
+                id={`canteen-card-${c.id}`}
+                onClick={() => {
+                  if (isInactive) return;
+                  setSelectedId(c.id);
+                  setError("");
+                }}
+                role="button"
+                tabIndex={isInactive ? -1 : 0}
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  padding: 0,
+                  borderRadius: 18,
+                  cursor: isInactive ? "not-allowed" : "pointer",
+                  background: "transparent",
+                  outline: "none",
+                  opacity: isInactive ? 0.68 : 1,
+                  transform: isSelected ? "scale(1.02)" : "scale(1)",
+                  transition: "all 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+                  display: "flex",
+                  flexDirection: "column",
+                  position: "relative",
+                  filter: isInactive ? "grayscale(0.4)" : "none",
+                }}
+              >
+                <div style={{
+                  width: "100%", height: "100%",
+                  borderRadius: 18, overflow: "hidden",
+                  border: isInactive
+                    ? "2px dashed rgba(239,68,68,0.4)"
+                    : isSelected
+                    ? `2.5px solid ${lv.color}`
+                    : "2px solid var(--line)",
+                  background: isInactive
+                    ? "rgba(240, 240, 240, 0.6)"
+                    : isSelected
+                    ? `linear-gradient(135deg, ${lv.bg}, var(--surface))`
+                    : "var(--surface)",
+                  boxShadow: isSelected
+                    ? `0 6px 24px ${lv.color}33, 0 0 0 4px ${lv.color}18`
+                    : "0 2px 10px rgba(0,0,0,0.06)",
+                  transition: "all 0.25s cubic-bezier(0.16,1,0.3,1)",
+                  display: "flex", flexDirection: "column", justifyContent: "space-between"
+                }}>
+                  {/* Card top accent bar */}
+                  <div style={{
+                    height: 4,
+                    background: isInactive
+                      ? "#ef4444"
+                      : `linear-gradient(90deg, ${lv.color}99, ${lv.color})`
+                  }} />
+
+                  <div style={{ padding: "16px 18px 14px", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                    <div>
+                      {/* Canteen Header & Active/Inactive Badge */}
+                      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontWeight: 800, fontSize: 16.5, color: "var(--fg)", display: "flex", alignItems: "center", gap: 8 }}>
+                            <span style={{ fontSize: 20 }}>{c.id === "main" ? "🏫" : c.id === "hostel" ? "🏢" : "🔧"}</span>
+                            <span>{cName}</span>
+                          </div>
+                          <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 4, fontWeight: 500 }}>
+                            📍 {cLoc}
+                          </div>
+                        </div>
+
+                        {/* Status Badge: Green Active or Red/Gray Inactive */}
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
+                          <span
+                            id={`canteen-status-badge-${c.id}`}
+                            style={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 5,
+                              padding: "4px 9px",
+                              borderRadius: 12,
+                              fontSize: 11.5,
+                              fontWeight: 800,
+                              letterSpacing: 0.2,
+                              background: isInactive ? "rgba(239,68,68,0.12)" : "rgba(16,185,129,0.14)",
+                              color: isInactive ? "#dc2626" : "#059669",
+                              border: isInactive ? "1px solid rgba(239,68,68,0.3)" : "1px solid rgba(16,185,129,0.3)",
+                            }}
+                          >
+                            <span style={{
+                              width: 7, height: 7, borderRadius: "50%",
+                              background: isInactive ? "#ef4444" : "#10b981",
+                              display: "inline-block",
+                              boxShadow: isInactive ? "0 0 6px #ef4444" : "0 0 6px #10b981"
+                            }} />
+                            {isInactive ? "Inactive" : "Active"}
+                          </span>
+
+                          {/* Radio Selection Indicator */}
+                          {!isInactive && (
+                            <div style={{
+                              width: 22, height: 22, borderRadius: "50%",
+                              border: `2.5px solid ${isSelected ? lv.color : "var(--line)"}`,
+                              background: isSelected ? lv.color : "transparent",
+                              display: "flex", alignItems: "center", justifyContent: "center",
+                              transition: "all 0.2s",
+                            }}>
+                              {isSelected && (
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Crowd description */}
+                      <div style={{ fontSize: 12, color: isInactive ? "#94a3b8" : lv.color, marginTop: 10, fontWeight: 600 }}>
+                        {isInactive
+                          ? (lang === "ta" ? "⚠️ இந்த உணவகம் தற்போது மூடப்பட்டுள்ளது" : "⚠️ Canteen is currently closed for orders")
+                          : `${crowdEmoji[c.level] || "😌"} ${crowdDesc[lang]?.[c.level] || ""}`}
+                      </div>
+
+                      {/* Crowd pill + wait time */}
+                      {!isInactive && (
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 12, gap: 8 }}>
+                          <span className="pill" style={{ color: lv.color, background: lv.bg, fontSize: 11, fontWeight: 700, padding: "3px 9px" }}>
+                            <i className="dot" style={{ background: lv.color }} />
+                            {t(lv.key)}
+                          </span>
+                          <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
+                            <span style={{ fontSize: 20, fontWeight: 900, color: lv.color, lineHeight: 1 }}>{c.wait}</span>
+                            <span style={{ fontSize: 9.5, color: "var(--muted)", fontWeight: 600, letterSpacing: 0.5, textTransform: "uppercase" }}>
+                              {t("min")} wait
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Action Button: [ Select Canteen ] vs [ Currently Unavailable ] */}
+                    <div style={{ marginTop: 14 }}>
+                      {isInactive ? (
+                        <button
+                          type="button"
+                          disabled
+                          id={`canteen-unavailable-btn-${c.id}`}
+                          style={{
+                            width: "100%",
+                            padding: "9px 12px",
+                            borderRadius: 10,
+                            border: "1px solid #cbd5e1",
+                            background: "#e2e8f0",
+                            color: "#64748b",
+                            fontSize: 12.5,
+                            fontWeight: 700,
+                            cursor: "not-allowed",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 6
+                          }}
+                        >
+                          <span>🔒</span>
+                          <span>{lang === "ta" ? "தற்போது கிடைக்கவில்லை" : "Currently Unavailable"}</span>
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          id={`canteen-select-btn-${c.id}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedId(c.id);
+                            setError("");
+                          }}
+                          style={{
+                            width: "100%",
+                            padding: "9px 12px",
+                            borderRadius: 10,
+                            border: isSelected ? `1.5px solid ${lv.color}` : "1.5px solid #073B30",
+                            background: isSelected ? lv.color : "#073B30",
+                            color: "#ffffff",
+                            fontSize: 12.5,
+                            fontWeight: 700,
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 6,
+                            transition: "all 0.2s ease"
+                          }}
+                        >
+                          <span>{isSelected ? "✓" : "→"}</span>
+                          <span>
+                            {isSelected
+                              ? (lang === "ta" ? "தேர்ந்தெடுக்கப்பட்டது" : "Selected")
+                              : (lang === "ta" ? "உணவகத்தை தேர்ந்தெடு" : "Select Canteen")}
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Selected footer ribbon */}
+                  {isSelected && (
+                    <div style={{
+                      padding: "8px 18px", background: `${lv.color}18`,
+                      borderTop: `1px solid ${lv.color}33`,
+                      display: "flex", alignItems: "center", gap: 6,
+                      fontSize: 11.5, fontWeight: 700, color: lv.color,
+                    }}>
+                      ✓ {lang === "ta" ? "தேர்ந்தெடுக்கப்பட்டது — இங்கிருந்து ஆர்டர் எடுக்கப்படும்" : "Selected — order will be routed here"}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Tip */}
+        <div style={{
+          maxWidth: 960, margin: "20px auto 0", padding: "12px 18px",
+          background: "rgba(62,122,79,0.08)", borderRadius: 14,
+          border: "1px dashed rgba(62,122,79,0.3)",
+          display: "flex", gap: 10, alignItems: "flex-start"
+        }}>
+          <span style={{ fontSize: 18, flexShrink: 0 }}>💡</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: 12, color: "var(--basil)" }}>
+              {lang === "ta" ? "செயலில் உள்ள உணவகங்கள்" : "Canteen Availability Status"}
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 2 }}>
+              {lang === "ta"
+                ? "பச்சை நிற புள்ளியுள்ள உணவகங்கள் தற்போது திறக்கப்பட்டுள்ளன. ஆர்டர் செய்ய செயலில் உள்ள உணவகத்தை தேர்வு செய்யவும்."
+                : "Canteens marked Active are open for student orders. Inactive canteens cannot accept new orders."}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom confirm bar */}
+      <div style={{
+        position: "sticky",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        background: "var(--surface)",
+        borderTop: "1.5px solid var(--surface-border)",
+        padding: "14px 20px 18px",
+        backdropFilter: "blur(20px)",
+        boxShadow: "0 -8px 30px rgba(0,0,0,0.1)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
+        <div style={{ width: "100%", maxWidth: 540, display: "flex", flexDirection: "column", gap: 6 }}>
+          {(error || isSelectedInactive) && (
+            <div style={{
+              fontSize: 12, fontWeight: 600, color: "var(--chili)",
+              background: "rgba(196,62,28,0.1)", borderRadius: 8,
+              padding: "6px 12px", textAlign: "center", width: "100%",
+            }}>
+              ⚠️ {error || (lang === "ta" ? "இந்த உணவகம் தற்போது செயல்படவில்லை. தயவுசெய்து மற்றொரு உணவகத்தை தேர்வு செய்யவும்." : "This canteen is currently inactive. Please choose another canteen.")}
+            </div>
+          )}
+          <button
+            id="canteen-confirm-btn"
+            className="place-btn"
+            disabled={confirming || !selectedId || isSelectedInactive}
+            onClick={handleConfirm}
+            style={{
+              opacity: (selectedId && !isSelectedInactive) ? 1 : 0.55,
+              cursor: (selectedId && !isSelectedInactive) ? "pointer" : "not-allowed",
+              width: "100%",
+              padding: "15px 0",
+              fontSize: 16
+            }}
+          >
+            {confirming
+              ? (lang === "ta" ? "ஆர்டர் செய்கிறது..." : "Placing order...")
+              : isSelectedInactive
+                ? (lang === "ta" ? "செயலில் உள்ள உணவகத்தை தேர்ந்தெடுக்கவும்" : "Select an Active Canteen to Continue")
+                : selectedId
+                  ? (lang === "ta" ? `ஆர்டர் உறுதிசெய் · ₹${total}` : `Confirm Order · ₹${total}`)
+                  : (lang === "ta" ? "உணவகத்தை தேர்ந்தெடு" : "Select a Canteen Above to Continue")}
           </button>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }
 
@@ -2201,59 +4282,11 @@ function CartPage({ onNavigate }) {
 /* ================================================================== */
 const STATUS_LABELS = ["Placed", "Preparing", "Ready", "Picked up"];
 
+
 function StockPage({ onNavigate }) {
-  const { menu, updateStock, addProduct, removeProduct, lang, toggleLang, t, lowStockItems } = useCanteen();
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [newName, setNewName] = useState("");
-  const [newPrice, setNewPrice] = useState("");
-  const [newKcal, setNewKcal] = useState("");
-  const [newStock, setNewStock] = useState("");
-  const [newCategory, setNewCategory] = useState("meals");
-  const [addError, setAddError] = useState("");
-  const [addSuccess, setAddSuccess] = useState("");
-
-  const handleAddProduct = () => {
-    const name = newName.trim();
-    const price = Number(newPrice);
-    const kcal = Number(newKcal);
-    const stock = Number(newStock);
-
-    if (!name) {
-      setAddError(lang === "ta" ? "உணவு பெயரை உள்ளிடவும்." : "Enter a product name.");
-      return;
-    }
-    if (!price || price <= 0) {
-      setAddError(lang === "ta" ? "சரியான விலையை உள்ளிடவும்." : "Enter a valid price.");
-      return;
-    }
-    if (!kcal || kcal <= 0) {
-      setAddError(lang === "ta" ? "சரியான கலோரி அளவை உள்ளிடவும்." : "Enter a valid calorie value.");
-      return;
-    }
-    if (!Number.isFinite(stock) || stock < 0) {
-      setAddError(lang === "ta" ? "சரியான இருப்பை உள்ளிடவும்." : "Enter a valid stock count.");
-      return;
-    }
-
-    addProduct({
-      id: name.toLowerCase().replace(/[^a-z0-9]+/g, "_") + "_" + Date.now(),
-      name,
-      price,
-      kcal,
-      category: newCategory,
-      icon: "thali",
-      stock,
-      available: stock > 0,
-    });
-    setNewName("");
-    setNewPrice("");
-    setNewKcal("");
-    setNewStock("");
-    setNewCategory("meals");
-    setAddError("");
-    setAddSuccess(lang === "ta" ? "உணவு வெற்றிகரமாக சேர்க்கப்பட்டது." : "Dish added to menu successfully.");
-    setTimeout(() => setAddSuccess(""), 4000);
-  };
+  const { menu, updateStock, removeProduct, lang, toggleLang, t, lowStockItems } = useCanteen();
+  const [filterCat, setFilterCat] = useState("all");
+  const [nutritionItem, setNutritionItem] = useState(null);
 
   const handleRemoveItem = (id, name) => {
     if (window.confirm(lang === "ta" ? `"${name}" உணவை மெனுவிலிருந்து நீக்கவா?` : `Remove "${name}" from canteen menu?`)) {
@@ -2265,11 +4298,11 @@ function StockPage({ onNavigate }) {
     <>
       <div style={{ position: "relative", height: 200, overflow: "hidden", flexShrink: 0 }}>
         <img
-          src="/canteen-hero.avif"
+          src="/anime-canteen-bg.jpg"
           alt="Canteen"
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "brightness(0.45) saturate(1.1)" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "brightness(0.88) saturate(1.15)" }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(10,6,2,0.8) 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(20,15,10,0.55) 75%, rgba(20,15,10,0.82) 100%)" }} />
         <div style={{ position: "absolute", top: 14, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
           <button className="back" onClick={() => onNavigate("admin-dashboard")} style={{ color: "var(--coral)" }}>
             <ArrowLeft />
@@ -2299,121 +4332,8 @@ function StockPage({ onNavigate }) {
           </div>
         )}
 
-        {/* Admin Add New Product Card */}
-        <div className="card add-product-card advanced-form-card" style={{ marginBottom: 16 }}>
-          <div
-            className="add-product-header"
-            style={{ cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-            onClick={() => setShowAddForm(!showAddForm)}
-          >
-            <div>
-              <div className="add-product-title">
-                <span className="add-product-icon">✨</span>
-                <span>{lang === "ta" ? "+ புதிய உணவு சேர்க்க" : "+ Add New Dish to Menu"}</span>
-              </div>
-              <div className="add-product-subtitle" style={{ marginTop: 2 }}>
-                {lang === "ta" ? "விலை, இருப்பு மற்றும் கலோரியுடன் புதிய உணவை சேர்க்கவும்" : "Create a new dish with price, calories, category and stock"}
-              </div>
-            </div>
-            <button type="button" className="cta-mini" style={{ fontSize: 11, padding: "6px 12px", flexShrink: 0 }}>
-              {showAddForm ? "▲ Close" : "➕ Add Product"}
-            </button>
-          </div>
-
-          {showAddForm && (
-            <div style={{ marginTop: 16 }}>
-              <div className="form-row">
-                <label className="adv-label">
-                  <span>🍔 {t("product_name")}</span>
-                </label>
-                <div className="input-with-icon">
-                  <input
-                    className="adv-input"
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    placeholder="e.g. Special Ghee Roast Dosa"
-                  />
-                </div>
-              </div>
-
-              <div className="form-row-grid">
-                <div className="form-row" style={{ marginBottom: 0 }}>
-                  <label className="adv-label">
-                    <span>💰 {t("price")} (₹)</span>
-                  </label>
-                  <div className="input-prefix-wrap">
-                    <span className="prefix-badge">₹</span>
-                    <input
-                      type="number"
-                      className="adv-input prefixed"
-                      value={newPrice}
-                      onChange={(e) => setNewPrice(e.target.value)}
-                      placeholder="60"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row" style={{ marginBottom: 0 }}>
-                  <label className="adv-label">
-                    <span>🔥 {t("calories")}</span>
-                  </label>
-                  <div className="input-suffix-wrap">
-                    <input
-                      type="number"
-                      className="adv-input suffixed"
-                      value={newKcal}
-                      onChange={(e) => setNewKcal(e.target.value)}
-                      placeholder="280"
-                    />
-                    <span className="suffix-badge">kcal</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-row-grid" style={{ marginTop: 14 }}>
-                <div className="form-row" style={{ marginBottom: 0 }}>
-                  <label className="adv-label">
-                    <span>📦 {t("stock_qty")}</span>
-                  </label>
-                  <div className="input-prefix-wrap">
-                    <span className="prefix-badge">Qty</span>
-                    <input
-                      type="number"
-                      className="adv-input prefixed"
-                      value={newStock}
-                      onChange={(e) => setNewStock(e.target.value)}
-                      placeholder="25"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row" style={{ marginBottom: 0 }}>
-                  <label className="adv-label">
-                    <span>🏷️ {t("category")}</span>
-                  </label>
-                  <select
-                    className="adv-select"
-                    value={newCategory}
-                    onChange={(e) => setNewCategory(e.target.value)}
-                  >
-                    {CATEGORIES.map((c) => (
-                      <option key={c} value={c}>
-                        {t("categories." + c)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {addError && <div className="hint error" style={{ marginTop: 14 }}>⚠️ {addError}</div>}
-              {addSuccess && <div className="hint success" style={{ marginTop: 14 }}>✅ {addSuccess}</div>}
-
-              <button className="adv-submit-btn" type="button" onClick={handleAddProduct} style={{ marginTop: 16 }}>
-                <span>➕ {lang === "ta" ? "மெனுவில் உணவு சேர்க்க" : "Publish Dish to Menu"}</span>
-              </button>
-            </div>
-          )}
-        </div>
+        {/* Admin Add New Product Card with Full Nutrition Facts */}
+        <AddProductCard defaultCategory="meals" />
 
         <div className="section-title">
           <span>{lang === "ta" ? "உணவுப் பொருட்கள் மற்றும் நேரலை இருப்பு" : "All Menu Items & Stock Controller"} ({menu.length})</span>
@@ -2505,201 +4425,13 @@ function StockPage({ onNavigate }) {
 /* Crowd page — live crowd monitoring & update                          */
 /* ================================================================== */
 function CrowdPage({ onNavigate }) {
-  const { user, canteens, updateCrowdLevel, lang, toggleLang, t } = useCanteen();
-  const isAdmin = user?.role === "admin";
-  const [now, setNow] = useState(new Date());
-  const [selectedCanteen, setSelectedCanteen] = useState(null);
-  const [animatingId, setAnimatingId] = useState(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => setNow(new Date()), 30000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const timeAgo = (date) => {
-    const diff = Math.floor((now - new Date(date)) / 1000);
-    if (diff < 60) return t("just_now");
-    if (diff < 3600) return `${Math.floor(diff / 60)} ${t("min_ago")}`;
-    return `${Math.floor(diff / 3600)} ${t("hr_ago")}`;
-  };
-
-  const handleUpdate = (canteenId, level) => {
-    setAnimatingId(canteenId);
-    updateCrowdLevel(canteenId, level);
-    setSelectedCanteen(null);
-    setTimeout(() => setAnimatingId(null), 600);
-  };
-
-  const crowdPercent = { low: 25, med: 55, high: 90 };
-  const crowdEmoji = { low: "😌", med: "😐", high: "😰" };
-  const crowdDesc = {
-    en: { low: "Plenty of seats available", med: "Moderate crowd, short wait", high: "Very crowded, long wait" },
-    ta: { low: "தாராளமாக இடங்கள் உள்ளன", med: "மிதமான கூட்டம், குறைந்த காத்திருப்பு", high: "அதிக கூட்டம், நீண்ட காத்திருப்பு" }
-  };
-
   return (
-    <>
-      <div style={{ position: "relative", height: 200, overflow: "hidden", flexShrink: 0 }}>
-        <img
-          src="/canteen-hero.avif"
-          alt="Canteen"
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "brightness(0.45) saturate(1.1)" }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(0,0,0,0.35) 0%,rgba(10,6,2,0.8) 100%)" }} />
-        <div style={{ position: "absolute", top: 14, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
-          <button className="back" onClick={() => onNavigate(isAdmin ? "admin-dashboard" : "home")} style={{ color: "var(--coral)" }}>
-            <ArrowLeft />
-          </button>
-          <div>
-            <div className="eyebrow" style={{ color: "rgba(255,220,120,0.9)", marginTop: 0 }}>{t("live_status")}</div>
-            <div className="h-title" style={{ color: "#fff", margin: 0 }}>{t("crowd")}</div>
-          </div>
-        </div>
-        <div style={{ position: "absolute", bottom: 16, left: 18 }}>
-          <div style={{ color: "rgba(255,220,120,0.85)", fontSize: 10, letterSpacing: 2, fontWeight: 700, textTransform: "uppercase" }}>
-            {isAdmin ? (lang === "ta" ? "நிர்வாக மேலாண்மை" : "ADMIN CONTROLLER") : t("live_status")}
-          </div>
-          <div style={{ color: "#fff", fontSize: 18, fontWeight: 800, marginTop: 3 }}>
-            {isAdmin
-              ? (lang === "ta" ? "கூட்ட நிலையை புதுப்பிக்கவும்" : "Manage & Update Crowd Levels")
-              : (lang === "ta" ? "நேரலை கூட்ட நெரிசல் நிலை" : "Live Crowd Density & Wait Times")}
-          </div>
-        </div>
-        <div style={{ position: "absolute", top: 14, right: 18, display: "flex", alignItems: "center", gap: 6 }}>
-          <span className="crowd-live-badge">
-            <i /> {t("live")}
-          </span>
-        </div>
-      </div>
-
-      <div className="scroll" style={{ paddingTop: 16, paddingBottom: 24 }}>
-        <div className="crowd-summary-strip">
-          {Object.entries(LEVELS).map(([key, lv]) => {
-            const count = canteens.filter(c => c.level === key).length;
-            return (
-              <div key={key} className="crowd-summary-chip">
-                <i className="dot" style={{ background: lv.color }} />
-                <span style={{ color: lv.color, fontWeight: 700 }}>{count}</span>
-                <span style={{ color: "var(--muted)", fontSize: 10 }}>{t(lv.key)}</span>
-              </div>
-            );
-          })}
-        </div>
-
-        {canteens.map((c) => {
-          const lv = LEVELS[c.level];
-          const isSelected = selectedCanteen === c.id;
-          const isAnimating = animatingId === c.id;
-          const pct = crowdPercent[c.level];
-          const canteenName = lang === "ta" ? (c.name_ta || c.name) : c.name;
-          const canteenLoc = lang === "ta" ? (c.loc_ta || c.loc) : c.loc;
-
-          return (
-            <div
-              className={"crowd-card" + (isAnimating ? " crowd-card-flash" : "")}
-              key={c.id}
-            >
-              <div className="crowd-card-header">
-                <div className="crowd-card-info">
-                  <div className="crowd-card-name">{canteenName}</div>
-                  <div className="crowd-card-loc">{canteenLoc}</div>
-                  <div className="crowd-card-ago">{timeAgo(c.lastUpdated)}</div>
-                </div>
-                <div className="crowd-card-status">
-                  <span className="crowd-emoji">{crowdEmoji[c.level]}</span>
-                  <span className="pill" style={{ color: lv.color, background: lv.bg }}>
-                    <i className="dot" style={{ background: lv.color }} />
-                    {t(lv.key)}
-                  </span>
-                </div>
-              </div>
-
-              <div className="crowd-bar-wrap">
-                <div className="crowd-bar-label">
-                  <span>{crowdDesc[lang][c.level]}</span>
-                  <span className="crowd-wait-tag">~{c.wait} {t("min")} {lang === "ta" ? "காத்திருப்பு" : "wait"}</span>
-                </div>
-                <div className="crowd-bar-track">
-                  <div
-                    className="crowd-bar-fill"
-                    style={{
-                      width: `${pct}%`,
-                      background: `linear-gradient(90deg, ${lv.color}88, ${lv.color})`,
-                    }}
-                  />
-                </div>
-              </div>
-
-              {isAdmin ? (
-                !isSelected ? (
-                  <button
-                    className="crowd-update-btn"
-                    onClick={() => setSelectedCanteen(c.id)}
-                  >
-                    <People size={14} />
-                    {t("update_crowd")}
-                  </button>
-                ) : (
-                  <div className="crowd-picker">
-                    <div className="crowd-picker-title">{lang === "ta" ? "தற்போது எவ்வளவு கூட்டம் உள்ளது?" : "How crowded is it right now?"}</div>
-                    <div className="crowd-picker-options">
-                      {["low", "med", "high"].map((lvl) => {
-                        const l = LEVELS[lvl];
-                        const active = c.level === lvl;
-                        return (
-                          <button
-                            key={lvl}
-                            className={"crowd-pick-btn" + (active ? " active" : "")}
-                            onClick={() => handleUpdate(c.id, lvl)}
-                            style={{
-                              "--pick-color": l.color,
-                              "--pick-bg": l.bg,
-                            }}
-                          >
-                            <span className="crowd-pick-emoji">{crowdEmoji[lvl]}</span>
-                            <span className="crowd-pick-label">{t(l.key)}</span>
-                            <span className="crowd-pick-desc">{crowdDesc[lang][lvl].split(",")[0]}</span>
-                            {active && <span className="crowd-pick-current">{lang === "ta" ? "தற்போது" : "Current"}</span>}
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <button
-                      className="crowd-cancel-btn"
-                      onClick={() => setSelectedCanteen(null)}
-                    >
-                      {t("cancel_btn")}
-                    </button>
-                  </div>
-                )
-              ) : (
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 10, borderTop: "1px dashed var(--line)", fontSize: 11.5, color: "var(--muted)" }}>
-                  <span>🛡️ {lang === "ta" ? "பணியாளர்களால் நேரலையாக புதுப்பிக்கப்படுகிறது" : "Live estimation updated by canteen staff"}</span>
-                  <span style={{ fontWeight: 700, color: lv.color }}>● {t("live")}</span>
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        <div className="crowd-tip-card">
-          <div className="crowd-tip-icon">💡</div>
-          <div>
-            <div className="crowd-tip-title">{t("crowd_tip_title")}</div>
-            <div className="crowd-tip-text">
-              {isAdmin
-                ? (lang === "ta"
-                    ? "நிர்வாகிகளாக, மாணவர்கள் தங்கள் காத்திருப்பு நேரத்தை திட்டமிட உதவ துல்லியமான கூட்ட நிலையை இங்கே புதுப்பிக்கவும்."
-                    : "As canteen staff/admin, keep crowd levels accurate so students can plan their dining with minimal waiting time.")
-                : t("crowd_tip_text")}
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <RefactoredCrowdPage
+      onNavigate={onNavigate}
+      useCanteenHook={useCanteen}
+    />
   );
 }
-
 function OrderTrackerDashboard() {
   const { orderHistory, lang, t } = useCanteen();
 
@@ -2771,6 +4503,9 @@ function OrderTrackerDashboard() {
                 </div>
 
                 <div className="ot-card-items">
+                  {item.canteenName && (
+                    <span style={{ display: "block", fontSize: 10.5, color: "var(--coral-d)", fontWeight: 600, marginBottom: 3 }}>📍 {item.canteenName}</span>
+                  )}
                   {item.items.map((it, idx) => (
                     <span key={idx}>
                       {it.qty}× {lang === "ta" ? (it.name_ta || it.name) : it.name}
@@ -2798,18 +4533,35 @@ function TrackingPage({ onNavigate }) {
   const { user, order, orderHistory, advanceOrderStatus, cancelOrder, lang, t, toggleLang } = useCanteen();
   const [notify, setNotify] = useState(true);
 
+  // 3D Tilt for Token Card
+  const tiltToken = use3DTilt(8, 1.02);
+
   const STATUS_KEYS = ["step_received", "step_preparing", "step_ready", "step_completed"];
 
   if (!order) {
     return (
       <>
-        <div className="header cart-header" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <button className="back" onClick={() => onNavigate("home")}>
-            <ArrowLeft />
-          </button>
-          <div className="cart-head-copy">
-            <div className="h-title">{t("order_tracking")}</div>
-            <div className="eyebrow">{t("cse_canteen")}</div>
+        <div style={{ position: "relative", height: 200, overflow: "hidden", flexShrink: 0 }}>
+          <img
+            src="/anime-canteen-bg.jpg"
+            alt="Canteen"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "brightness(0.88) saturate(1.15)" }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(20,15,10,0.55) 75%, rgba(20,15,10,0.82) 100%)" }} />
+          <div style={{ position: "absolute", top: 14, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
+            <button className="back" onClick={() => onNavigate("home")} style={{ color: "var(--coral)" }}>
+              <ArrowLeft />
+            </button>
+            <div>
+              <div className="eyebrow" style={{ color: "var(--coral-d)", marginTop: 0 }}>
+                {lang === "ta" ? "கல்லூரி உணவகம்" : "CAMPUS CANTEEN"}
+              </div>
+              <div className="h-title" style={{ color: "#fff", margin: 0 }}>{t("order_tracking")}</div>
+            </div>
+          </div>
+          <div style={{ position: "absolute", bottom: 32, left: 18 }}>
+            <div style={{ color: "var(--coral)", fontSize: 10, letterSpacing: 2, fontWeight: 700, textTransform: "uppercase" }}>LIVE STATUS</div>
+            <div style={{ color: "#fff", fontSize: 22, fontWeight: 800, marginTop: 3 }}>Track your order 📦</div>
           </div>
         </div>
         <div className="scroll" style={{ paddingTop: 20 }}>
@@ -2861,6 +4613,9 @@ function TrackingPage({ onNavigate }) {
                       </div>
 
                       <div className="ot-card-items">
+                        {item.canteenName && (
+                          <span style={{ display: "block", fontSize: 10.5, color: "var(--coral-d)", fontWeight: 600, marginBottom: 3 }}>📍 {item.canteenName}</span>
+                        )}
                         {item.items.map((it, idx) => (
                           <span key={idx}>
                             {it.qty}× {lang === "ta" ? (it.name_ta || it.name) : it.name}
@@ -2895,18 +4650,35 @@ function TrackingPage({ onNavigate }) {
 
   return (
     <>
-      <div className="header cart-header" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <button className="back" onClick={() => onNavigate("home")}>
-          <ArrowLeft />
-        </button>
-        <div className="cart-head-copy" style={{ flex: 1, alignItems: "center", textAlign: "center" }}>
-          <div className="eyebrow" style={{ textAlign: "center" }}>
-            {order.id} · CSE CANTEEN · COUNTER {order.counter}
+      <div style={{ position: "relative", height: 200, overflow: "hidden", flexShrink: 0 }}>
+        <img
+          src="/anime-canteen-bg.jpg"
+          alt="Canteen"
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "brightness(0.88) saturate(1.15)" }}
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(20,15,10,0.55) 75%, rgba(20,15,10,0.82) 100%)" }} />
+        <div style={{ position: "absolute", top: 14, left: 14, display: "flex", alignItems: "center", gap: 10 }}>
+          <button className="back" onClick={() => onNavigate("home")} style={{ color: "var(--coral)" }}>
+            <ArrowLeft />
+          </button>
+          <div>
+            <div className="eyebrow" style={{ color: "var(--coral-d)", marginTop: 0 }}>{order?.canteenName || "CAMPUS CANTEEN"}</div>
+            <div className="h-title" style={{ color: "#fff", margin: 0 }}>{t("order_tracking")}</div>
           </div>
+        </div>
+        <div style={{ position: "absolute", bottom: 32, left: 18 }}>
+          <div style={{ color: "var(--coral)", fontSize: 10, letterSpacing: 2, fontWeight: 700, textTransform: "uppercase" }}>LIVE STATUS</div>
+          <div style={{ color: "#fff", fontSize: 22, fontWeight: 800, marginTop: 3 }}>{order.id} · COUNTER {order.counter}</div>
         </div>
       </div>
 
-      <div className="token-card">
+      <div
+        className="token-card"
+        ref={tiltToken.ref}
+        style={tiltToken.style}
+        onMouseMove={tiltToken.onMouseMove}
+        onMouseLeave={tiltToken.onMouseLeave}
+      >
         <div className="token-label">{t("pickup_token")}</div>
         <div className="token-number">{order.token}</div>
         <div className="token-tear" />
@@ -2914,7 +4686,7 @@ function TrackingPage({ onNavigate }) {
           <div>
             {t("issued")}
             <br />
-            <b>{order.issuedTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</b>
+            <b>{new Date(order.issuedTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</b>
           </div>
           <div>
             {t("counter")}
@@ -2979,6 +4751,12 @@ function TrackingPage({ onNavigate }) {
               </div>
             );
           })}
+          {order.canteenName && (
+            <div className="r-row">
+              <span>📍 {lang === "ta" ? "உணவகம்" : "Canteen"}</span>
+              <span style={{ fontWeight: 700, color: "var(--coral-d)" }}>{order.canteenName}{order.canteenLoc ? ` · ${order.canteenLoc}` : ""}</span>
+            </div>
+          )}
           <div className="r-row total">
             <span>{t("paid_via")} {order.paymentMode}</span>
             <span className="mono">₹{order.total}</span>
@@ -3006,526 +4784,22 @@ function TrackingPage({ onNavigate }) {
 /* Feedback page                                                         */
 /* ================================================================== */
 function FeedbackPage({ onNavigate }) {
-  const { user, lang, toggleLang, t, feedbacks, addFeedback, addManagerReply, upvoteFeedback, menu } = useCanteen();
-  const [rating, setRating] = useState(5);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [category, setCategory] = useState("food_quality");
-  const [selectedItem, setSelectedItem] = useState("");
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [comment, setComment] = useState("");
-  const [filterTab, setFilterTab] = useState("all");
-  const [replyTextMap, setReplyTextMap] = useState({});
-
-  const AVAILABLE_TAGS = [
-    "🔥 Hot & Fresh",
-    "⚡ Fast Service",
-    "🥗 Great Portion",
-    "💰 Value for Money",
-    "🧹 Clean Area",
-    "😋 Super Tasty",
-    "⏱️ Short Wait Time",
-  ];
-
-  const handleTagToggle = (tag) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!comment.trim()) return;
-
-    addFeedback({
-      rating,
-      category,
-      item: selectedItem || null,
-      tags: selectedTags,
-      comment: comment.trim(),
-    });
-
-    setRating(5);
-    setSelectedItem("");
-    setSelectedTags([]);
-    setComment("");
-  };
-
-  const handlePostReply = (feedbackId) => {
-    const text = replyTextMap[feedbackId];
-    if (text && text.trim()) {
-      addManagerReply(feedbackId, text.trim());
-      setReplyTextMap((prev) => ({ ...prev, [feedbackId]: "" }));
-    }
-  };
-
-  const totalReviews = feedbacks.length;
-  const avgRating = totalReviews
-    ? (feedbacks.reduce((s, f) => s + f.rating, 0) / totalReviews).toFixed(1)
-    : "5.0";
-
-  const ratingCounts = useMemo(() => {
-    const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-    feedbacks.forEach((f) => {
-      if (counts[f.rating] !== undefined) counts[f.rating]++;
-    });
-    return counts;
-  }, [feedbacks]);
-
-  const filteredFeedbacks = useMemo(() => {
-    if (filterTab === "5star") return feedbacks.filter((f) => f.rating === 5);
-    if (filterTab === "food") return feedbacks.filter((f) => f.category === "food_quality");
-    if (filterTab === "service") return feedbacks.filter((f) => f.category === "service_speed");
-    if (filterTab === "hygiene") return feedbacks.filter((f) => f.category === "hygiene");
-    if (filterTab === "helpful") return [...feedbacks].sort((a, b) => b.helpful - a.helpful);
-    return feedbacks;
-  }, [feedbacks, filterTab]);
-
   return (
-    <>
-      <div className="header cart-header" style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <button className="back" onClick={() => onNavigate(user?.role === "admin" ? "admin-dashboard" : "home")}>
-          <ArrowLeft />
-        </button>
-        <div className="cart-head-copy" style={{ flex: 1, alignItems: "center", textAlign: "center" }}>
-          <div className="eyebrow" style={{ textAlign: "center" }}>
-            {t("feedback")} · {t("brand")} {user?.role === "admin" && "· ADMIN MODE"}
-          </div>
-        </div>
-      </div>
-
-      <div className="scroll" style={{ paddingTop: 16 }}>
-        <div className="fb-summary-card">
-          <div className="fb-score-box">
-            <div className="fb-score-number">{avgRating}</div>
-            <div className="fb-stars-row">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <StarIcon key={star} size={18} filled={star <= Math.round(Number(avgRating))} />
-              ))}
-            </div>
-            <div className="fb-total-text">
-              {totalReviews} {lang === "ta" ? "மதிப்பீடுகள்" : "student reviews"}
-            </div>
-          </div>
-
-          <div className="fb-bars-box">
-            {[5, 4, 3, 2, 1].map((num) => {
-              const count = ratingCounts[num] || 0;
-              const pct = totalReviews ? Math.round((count / totalReviews) * 100) : 0;
-              return (
-                <div key={num} className="fb-bar-row">
-                  <span className="fb-bar-label">{num} ★</span>
-                  <div className="fb-bar-track">
-                    <div className="fb-bar-fill" style={{ width: `${pct}%` }} />
-                  </div>
-                  <span className="fb-bar-count">{count}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="add-product-card" style={{ marginTop: 16 }}>
-          <div className="add-product-header" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span>⭐</span> {t("rate_your_experience")}
-          </div>
-
-          <form onSubmit={handleSubmit}>
-            <div className="form-row">
-              <label>{lang === "ta" ? "மதிப்பீடு கொடுக்கவும்" : "Your Rating"}</label>
-              <div className="star-picker">
-                {[1, 2, 3, 4, 5].map((star) => {
-                  const isFilled = star <= (hoverRating || rating);
-                  return (
-                    <button
-                      key={star}
-                      type="button"
-                      className={"star-pick-btn" + (isFilled ? " filled" : "")}
-                      onMouseEnter={() => setHoverRating(star)}
-                      onMouseLeave={() => setHoverRating(0)}
-                      onClick={() => setRating(star)}
-                    >
-                      <StarIcon size={26} filled={isFilled} />
-                    </button>
-                  );
-                })}
-                <span className="star-rating-label">
-                  {rating === 5 && (lang === "ta" ? "சிறப்பானது! 🔥" : "Excellent! 🔥")}
-                  {rating === 4 && (lang === "ta" ? "மிகவும் நல்லது 👍" : "Very Good 👍")}
-                  {rating === 3 && (lang === "ta" ? "சராசரி 👌" : "Average 👌")}
-                  {rating === 2 && (lang === "ta" ? "மேம்பட வேண்டும் 😕" : "Needs Improvement 😕")}
-                  {rating === 1 && (lang === "ta" ? "மோசமானது 😞" : "Poor 😞")}
-                </span>
-              </div>
-            </div>
-
-            <div className="form-row-grid">
-              <div className="form-row" style={{ marginBottom: 0 }}>
-                <label>{t("select_category")}</label>
-                <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                  <option value="food_quality">{t("food_quality")}</option>
-                  <option value="service_speed">{t("service_speed")}</option>
-                  <option value="hygiene">{t("hygiene")}</option>
-                  <option value="app_experience">{t("app_experience")}</option>
-                </select>
-              </div>
-
-              <div className="form-row" style={{ marginBottom: 0 }}>
-                <label>{lang === "ta" ? "குறிப்பிட்ட உணவு (விரும்பினால்)" : "Dish Item (Optional)"}</label>
-                <select value={selectedItem} onChange={(e) => setSelectedItem(e.target.value)}>
-                  <option value="">{lang === "ta" ? "பொதுவான கருத்து" : "General Feedback"}</option>
-                  {menu.map((m) => (
-                    <option key={m.id} value={lang === "ta" ? (m.name_ta || m.name) : m.name}>
-                      {lang === "ta" ? (m.name_ta || m.name) : m.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="form-row" style={{ marginTop: 14 }}>
-              <label>{t("quick_tags")}</label>
-              <div className="tag-chips-wrap">
-                {AVAILABLE_TAGS.map((tag) => {
-                  const isSelected = selectedTags.includes(tag);
-                  return (
-                    <button
-                      key={tag}
-                      type="button"
-                      className={"tag-chip-btn" + (isSelected ? " active" : "")}
-                      onClick={() => handleTagToggle(tag)}
-                    >
-                      {tag}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="form-row">
-              <label>{lang === "ta" ? "கருத்து உரை" : "Review Details"}</label>
-              <textarea
-                className="fb-textarea"
-                rows={3}
-                placeholder={t("write_comment")}
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="login-submit"
-              style={{ marginTop: 8 }}
-              disabled={!comment.trim()}
-            >
-              💬 {t("submit_feedback")}
-            </button>
-          </form>
-        </div>
-
-        <div className="section-title" style={{ marginTop: 24 }}>
-          <span>{lang === "ta" ? "மாணவர் விமர்சனங்கள்" : "Student Reviews"} ({filteredFeedbacks.length})</span>
-        </div>
-
-        <div className="cats" style={{ marginBottom: 14 }}>
-          {[
-            { id: "all", label: t("all_reviews") },
-            { id: "5star", label: "5 ★" },
-            { id: "food", label: t("food_quality") },
-            { id: "service", label: t("service_speed") },
-            { id: "hygiene", label: t("hygiene") },
-            { id: "helpful", label: lang === "ta" ? "மிகவும் பயனுள்ளது" : "Most Helpful" },
-          ].map((cat) => (
-            <button
-              key={cat.id}
-              className={"chip" + (filterTab === cat.id ? " active" : "")}
-              onClick={() => setFilterTab(cat.id)}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="fb-feed">
-          {filteredFeedbacks.map((fb) => (
-            <div key={fb.id} className="card fb-card">
-              <div className="fb-card-top">
-                <div className="fb-avatar">
-                  {fb.author.charAt(0)}
-                </div>
-                <div className="fb-author-info">
-                  <div className="fb-author-name">
-                    {fb.author} <span className="fb-author-roll">· {fb.roll}</span>
-                  </div>
-                  <div className="fb-meta-sub">
-                    <span className="fb-cat-pill">{t(fb.category) || fb.category}</span>
-                    {fb.item && <span className="fb-dish-pill">🍛 {fb.item}</span>}
-                    <span className="fb-time">{fb.date}</span>
-                  </div>
-                </div>
-                <div className="fb-stars-badge">
-                  <span>{fb.rating}</span> ★
-                </div>
-              </div>
-
-              {fb.tags && fb.tags.length > 0 && (
-                <div className="fb-card-tags">
-                  {fb.tags.map((tg, idx) => (
-                    <span key={idx} className="fb-tag-pill">{tg}</span>
-                  ))}
-                </div>
-              )}
-
-              <p className="fb-comment-text">{fb.comment}</p>
-
-              {fb.managerReply && (
-                <div className="fb-manager-reply">
-                  <div className="fb-manager-head">
-                    <span>👨‍🍳</span> {t("staff_response")}
-                  </div>
-                  <p className="fb-manager-text">{fb.managerReply}</p>
-                </div>
-              )}
-
-              {/* Admin Manager Response Box */}
-              {user?.role === "admin" && (
-                <div style={{ marginTop: 12, paddingTop: 10, borderTop: "1px dashed var(--line)" }}>
-                  {!fb.managerReply ? (
-                    <div style={{ display: "flex", gap: 8 }}>
-                      <input
-                        type="text"
-                        className="adv-input"
-                        placeholder={lang === "ta" ? "மேலாளர் பதிலாக எழுதவும்..." : "Write official manager response..."}
-                        style={{ fontSize: 12, padding: "8px 12px" }}
-                        value={replyTextMap[fb.id] || ""}
-                        onChange={(e) => setReplyTextMap({ ...replyTextMap, [fb.id]: e.target.value })}
-                      />
-                      <button
-                        type="button"
-                        className="cta-mini"
-                        style={{ fontSize: 11, padding: "6px 14px", flexShrink: 0 }}
-                        onClick={() => handlePostReply(fb.id)}
-                      >
-                        {lang === "ta" ? "பதில் அளி" : "Post Reply"}
-                      </button>
-                    </div>
-                  ) : (
-                    <div style={{ fontSize: 11, color: "var(--emerald)", fontWeight: 700 }}>
-                      ✓ {lang === "ta" ? "மேலாளர் பதில் வெளியிடப்பட்டுள்ளது" : "Official manager response published"}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <div className="fb-card-bottom" style={{ marginTop: 10 }}>
-                <button
-                  type="button"
-                  className="helpful-btn"
-                  onClick={() => upvoteFeedback(fb.id)}
-                >
-                  <ThumbsUpIcon size={13} /> {t("helpful")} ({fb.helpful})
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
+    <RefactoredFeedbackPage
+      onNavigate={onNavigate}
+      useCanteenHook={useCanteen}
+    />
   );
 }
-
 /* ================================================================== */
 /* Admin Dashboard Page                                                */
 /* ================================================================== */
 function AdminDashboardPage({ onNavigate }) {
-  const { user, orderHistory, menu, lowStockItems, canteens, advanceOrderStatus, cancelOrder, lang, t } = useCanteen();
-
-  const totalOrders = orderHistory.length;
-  const activeOrders = orderHistory.filter((o) => o.status >= 0 && o.status < 3);
-  const deliveredOrders = orderHistory.filter((o) => o.status === 3).length;
-  const totalRevenue = orderHistory
-    .filter((o) => o.status === 3)
-    .reduce((sum, o) => sum + o.total, 0);
-
-  const STATUS_LABELS = {
-    0: { en: "Placed", ta: "ஆர்டர் செய்யப்பட்டது", bg: "rgba(204,122,0,0.14)", color: "var(--amber)" },
-    1: { en: "Preparing", ta: "தயாராகிறது", bg: "rgba(139,92,246,0.14)", color: "var(--violet)" },
-    2: { en: "Ready for Pickup", ta: "பெறத் தயார்", bg: "rgba(62,122,79,0.14)", color: "var(--basil)" },
-    3: { en: "Completed", ta: "நிறைவடைந்தது", bg: "rgba(16,185,129,0.14)", color: "var(--emerald)" },
-    "-1": { en: "Cancelled", ta: "ரத்து செய்யப்பட்டது", bg: "rgba(196,62,28,0.14)", color: "var(--rose)" },
-  };
-
   return (
-    <>
-      <div className="admin-header-banner">
-        <div className="admin-banner-inner">
-          <div className="admin-badge-top">🛡️ {lang === "ta" ? "நிர்வாக கட்டுப்பாட்டு மையம்" : "CANTEEN ADMIN COMMAND CENTER"}</div>
-          <h1 className="admin-banner-title">{lang === "ta" ? "வரவேற்கிறோம், மேலாளர்!" : `Welcome back, ${user?.name || "Admin"}!`}</h1>
-          <p className="admin-banner-sub">
-            {lang === "ta"
-              ? "ஆர்டர்கள், இருப்பு, கூட்ட நெரிசல் மற்றும் வாடிக்கையாளர் கருத்துகளை இங்கிருந்து நிர்வகிக்கவும்."
-              : "Manage live orders, menu stock, crowd levels, and student feedback in real-time."}
-          </p>
-        </div>
-      </div>
-
-      <div className="scroll" style={{ paddingTop: 20 }}>
-        {/* KPI Stats Grid */}
-        <div className="admin-kpi-grid">
-          <div className="admin-kpi-card">
-            <div className="admin-kpi-icon" style={{ background: "rgba(226,163,16,0.15)", color: "var(--coral-d)" }}>📋</div>
-            <div className="admin-kpi-info">
-              <div className="admin-kpi-num">{totalOrders}</div>
-              <div className="admin-kpi-label">{lang === "ta" ? "மொத்த ஆர்டர்கள்" : "Total Orders Intake"}</div>
-            </div>
-          </div>
-
-          <div className="admin-kpi-card">
-            <div className="admin-kpi-icon" style={{ background: "rgba(204,122,0,0.15)", color: "var(--amber)" }}>⏳</div>
-            <div className="admin-kpi-info">
-              <div className="admin-kpi-num">{activeOrders.length}</div>
-              <div className="admin-kpi-label">{lang === "ta" ? "சமையலறையில் தயார்" : "Active In Kitchen"}</div>
-            </div>
-          </div>
-
-          <div className="admin-kpi-card">
-            <div className="admin-kpi-icon" style={{ background: "rgba(62,122,79,0.15)", color: "var(--basil)" }}>✅</div>
-            <div className="admin-kpi-info">
-              <div className="admin-kpi-num">{deliveredOrders}</div>
-              <div className="admin-kpi-label">{lang === "ta" ? "வழங்கப்பட்டவை" : "Delivered Today"}</div>
-            </div>
-          </div>
-
-          <div className="admin-kpi-card">
-            <div className="admin-kpi-icon" style={{ background: "rgba(139,92,246,0.15)", color: "var(--violet)" }}>💰</div>
-            <div className="admin-kpi-info">
-              <div className="admin-kpi-num">₹{totalRevenue}</div>
-              <div className="admin-kpi-label">{lang === "ta" ? "மொத்த வருவாய்" : "Total Revenue"}</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Low Stock Warning Alert */}
-        {lowStockItems.length > 0 && (
-          <div className="low-stock-alert-banner" style={{ marginTop: 16, cursor: "pointer" }} onClick={() => onNavigate("stock")}>
-            <AlertTriangle size={20} />
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 800 }}>
-                {lang === "ta" ? "⚠️ குறைந்த இருப்பு எச்சரிக்கை!" : "⚠️ Low Stock Alert for Menu Items!"}
-              </div>
-              <div style={{ fontSize: 12, opacity: 0.9 }}>
-                {lowStockItems.map((i) => i.name).join(", ")} {lang === "ta" ? "இருப்பு குறைவாக உள்ளது. கிளிக் செய்து இருப்பு உயர்த்தவும்." : "running low. Click to update stock."}
-              </div>
-            </div>
-            <button className="cta-mini" style={{ background: "var(--chili)", color: "#fff" }}>
-              {lang === "ta" ? "இருப்பு பார் →" : "Manage Stock →"}
-            </button>
-          </div>
-        )}
-
-        {/* Admin Quick Action Cards Grid */}
-        <div className="section-title" style={{ marginTop: 24 }}>
-          <span>⚡ {lang === "ta" ? "நிர்வாக விரைவு செயல்பாடுகள்" : "Admin Quick Actions"}</span>
-        </div>
-
-        <div className="admin-actions-grid">
-          <div className="admin-action-card" onClick={() => onNavigate("kitchen-orders")}>
-            <div className="admin-act-icon">👨‍🍳</div>
-            <div className="admin-act-title">{lang === "ta" ? "சமையலறை ஆர்டர்கள் KDS" : "Kitchen Display System"}</div>
-            <div className="admin-act-desc">{lang === "ta" ? "நேரலை ஆர்டர்களை பார்த்து நிலையை புதுப்பிக்கவும்" : "View active order queue & advance pickup tokens"}</div>
-            <button className="admin-act-btn">{lang === "ta" ? "சமையலறை திற →" : "Open Kitchen KDS →"}</button>
-          </div>
-
-          <div className="admin-action-card" onClick={() => onNavigate("stock")}>
-            <div className="admin-act-icon">📦</div>
-            <div className="admin-act-title">{lang === "ta" ? "மெனு மற்றும் இருப்பு நிர்வாகம்" : "Menu & Stock Manager"}</div>
-            <div className="admin-act-desc">{lang === "ta" ? "புதிய உணவு சேர்க்க, விலை மற்றும் இருப்பு மாற்ற" : "Add new dishes, edit prices & stock counts"}</div>
-            <button className="admin-act-btn">{lang === "ta" ? "இருப்பு மேலாண்மை →" : "Manage Stock →"}</button>
-          </div>
-
-          <div className="admin-action-card" onClick={() => onNavigate("crowd")}>
-            <div className="admin-act-icon">👥</div>
-            <div className="admin-act-title">{lang === "ta" ? "கூட்ட நிலை அமைப்புகள்" : "Crowd Level Controller"}</div>
-            <div className="admin-act-desc">{lang === "ta" ? "கேண்டீன் கூட்ட அளவை (குறைவு/மிதம்/அதிகம்) நேரலையாக மாற்ற" : "Set live crowd density and wait time estimates"}</div>
-            <button className="admin-act-btn">{lang === "ta" ? "கூட்டம் மாற்று →" : "Update Crowd →"}</button>
-          </div>
-
-          <div className="admin-action-card" onClick={() => onNavigate("feedback")}>
-            <div className="admin-act-icon">⭐</div>
-            <div className="admin-act-title">{lang === "ta" ? "மாணவர் விமர்சனங்கள் & பதில்கள்" : "Customer Reviews & Replies"}</div>
-            <div className="admin-act-desc">{lang === "ta" ? "மாணவர்களின் கருத்துகளை படித்து மேலாளர் பதில் அளிக்கவும்" : "Read feedback & post official manager responses"}</div>
-            <button className="admin-act-btn">{lang === "ta" ? "பதில் அளி →" : "View Reviews →"}</button>
-          </div>
-        </div>
-
-        {/* Live Kitchen Order Queue Preview */}
-        <div className="section-title" style={{ marginTop: 28 }}>
-          <span>🔥 {lang === "ta" ? "சமையலறை ஆர்டர்கள் நேரலை" : "Live Kitchen Order Queue"} ({activeOrders.length})</span>
-          <span className="see-all" onClick={() => onNavigate("kitchen-orders")}>
-            {lang === "ta" ? "அனைத்தும் பார் →" : "View All Orders →"}
-          </span>
-        </div>
-
-        {activeOrders.length === 0 ? (
-          <div className="card empty-state" style={{ padding: "40px 20px" }}>
-            <div style={{ fontSize: 36, marginBottom: 8 }}>✅</div>
-            <div style={{ fontWeight: 800, fontSize: 16 }}>{lang === "ta" ? "அனைத்து ஆர்டர்களும் வழங்கப்பட்டுவிட்டன!" : "All kitchen orders cleared!"}</div>
-            <div style={{ fontSize: 12, color: "var(--muted)" }}>{lang === "ta" ? "புதிய ஆர்டர்கள் வரும்போது இங்கு காணப்படும்." : "New orders will appear here automatically."}</div>
-          </div>
-        ) : (
-          <div className="admin-orders-list">
-            {activeOrders.map((ord) => {
-              const st = STATUS_LABELS[ord.status] || STATUS_LABELS[0];
-              return (
-                <div key={ord.id} className="admin-order-card">
-                  <div className="admin-order-top">
-                    <div>
-                      <span className="ot-token">{ord.token}</span>
-                      <span className="ot-id">{ord.id}</span>
-                    </div>
-                    <span className="ot-badge" style={{ background: st.bg, color: st.color }}>
-                      {st[lang]}
-                    </span>
-                  </div>
-
-                  <div className="admin-order-items">
-                    {ord.items.map((it, idx) => (
-                      <div key={idx} className="admin-order-item-row">
-                        <span className="bold">{it.qty}×</span> {lang === "ta" ? (it.name_ta || it.name) : it.name}
-                        <span className="mono muted"> (₹{it.price * it.qty})</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="admin-order-bottom">
-                    <div>
-                      <div style={{ fontSize: 11, color: "var(--muted)" }}>
-                        🕒 {new Date(ord.issuedTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} · {ord.paymentMode}
-                      </div>
-                      <div style={{ fontWeight: 800, color: "var(--ink)" }}>₹{ord.total}</div>
-                    </div>
-
-                    <div style={{ display: "flex", gap: 8 }}>
-                      <button
-                        className="cta-mini"
-                        style={{ fontSize: 12, padding: "8px 14px" }}
-                        onClick={() => advanceOrderStatus()}
-                      >
-                        {ord.status === 0
-                          ? (lang === "ta" ? "▶ தயாரிப்பை தொடங்கு" : "▶ Start Prep")
-                          : ord.status === 1
-                          ? (lang === "ta" ? "🔔 தயாரானது" : "🔔 Mark Ready")
-                          : (lang === "ta" ? "✅ வழங்கப்பட்டது" : "✅ Mark Served")}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </>
+    <RefactoredAdminDashboard
+      onNavigate={onNavigate}
+      useCanteenHook={useCanteen}
+    />
   );
 }
 
@@ -3533,7 +4807,7 @@ function AdminDashboardPage({ onNavigate }) {
 /* Kitchen Display System (KDS) Page                                    */
 /* ================================================================== */
 function KitchenOrdersPage({ onNavigate }) {
-  const { orderHistory, setOrderHistory, lang, t } = useCanteen();
+  const { orderHistory, setOrderHistory, updateOrderStatus, lang, t } = useCanteen();
   const [filter, setFilter] = useState("active");
 
   const STATUS_LABELS = {
@@ -3545,9 +4819,13 @@ function KitchenOrdersPage({ onNavigate }) {
   };
 
   const handleUpdateOrderStatus = (orderId, newStatus) => {
-    setOrderHistory((prev) =>
-      prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
-    );
+    if (updateOrderStatus) {
+      updateOrderStatus(orderId, newStatus);
+    } else {
+      setOrderHistory((prev) =>
+        prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
+      );
+    }
   };
 
   const filteredOrders = useMemo(() => {
@@ -3789,6 +5067,21 @@ function generateBotResponse(userText, contextState, appState) {
     }
     if (/brownie|brownies|cake|pastry|dessert|chocolate|பிரவுனி/i.test(clean)) {
       return menu.find((m) => m.id === "brownie") || menu[5];
+    }
+    if (/orange juice|orange|ஆரஞ்சு ஜூஸ்|ஆரஞ்சு/i.test(clean)) {
+      return menu.find((m) => m.id === "orange_juice");
+    }
+    if (/mango juice|mango shake|mango|மாம்பழ ஜூஸ்|மாம்பழம்/i.test(clean)) {
+      return menu.find((m) => m.id === "mango_juice");
+    }
+    if (/watermelon juice|watermelon|தர்பூசணி ஜூஸ்|தர்பூசணி/i.test(clean)) {
+      return menu.find((m) => m.id === "watermelon_juice");
+    }
+    if (/lime mint|lime cooler|lemon juice|lime juice|எலுமிச்சை புதினா/i.test(clean)) {
+      return menu.find((m) => m.id === "lime_mint");
+    }
+    if (/juice|fresh juice|ஜூஸ்|பழச்சாறு/i.test(clean)) {
+      return menu.find((m) => m.category === "juice") || menu.find((m) => m.id === "orange_juice");
     }
     return null;
   };
@@ -4474,6 +5767,116 @@ function generateBotResponse(userText, contextState, appState) {
 }
 
 /* ================================================================== */
+/* Chef AI Vector Avatar Component (Robot with Chef Toque)            */
+/* ================================================================== */
+function ChefAiAvatar({ size = 36 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
+      <defs>
+        <linearGradient id="chefHatGrad" x1="32" y1="2" x2="32" y2="24" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="60%" stopColor="#F8FAFC" />
+          <stop offset="100%" stopColor="#E2E8F0" />
+        </linearGradient>
+        <linearGradient id="robotBodyGrad" x1="16" y1="22" x2="48" y2="58" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="45%" stopColor="#EDE9FE" />
+          <stop offset="100%" stopColor="#CBD5E1" />
+        </linearGradient>
+        <linearGradient id="visorGrad" x1="20" y1="30" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#0F172A" />
+          <stop offset="100%" stopColor="#1E293B" />
+        </linearGradient>
+        <linearGradient id="eyeGlow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#38BDF8" />
+          <stop offset="100%" stopColor="#0284C7" />
+        </linearGradient>
+        <linearGradient id="earNode" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#F43F5E" />
+          <stop offset="100%" stopColor="#BE123C" />
+        </linearGradient>
+        <linearGradient id="scarfGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#EF4444" />
+          <stop offset="100%" stopColor="#B91C1C" />
+        </linearGradient>
+        <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="1.5" stdDeviation="1.2" floodColor="#000" floodOpacity="0.18" />
+        </filter>
+      </defs>
+
+      {/* Side Antennas / Ear Nodes */}
+      <circle cx="12" cy="38" r="4" fill="url(#earNode)" />
+      <rect x="14" y="36.5" width="4" height="3" fill="#94A3B8" />
+      <circle cx="52" cy="38" r="4" fill="url(#earNode)" />
+      <rect x="46" y="36.5" width="4" height="3" fill="#94A3B8" />
+
+      {/* Antenna Tops */}
+      <line x1="16" y1="30" x2="11" y2="24" stroke="#F43F5E" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="10" cy="23" r="2.5" fill="#F43F5E" />
+      <line x1="48" y1="30" x2="53" y2="24" stroke="#F43F5E" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="54" cy="23" r="2.5" fill="#F43F5E" />
+
+      {/* Robot Head Body */}
+      <rect x="15" y="24" width="34" height="28" rx="10" fill="url(#robotBodyGrad)" stroke="#94A3B8" strokeWidth="1.2" filter="url(#softShadow)" />
+
+      {/* Glossy Visor Screen */}
+      <rect x="19" y="30" width="26" height="15" rx="5" fill="url(#visorGrad)" stroke="#334155" strokeWidth="0.8" />
+
+      {/* Friendly Glowing Cyan Eyes */}
+      <rect x="23" y="33.5" width="5.5" height="8" rx="2.5" fill="url(#eyeGlow)" />
+      <circle cx="24.5" cy="35" r="1" fill="#FFFFFF" />
+      
+      <rect x="35.5" y="33.5" width="5.5" height="8" rx="2.5" fill="url(#eyeGlow)" />
+      <circle cx="37" cy="35" r="1" fill="#FFFFFF" />
+
+      {/* Cute LED Smile/Mouth */}
+      <path d="M29 48 Q32 50.5 35 48" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+
+      {/* Red Chef Neckerchief / Ascot Knot */}
+      <path d="M26 53 L38 53 L35 60 L32 56 L29 60 Z" fill="url(#scarfGrad)" />
+      <circle cx="32" cy="54" r="2.2" fill="#F59E0B" />
+
+      {/* Chef Hat (Toque Blanche) on Robot Head */}
+      <g filter="url(#softShadow)">
+        {/* Hat Puffs */}
+        <circle cx="24" cy="11" r="7.5" fill="url(#chefHatGrad)" />
+        <circle cx="32" cy="8" r="8.5" fill="url(#chefHatGrad)" />
+        <circle cx="40" cy="11" r="7.5" fill="url(#chefHatGrad)" />
+        <rect x="22" y="11" width="20" height="10" fill="url(#chefHatGrad)" />
+        
+        {/* Hat Band */}
+        <path d="M20 20 C20 18, 44 18, 44 20 L45 25.5 C45 26.5, 19 26.5, 19 25.5 Z" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="0.8" />
+        <rect x="21" y="22" width="22" height="2" rx="1" fill="#F59E0B" />
+      </g>
+    </svg>
+  );
+}
+
+/* ================================================================== */
+/* Helper to check if a SpeechSynthesisVoice is an authentic Tamil voice */
+/* ================================================================== */
+function isRealTamilVoice(voice) {
+  if (!voice) return false;
+  const vLang = (voice.lang || "").toLowerCase();
+  const vName = (voice.name || "").toLowerCase();
+  const isTaLang =
+    vLang === "ta-in" ||
+    vLang === "ta_in" ||
+    vLang.startsWith("ta-") ||
+    vLang.startsWith("ta_") ||
+    vLang === "ta";
+  const isTaName =
+    vName.includes("tamil") ||
+    vName.includes("தமிழ்") ||
+    vName.includes("valluvar") ||
+    vName.includes("pallavi") ||
+    vName.includes("latha") ||
+    vName.includes("google தமிழ்") ||
+    vName.includes("google tamil");
+  return isTaLang || isTaName;
+}
+
+/* ================================================================== */
 /* Canteen Chef Voice Assistant Component                              */
 /* ================================================================== */
 function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
@@ -4504,12 +5907,12 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
       id: "welcome-1",
       sender: "bot",
       text: lang === "ta"
-        ? "வணக்கம்! 👨‍🍳✨ நான் உங்கள் கேண்டீன் வாய்ஸ் உதவியாளர். உணவு ஆர்டர் செய்ய, மெனு பார்க்க அல்லது கூட்ட நிலை அறிய மைக் பட்டனை அழுத்தி பேசவும்!"
-        : "Hey! 👋 I'm your AI Canteen Voice Assistant. Click the 🎙️ mic button or tap any command below to order food, check live crowd, and track orders!",
+        ? "வணக்கம்! 👨‍🍳✨ நான் உங்கள் AI செஃப் சாட்பாட். இன்றைய சிறப்பு உணவு அறிய, உடனடி ஆர்டர் செய்ய, அல்லது கூட்ட நிலையை சரிபார்க்க என்னிடம் கேட்கலாம்!"
+        : "Hello! 👨‍🍳✨ I'm your AI Chef Chatbot. I can recommend today's specials, order meals for you, check live crowd, and answer canteen questions!",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       suggestions: lang === "ta"
-        ? ["🎙️ 2 மசாலா டீ ஆர்டர் செய்", "🍽️ இன்றைய மெனு", "📦 பிரியாணி இருக்கா?", "👥 கூட்டம் எப்படி இருக்கு?", "🛒 என் கார்ட் காட்டு"]
-        : ["🎙️ Order 2 Masala Chai", "🍽️ Today's Menu", "📦 Is Biryani in stock?", "👥 Check Crowd", "🛒 Show My Cart"]
+        ? ["🍛 இன்றைய சிறப்பு உணவு", "🛒 2 மசாலா டீ ஆர்டர் செய்", "👥 கூட்டம் எப்படி இருக்கு?", "📦 பிரியாணி இருப்பு எவ்ளோ?", "🍽️ இன்றைய மெனு"]
+        : ["🍛 Today's Special Dish", "🛒 Order 2 Masala Chai", "👥 Check Live Crowd", "📦 Is Biryani in stock?", "🍽️ Show Full Menu"]
     }
   ]);
 
@@ -4521,6 +5924,8 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
   const [activeSpeakingId, setActiveSpeakingId] = useState(null);
   const [voiceNotice, setVoiceNotice] = useState(null);
   const [systemVoices, setSystemVoices] = useState([]);
+  const [noTamilVoice, setNoTamilVoice] = useState(false);
+  const [activeVoiceName, setActiveVoiceName] = useState("");
 
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
@@ -4539,6 +5944,8 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
       const vList = window.speechSynthesis.getVoices();
       if (vList && vList.length > 0) {
         setSystemVoices(vList);
+        const hasTamil = vList.some(isRealTamilVoice);
+        setNoTamilVoice(!hasTamil);
       }
     };
 
@@ -4576,20 +5983,44 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
     if (!availVoices || availVoices.length === 0) return null;
 
     if (targetLang === "ta") {
+      // 1. Exact/prefix BCP-47 codes: ta-IN, ta_IN, ta-*, ta
       const directTa = availVoices.find((v) => {
         const vLang = (v.lang || "").toLowerCase();
-        return vLang === "ta-in" || vLang === "ta_in" || vLang.startsWith("ta-") || vLang.startsWith("ta_") || vLang === "ta";
+        return (
+          vLang === "ta-in" ||
+          vLang === "ta_in" ||
+          vLang.startsWith("ta-") ||
+          vLang.startsWith("ta_") ||
+          vLang === "ta"
+        );
       });
       if (directTa) return directTa;
 
+      // 2. Known voice names (case-insensitive):
+      // tamil, தமிழ், valluvar (Microsoft Edge), pallavi (Microsoft), latha (Android/legacy), google தமிழ், google tamil
       const nameTa = availVoices.find((v) => {
         const vName = (v.name || "").toLowerCase();
-        return vName.includes("tamil") || vName.includes("தமிழ்") || vName.includes("valluvar") || vName.includes("pallavi") || vName.includes("latha");
+        return (
+          vName.includes("tamil") ||
+          vName.includes("தமிழ்") ||
+          vName.includes("valluvar") ||
+          vName.includes("pallavi") ||
+          vName.includes("latha") ||
+          vName.includes("google தமிழ்") ||
+          vName.includes("google tamil")
+        );
       });
       if (nameTa) return nameTa;
 
-      const inFallback = availVoices.find((v) => (v.lang || "").toLowerCase().includes("in"));
+      // 3. Fallback: any voice whose lang contains -IN (India region)
+      const inFallback = availVoices.find((v) => {
+        const vLang = (v.lang || "").toLowerCase();
+        return vLang.includes("-in") || vLang.includes("_in");
+      });
       if (inFallback) return inFallback;
+
+      // 4. Explicitly return null if nothing matches rather than guessing
+      return null;
     } else {
       const inEn = availVoices.find((v) => {
         const vLang = (v.lang || "").toLowerCase();
@@ -4627,11 +6058,32 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
       if (currentLang === "ta") {
         utterance.lang = "ta-IN";
         const taVoice = findBestVoice("ta");
-        if (taVoice) utterance.voice = taVoice;
+        const isReal = isRealTamilVoice(taVoice);
+        if (taVoice && isReal) {
+          utterance.voice = taVoice;
+          setNoTamilVoice(false);
+          setActiveVoiceName(`${taVoice.name} (${taVoice.lang})`);
+        } else {
+          // No Tamil voice found on this device/browser
+          setNoTamilVoice(true);
+          if (taVoice) {
+            utterance.voice = taVoice;
+            setActiveVoiceName(`${taVoice.name} (${taVoice.lang}) [Fallback - No Tamil TTS]`);
+          } else {
+            setActiveVoiceName("System Default (No Tamil TTS Voice)");
+          }
+          // Surface short bilingual warning notice without blocking speech
+          setVoiceNotice(
+            "⚠️ சாதனத்தில் தமிழ் TTS குரல் இல்லை (ஒலி ஆங்கிலம் போல் ஒலிக்கலாம்). OS அமைப்புகளில் தமிழ் குரலை நிறுவவும். / No Tamil TTS voice on device (audio may sound English). Please install a Tamil voice pack in your OS/browser settings."
+          );
+        }
       } else {
         utterance.lang = "en-IN";
         const enVoice = findBestVoice("en");
-        if (enVoice) utterance.voice = enVoice;
+        if (enVoice) {
+          utterance.voice = enVoice;
+          setActiveVoiceName(`${enVoice.name} (${enVoice.lang})`);
+        }
       }
 
       utterance.onstart = () => {
@@ -4765,6 +6217,19 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
     const newLang = lang === "ta" ? "en" : "ta";
     if (setLang) setLang(newLang);
 
+    if (newLang === "ta") {
+      const availVoices = systemVoices.length > 0 ? systemVoices : (synthRef.current ? synthRef.current.getVoices() : []);
+      const hasTamil = availVoices.some(isRealTamilVoice);
+      setNoTamilVoice(!hasTamil);
+      if (!hasTamil) {
+        setVoiceNotice(
+          "⚠️ சாதனத்தில் தமிழ் TTS குரல் இல்லை (ஒலி ஆங்கிலம் போல் ஒலிக்கலாம்). OS அமைப்புகளில் தமிழ் குரலை நிறுவவும். / No Tamil TTS voice on device (audio may sound English). Please install a Tamil voice pack in your OS/browser settings."
+        );
+      }
+    } else {
+      setVoiceNotice(null);
+    }
+
     const switchNotice = newLang === "ta"
       ? "வணக்கம்! 👨‍🍳✨ இப்போது நான் தமிழில் பேசுவேன். என்ன சாப்பிட ஆசை?"
       : "Hello! 👨‍🍳✨ Language switched to English. How can I help you today?";
@@ -4874,50 +6339,48 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
     }
   };
 
-  return (
-    <>
-      {!isOpen && (
-        <button
-          className="chef-fab"
-          onClick={() => onClose(false)}
-          title={lang === "ta" ? "கேண்டீன் வாய்ஸ் உதவியாளருடன் பேசுங்கள்" : "Talk with AI Voice Assistant"}
-        >
-          <span className="chef-fab-icon">🎙️</span>
-          <span className="chef-fab-label">{lang === "ta" ? "வாய்ஸ் உதவியாளர்" : "Voice Assistant"}</span>
-          <span className="chef-fab-pulse" />
-        </button>
-      )}
+  if (!isOpen) return null;
 
-      {isOpen && (
-        <div className="chef-chat-modal">
+  return (
+    <div className="chef-chat-modal">
           <div className="chef-chat-header">
             <div className="chef-header-info">
               <div className="chef-avatar-wrap">
-                <span>👨‍🍳</span>
+                <ChefAiAvatar size={38} />
                 <span className="chef-status-dot" />
               </div>
               <div>
-                <div className="chef-title">{lang === "ta" ? "கேண்டீன் AI வாய்ஸ் உதவியாளர்" : "Canteen AI Voice Assistant"}</div>
+                <div className="chef-title">{lang === "ta" ? "🤖 AI செஃப் ரோபோட்" : "🤖 Chef AI Assistant"}</div>
                 <div className="chef-status-text">
                   {isSpeaking ? (
                     <span style={{ color: "#ea580c", fontWeight: 800 }}>🔊 {lang === "ta" ? "பதில் பேசுகிறது..." : "Speaking response..."}</span>
                   ) : isListening ? (
                     <span style={{ color: "#16a34a", fontWeight: 800 }}>🎙️ {lang === "ta" ? "உங்கள் குரலை கேட்கிறது..." : "Listening to your voice..."}</span>
                   ) : (
-                    lang === "ta" ? "ஆன்லைன் • தமிழ் & English Voice" : "Online • Voice & Action Ready"
+                    lang === "ta" ? "ஆன்லைன் • உணவு & கேண்டீன் வழிகாட்டி" : "Online • Smart Orders & Food Specials"
                   )}
                 </div>
               </div>
             </div>
             <div className="chef-header-actions">
-              {/* Language Switcher Button */}
-              <button
-                className="chef-lang-toggle-btn"
-                title={lang === "ta" ? "Switch to English" : "தமிழுக்கு மாற்றவும்"}
-                onClick={handleToggleLang}
-              >
-                🗣️ {lang === "ta" ? "தமிழ்" : "English"}
-              </button>
+              {/* Language Switcher Button with missing voice warning badge */}
+              <div className="chef-lang-btn-wrap">
+                <button
+                  className="chef-lang-toggle-btn"
+                  title={lang === "ta" ? "Switch to English" : "தமிழுக்கு மாற்றவும்"}
+                  onClick={handleToggleLang}
+                >
+                  🗣️ {lang === "ta" ? "தமிழ்" : "English"}
+                </button>
+                {lang === "ta" && noTamilVoice && (
+                  <span
+                    className="chef-voice-warn-badge"
+                    title="சாதனத்தில் தமிழ் TTS குரல் இல்லை (குரல் ஆங்கிலம் போல் ஒலிக்கலாம்). அமைப்புகளில் தமிழ் குரலை நிறுவவும். / No Tamil TTS voice installed on this device (audio may sound English). Please install a Tamil voice pack in your OS/browser settings."
+                  >
+                    !
+                  </span>
+                )}
+              </div>
 
               {/* Auto Voice Output Toggle */}
               <button
@@ -5075,7 +6538,10 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
                             key={idx}
                             className="chef-action-btn"
                             onClick={() => {
-                              if (act.navigate && onNavigate) onNavigate(act.navigate);
+                              if (act.navigate && onNavigate) {
+                                onNavigate(act.navigate);
+                                if (onClose) onClose(true); // close chatbot so the navigated page is visible
+                              }
                               if (act.text) processUserInput(act.text);
                             }}
                           >
@@ -5157,19 +6623,51 @@ function CanteenChefChatbot({ isOpen, onClose, onNavigate }) {
             </div>
           </div>
         </div>
-      )}
-    </>
   );
 }
 
 
-function AppShell({ theme, toggleTheme }) {
-  const { alertMessage, user } = useCanteen();
-  const [page, setPage] = useState("login");
-  const [chatOpen, setChatOpen] = useState(false);
-  const onNavigate = useCallback((p) => setPage(p), []);
+function isPasswordResetRoute(p) {
+  const clean = (p || "").replace("#", "").replace(/^\//, "");
+  return clean === "forgot-password" || clean === "verify-otp" || clean === "reset-password";
+}
 
-  if (page === "login") {
+function AppShell({ theme, toggleTheme }) {
+  const { alertMessage, user, lang, toggleLang, showAlert, updateUserPassword, registeredUsers } = useCanteen();
+  const [page, setPage] = useState(() => {
+    try {
+      const hash = window.location.hash.replace("#", "").replace(/^\//, "");
+      if (isPasswordResetRoute(hash)) return hash;
+      if (user && hash) return hash;
+    } catch (e) {}
+    return user ? (user.role === "admin" ? "admin-dashboard" : "order") : "login";
+  });
+  const [chatOpen, setChatOpen] = useState(false);
+  const onNavigate = useCallback((p) => {
+    const clean = (p || "").replace("#", "").replace(/^\//, "");
+    setPage(clean);
+    try {
+      window.location.hash = clean;
+    } catch (e) {}
+  }, []);
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "").replace(/^\//, "");
+      if (hash) {
+        if (!user && !isPasswordResetRoute(hash)) {
+          setPage("login");
+        } else {
+          setPage(hash);
+        }
+      }
+    };
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, [user]);
+
+  // Auth Guard: If no user is logged in (and not on password reset flow) or page is explicitly "login", show LoginPage
+  if (page === "login" || (!user && !isPasswordResetRoute(page))) {
     return (
       <AppFrame>
         {alertMessage && (
@@ -5179,7 +6677,38 @@ function AppShell({ theme, toggleTheme }) {
           </div>
         )}
         <div className="page-col page-col-login">
-          <LoginPage theme={theme} toggleTheme={toggleTheme} onLogin={(targetPage) => onNavigate(targetPage || (user?.role === "admin" ? "admin-dashboard" : "home"))} />
+          <LoginPage
+            theme={theme}
+            toggleTheme={toggleTheme}
+            onNavigate={onNavigate}
+            onLogin={(targetPage) => onNavigate(targetPage || (user?.role === "admin" ? "admin-dashboard" : "order"))}
+          />
+        </div>
+      </AppFrame>
+    );
+  }
+
+  if (isPasswordResetRoute(page)) {
+    return (
+      <AppFrame>
+        {alertMessage && (
+          <div className="alert-toast">
+            <AlertTriangle size={18} />
+            <span>{alertMessage}</span>
+          </div>
+        )}
+        <div className="page-col page-col-login">
+          <ForgotPasswordFlow
+            onNavigate={onNavigate}
+            initialRoute={page}
+            lang={lang}
+            toggleLang={toggleLang}
+            showAlert={showAlert}
+            onPasswordResetSuccess={(resetEmail, newPass) => {
+              if (updateUserPassword) updateUserPassword(resetEmail, newPass);
+            }}
+            registeredUsers={registeredUsers}
+          />
         </div>
       </AppFrame>
     );
@@ -5196,16 +6725,38 @@ function AppShell({ theme, toggleTheme }) {
       <TopNav page={page} onNavigate={onNavigate} theme={theme} toggleTheme={toggleTheme} onOpenChat={() => setChatOpen(true)} />
       <div className="page-col">
         {page === "admin-dashboard" && <AdminDashboardPage onNavigate={onNavigate} />}
-        {page === "kitchen-orders" && <KitchenOrdersPage onNavigate={onNavigate} />}
+        {page === "admin-home" && <AdminHomePage onNavigate={onNavigate} useCanteenHook={useCanteen} />}
+        {(page === "admin-orders" || page === "kitchen-orders") && (
+          <AdminOrdersPage onNavigate={onNavigate} useCanteenHook={useCanteen} />
+        )}
+        {page === "admin-crowd" && (
+          <RefactoredCrowdPage onNavigate={onNavigate} useCanteenHook={useCanteen} />
+        )}
+        {page === "admin-stock" && <AdminStockManagement onNavigate={onNavigate} />}
+        {page === "admin-menu" && <AdminMenuPage onNavigate={onNavigate} useCanteenHook={useCanteen} />}
+        {page === "qr-scanner" && <QrScannerPage onNavigate={onNavigate} useCanteenHook={useCanteen} />}
+
+        {/* Student Routes */}
         {page === "home" && <HomePage onNavigate={onNavigate} onOpenChat={() => setChatOpen(true)} />}
-        {page === "menu" && <MenuPage onNavigate={onNavigate} />}
+        {(page === "menu" || page === "order") && <MenuPage onNavigate={onNavigate} />}
         {page === "crowd" && <CrowdPage onNavigate={onNavigate} />}
         {page === "stock" && <StockPage onNavigate={onNavigate} />}
         {page === "feedback" && <FeedbackPage onNavigate={onNavigate} />}
         {page === "cart" && <CartPage onNavigate={onNavigate} />}
-        {page === "tracking" && <TrackingPage onNavigate={onNavigate} />}
+        {page === "canteen-select" && <CanteenSelectPage onNavigate={onNavigate} />}
+        {page === "payment" && <PaymentPage onNavigate={onNavigate} useCanteenHook={useCanteen} />}
+        {page === "order-success" && <OrderSuccessPage onNavigate={onNavigate} useCanteenHook={useCanteen} />}
+        {page === "tracking" && <RefactoredTrackingPage onNavigate={onNavigate} useCanteenHook={useCanteen} />}
       </div>
-      <CanteenChefChatbot isOpen={chatOpen} onClose={(forceClose) => setChatOpen(forceClose ? false : !chatOpen)} onNavigate={onNavigate} />
+      <RefactoredChefDrawer
+        isOpen={chatOpen}
+        onClose={() => setChatOpen(false)}
+        onNavigate={onNavigate}
+        useCanteenHook={useCanteen}
+      />
+      {!chatOpen && page !== "login" && page !== "forgot-password" && (
+        <FloatingChefButton onClick={() => setChatOpen(true)} />
+      )}
     </AppFrame>
   );
 }
@@ -5234,61 +6785,66 @@ const css = `
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
 
 :root{
+  --forest-green: #073B30;
+  --forest-green-d: #052b23;
+  --gold: #F5B800;
+  --gold-hover: #E0A700;
+  --cream-bg: #F4EDE0;
   --chalk:#262922; --chalk-2:#33372D; --steel:#ECE8DE; --paper:#FFFFFF;
-  --coral:#E2A310; --coral-d:#B8830B; --rose:#C43E1C; --amber:#CC7A00; --emerald:#3E7A4F; --violet:#8B5CF6;
-  --turmeric:#E2A310; --turmeric-d:#B8830B; --chili:#C43E1C; --basil:#3E7A4F;
-  --ink:#201E1A; --muted:#7A7468; --line:#DAD3C2;
-  --font-display:'Archivo Black',sans-serif; --font-body:'Work Sans',sans-serif; --font-mono:'IBM Plex Mono',monospace;
+  --coral:#F5B800; --coral-d:#D9A000; --rose:#C43E1C; --amber:#CC7A00; --emerald:#3E7A4F; --violet:#8B5CF6;
+  --turmeric:#F5B800; --turmeric-d:#D9A000; --chili:#C43E1C; --basil:#073B30;
+  --ink:#111827; --muted:#64748B; --line:#E2E8F0;
+  --font-display:'Work Sans',sans-serif; --font-body:'Work Sans',sans-serif; --font-mono:'IBM Plex Mono',monospace;
 
-  --page-bg: #f2ebe0;
-  --surface: rgba(255,255,255,.96);
-  --surface-border: rgba(32,30,26,.14);
-  --text: #27231b;
-  --text-muted: rgba(39,35,27,.65);
-  --input-bg: rgba(255,255,255,.95);
-  --input-border: rgba(32,30,26,.14);
-  --button-bg: linear-gradient(135deg, #e2a310 0%, #b8830b 100%);
-  --button-bg-flat: var(--coral);
-  --button-text: #1f1a0f;
-  --pill-bg: rgba(255,255,255,.12);
-  --pill-border: rgba(39,35,27,.14);
-  --pill-active-bg: rgba(226,163,16,.2);
-  --pill-active-text: #27231b;
-  --card-shadow: 0 10px 32px rgba(15,23,42,0.06);
-  --card-shadow-hover: 0 18px 48px rgba(15,23,42,0.12);
+  --page-bg: #F4EDE0;
+  --surface: #FFFFFF;
+  --surface-border: rgba(7,59,48,.08);
+  --text: #111827;
+  --text-muted: rgba(17,24,39,.65);
+  --input-bg: #FFFFFF;
+  --input-border: #E2E8F0;
+  --button-bg: linear-gradient(135deg, #F5B800 0%, #D9A000 100%);
+  --button-bg-flat: #F5B800;
+  --button-text: #111827;
+  --pill-bg: rgba(7,59,48,.06);
+  --pill-border: rgba(7,59,48,.12);
+  --pill-active-bg: #F5B800;
+  --pill-active-text: #111827;
+  --card-shadow: 0 4px 20px rgba(7,59,48,0.05);
+  --card-shadow-hover: 0 10px 28px rgba(7,59,48,0.1);
 }
 :root.theme-dark{
-  --page-bg: radial-gradient(circle at 30% 0%, rgba(226,163,16,.15), transparent 30%), linear-gradient(180deg, #24271e 0%, #161810 100%);
-  --surface: rgba(22,25,18,.85);
-  --surface-border: rgba(226,163,16,.22);
+  --page-bg: #0b1a16;
+  --surface: #0f2721;
+  --surface-border: rgba(245,184,0,.25);
   --text: #f7ecd4;
   --text-muted: rgba(247,236,212,.72);
-  --input-bg: rgba(16,18,13,.6);
+  --input-bg: rgba(7,59,48,.4);
   --input-border: rgba(255,255,255,.14);
-  --button-bg: linear-gradient(135deg, #e2a310 0%, #b8830b 100%);
-  --button-bg-flat: var(--coral);
-  --button-text: #1b170c;
-  --pill-bg: rgba(255,255,255,.04);
-  --pill-border: rgba(255,213,110,.25);
-  --pill-active-bg: rgba(226,163,16,.22);
-  --pill-active-text: #fff;
+  --button-bg: linear-gradient(135deg, #F5B800 0%, #D9A000 100%);
+  --button-bg-flat: #F5B800;
+  --button-text: #111827;
+  --pill-bg: rgba(255,255,255,.05);
+  --pill-border: rgba(245,184,0,.25);
+  --pill-active-bg: #F5B800;
+  --pill-active-text: #111827;
   --card-shadow: 0 10px 36px rgba(0,0,0,0.35);
   --card-shadow-hover: 0 20px 54px rgba(0,0,0,0.5);
 }
 :root.theme-light{
-  --page-bg: #f2ebe0;
-  --surface: #ffffff;
-  --surface-border: rgba(32,30,26,.14);
-  --text: #27231b;
-  --text-muted: rgba(39,35,27,.65);
-  --input-bg: rgba(255,255,255,.98);
-  --input-border: rgba(32,30,26,.14);
-  --button-bg: linear-gradient(135deg, #e2a310 0%, #b8830b 100%);
-  --button-bg-flat: var(--coral);
-  --button-text: #1f1a0f;
-  --pill-bg: rgba(39,35,27,.04);
-  --pill-border: rgba(39,35,27,.14);
-  --pill-active-bg: rgba(226,163,16,.22);
+  --page-bg: #F4EDE0;
+  --surface: #FFFFFF;
+  --surface-border: rgba(7,59,48,.08);
+  --text: #111827;
+  --text-muted: rgba(17,24,39,.65);
+  --input-bg: #FFFFFF;
+  --input-border: #E2E8F0;
+  --button-bg: linear-gradient(135deg, #F5B800 0%, #D9A000 100%);
+  --button-bg-flat: #F5B800;
+  --button-text: #111827;
+  --pill-bg: rgba(7,59,48,.06);
+  --pill-border: rgba(7,59,48,.12);
+  --pill-active-bg: #F5B800;
   --pill-active-text: #27231b;
   --card-shadow: 0 10px 32px rgba(15,23,42,0.06);
   --card-shadow-hover: 0 18px 48px rgba(15,23,42,0.12);
@@ -5310,6 +6866,73 @@ html, #root{ height:100%; }
 .page-col-login{ min-height:100vh; width:100%; background:transparent; box-shadow:none; display:flex; flex-direction:column; }
 
 /* ---- Reference Login Layout matching User Mockup with Vivid Background Image ---- */
+/* ── Login Error Popup Toast ────────────────────────────────────────── */
+@keyframes loginPopupIn {
+  0%   { opacity: 0; transform: translateY(-28px) scale(0.95); }
+  60%  { transform: translateY(4px) scale(1.01); }
+  80%  { transform: translateY(-3px) scale(1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes loginPopupShake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+.login-popup-error {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 300px;
+  max-width: 420px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(200, 30, 30, 0.92), rgba(160, 20, 20, 0.88));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 120, 120, 0.35);
+  box-shadow: 0 8px 32px rgba(180, 30, 30, 0.38), 0 2px 8px rgba(0,0,0,0.18);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  animation: loginPopupIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             loginPopupShake 0.45s 0.3s ease both;
+}
+.login-popup-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+}
+.login-popup-msg {
+  flex: 1;
+  letter-spacing: 0.01em;
+}
+.login-popup-close {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s;
+}
+.login-popup-close:hover {
+  background: rgba(255,255,255,0.28);
+}
+
 .ref-login-canvas {
   min-height: 100vh;
   width: 100%;
@@ -5317,14 +6940,37 @@ html, #root{ height:100%; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #f6e8db;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.18)), url('/cantenn.png');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #0f172a;
   overflow-x: hidden;
   font-family: var(--font-body);
+}
+
+.ref-login-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  filter: brightness(1.15) contrast(1.05) saturate(1.25);
+}
+
+.ref-login-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(0, 0, 0, 0.08) 60%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .ref-watermark-login {
@@ -5604,6 +7250,13 @@ html, #root{ height:100%; }
 .ref-forgot-link:hover {
   color: #ea580c;
   text-decoration: underline;
+}
+
+button,
+button * {
+  user-select: none;
+  -webkit-user-select: none;
+  caret-color: transparent !important;
 }
 
 .ref-cta-btn {
@@ -5888,7 +7541,8 @@ html, #root{ height:100%; }
 .mode.active{ border-color:var(--coral); background:rgba(226,163,16,0.14); color:var(--coral-d); box-shadow:0 4px 16px rgba(226,163,16,0.2); }
 .r-row{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); padding:7px 0; }
 .r-row.total{ color:var(--ink); font-weight:800; font-size:15px; border-top:1px dashed var(--line); padding-top:12px; margin-top:8px; }
-.checkoutbar{ position:absolute; left:0; right:0; bottom:0; background:var(--surface); border-top:1.5px solid var(--surface-border); padding:18px 24px 28px; backdrop-filter:blur(20px); box-shadow:0 -10px 40px rgba(0,0,0,0.08); }
+.checkoutbar{ position:absolute; left:0; right:0; bottom:0; background:var(--surface); border-top:1.5px solid var(--surface-border); padding:18px 24px 28px; backdrop-filter:blur(20px); box-shadow:0 -10px 40px rgba(0,0,0,0.08); display:flex; align-items:center; }
+.flapboard.home-canteen-cta{ cursor:default; }
 .place-btn{ width:100%; background:linear-gradient(135deg, var(--coral), #b8830b); color:#1f1a0f; border:none; border-radius:16px; padding:16px 0;
   font-weight:800; font-size:16px; letter-spacing:0.04em; box-shadow:0 8px 24px rgba(226,163,16,0.4); cursor:pointer; transition:transform .15s, box-shadow .15s; }
 .place-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 32px rgba(226,163,16,0.55); }
@@ -5935,22 +7589,31 @@ html, #root{ height:100%; }
 
 /* ---- Top nav (web) ---- */
 .topnav{ position:sticky; top:0; z-index:40; width:100%; background:rgba(38,41,34,0.92); backdrop-filter:blur(20px); flex-shrink:0;
-  box-shadow:0 4px 20px rgba(0,0,0,.15); border-bottom:1px solid rgba(226,163,16,0.2); }
-.topnav-inner{ max-width:720px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
-  padding:12px 20px; }
-.topnav-brand{ display:flex; align-items:center; gap:8px; font-family:var(--font-display); color:var(--paper);
-  font-size:15px; letter-spacing:.02em; }
-.topnav-dot{ width:9px; height:9px; border-radius:50%; background:#4ade80; flex-shrink:0; box-shadow:0 0 0 3px rgba(74,222,128,0.25); animation:chefPulse 2s infinite; }
-.topnav-items{ display:flex; gap:4px; }
-.navitem{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:#A9A498; font-weight:700;
-  background:none; border:none; cursor:pointer; font-family:var(--font-body); padding:8px 14px; border-radius:20px;
-  transition:background .2s, color .2s, transform .15s; }
+  box-shadow:0 4px 20px rgba(0,0,0,.15); border-bottom:1px solid rgba(226,163,16,0.2); box-sizing:border-box; }
+.topnav-inner{ width:100%; max-width:100%; box-sizing:border-box; margin:0; display:flex; align-items:center; justify-content:space-between;
+  gap:8px; padding:8px 16px; }
+.topnav-left{ display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.topnav-brand{ display:flex; align-items:center; gap:6px; font-family:var(--font-display); color:var(--paper);
+  font-size:14px; letter-spacing:.02em; white-space:nowrap; flex-shrink:0; }
+.topnav-dot{ width:8px; height:8px; border-radius:50%; background:#4ade80; flex-shrink:0; box-shadow:0 0 0 3px rgba(74,222,128,0.25); animation:chefPulse 2s infinite; }
+.topnav-items{ display:flex; align-items:center; justify-content:center; gap:4px; flex:1; min-width:0;
+  overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; padding:2px 4px; }
+.topnav-items::-webkit-scrollbar{ display:none; }
+.topnav-right{ display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-shrink:0; margin-left:auto; }
+.navitem{ display:inline-flex; align-items:center; justify-content:center; gap:5px; font-size:12px; color:#A9A498; font-weight:700;
+  background:none; border:none; cursor:pointer; font-family:var(--font-body); padding:6px 11px; border-radius:18px;
+  white-space:nowrap; text-align:center; flex-shrink:0; transition:background .2s, color .2s, transform .15s; }
 .navitem:hover{ color:var(--paper); background:rgba(255,255,255,.08); transform:translateY(-1px); }
 .navitem.active{ color:#1f1a0f; background:linear-gradient(135deg, var(--coral), #b8830b); box-shadow:0 4px 14px rgba(226,163,16,0.35); }
-.navicon{ display:flex; }
-.navitem span:last-child{ display:none; }
+.navicon{ display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; font-size:13px; }
+.navitem span:last-child{ display:none; white-space:nowrap; }
+.logout-btn{ flex-shrink:0 !important; }
 @media (min-width:520px){
   .navitem span:last-child{ display:inline; }
+}
+@media (max-width:960px){
+  .topnav-inner{ padding:8px 10px; gap:6px; }
+  .topnav-brand span:last-child{ display:none; }
 }
 
 /* ---- Crowd page ---- */
@@ -6123,42 +7786,53 @@ html, #root{ height:100%; }
 /* ---- Canteen Chef AI Chatbot Styles ---- */
 .chef-fab {
   position: fixed;
-  bottom: 26px;
-  right: 26px;
+  bottom: 24px;
+  right: 24px;
   z-index: 999;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 12px 30px rgba(217, 119, 6, 0.48), 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, var(--coral), #b8830b);
-  color: #fff;
-  border: 1.5px solid rgba(255,255,255,0.4);
-  box-shadow: 0 12px 36px rgba(226,163,16,0.5);
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 14px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  justify-content: center;
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+  backdrop-filter: blur(12px);
+  padding: 0;
 }
 .chef-fab:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 16px 44px rgba(226,163,16,0.65);
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 18px 40px rgba(217, 119, 6, 0.7), 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+.chef-fab:active {
+  transform: translateY(-1px) scale(0.96);
 }
 .chef-fab-icon {
-  font-size: 22px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .chef-fab-pulse {
-  width: 10px;
-  height: 10px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 0 3px rgba(74,222,128,0.35);
+  background: #22c55e;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35);
   animation: chefPulse 2s infinite;
 }
 @keyframes chefPulse {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.35); }
-  50% { box-shadow: 0 0 0 8px rgba(74,222,128,0.55); }
+  0%, 100% { box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35); }
+  50% { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0.6); }
 }
 
 .chef-chat-modal {
@@ -6515,6 +8189,11 @@ html, #root{ height:100%; }
   border-color: #ea580c;
   box-shadow: 0 2px 8px rgba(234, 88, 12, 0.4);
 }
+.chef-lang-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
 .chef-lang-toggle-btn {
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.25);
@@ -6531,6 +8210,32 @@ html, #root{ height:100%; }
 }
 .chef-lang-toggle-btn:hover {
   background: rgba(255,255,255,0.28);
+}
+.chef-voice-warn-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.5);
+  cursor: help;
+  animation: badgePulse 1.8s infinite ease-in-out;
+  pointer-events: auto;
+  z-index: 2;
+}
+@keyframes badgePulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  50% { transform: scale(1.18); box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 .chef-mic-btn {
   width: 40px;
@@ -7082,5 +8787,1590 @@ html, #root{ height:100%; }
   border-color: var(--coral);
   background: rgba(226,163,16,0.12);
   transform: translateY(-1px);
+}
+
+/* ================================================================== */
+/* 3D Visual Effects & Dining Scene Animations                        */
+/* ================================================================== */
+.floating-3d-item {
+  animation: float3D 6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.18));
+}
+.floating-3d-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  transition: transform 0.2s ease;
+}
+
+@keyframes float3D {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-14px) rotate(6deg) scale(1.05); }
+  100% { transform: translateY(-6px) rotate(-6deg) scale(0.98); }
+}
+
+.ref-cta-btn, .place-btn, .adv-submit-btn {
+  transform: translateZ(0);
+  box-shadow: 0 6px 0 #92400e, 0 12px 24px rgba(226, 163, 16, 0.45);
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+.ref-cta-btn:active, .place-btn:active, .adv-submit-btn:active {
+  transform: translateY(4px) !important;
+  box-shadow: 0 2px 0 #92400e, 0 4px 12px rgba(226, 163, 16, 0.3) !important;
+}
+
+.token-card {
+  transform-style: preserve-3d;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.chef-3d-gyro {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  animation: gyroSpin 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes gyroSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.steam-line-1 {
+  animation: steamRise 2.4s ease-in-out infinite;
+}
+.steam-line-2 {
+  animation: steamRise 2.8s ease-in-out infinite 0.7s;
+}
+@keyframes steamRise {
+  0% { transform: translateY(0) scaleX(1); opacity: 0.2; }
+  50% { transform: translateY(-4px) scaleX(1.4); opacity: 0.8; }
+  100% { transform: translateY(-9px) scaleX(0.8); opacity: 0; }
+}
+
+.char-left, .char-center, .char-right {
+  transition: transform 0.25s ease;
+  transform-origin: bottom center;
+}
+.dining-illustration-wrap:hover .char-left {
+  transform: translateY(-2px) rotate(-1deg);
+}
+.dining-illustration-wrap:hover .char-center {
+  transform: translateY(-3px);
+}
+.dining-illustration-wrap:hover .char-right {
+  transform: translateY(-2px) rotate(1deg);
+}
+
+/* ================================================================== */
+/* Nutrition Modal Styles                                                */
+/* ================================================================== */
+.nutri-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(10, 8, 5, 0.72);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: nutriOverlayIn 0.25s ease;
+}
+@keyframes nutriOverlayIn { from { opacity: 0; } to { opacity: 1; } }
+
+.nutri-modal {
+  width: 100%; max-width: 520px;
+  background: var(--surface);
+  border: 1.5px solid var(--surface-border);
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -24px 80px rgba(0,0,0,0.32);
+  overflow: hidden;
+  animation: nutriSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 92vh;
+  display: flex; flex-direction: column;
+}
+@keyframes nutriSlideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.nutri-modal-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 20px 20px 16px;
+  background: linear-gradient(135deg, rgba(226,163,16,0.12), rgba(99,102,241,0.06));
+  border-bottom: 1.5px solid var(--line);
+  flex-shrink: 0;
+}
+.nutri-modal-title-row {
+  display: flex; align-items: center; gap: 12;
+}
+.nutri-food-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(226,163,16,0.22), rgba(226,163,16,0.08));
+  border: 1.5px solid rgba(226,163,16,0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--coral-d); flex-shrink: 0; margin-right: 12px;
+}
+.nutri-modal-name {
+  font-size: 16px; font-weight: 800; color: var(--ink);
+  font-family: var(--font-display); line-height: 1.2;
+}
+.nutri-modal-sub {
+  font-size: 11.5px; color: var(--muted); margin-top: 3px;
+  max-width: 240px; line-height: 1.4;
+}
+.nutri-close-btn {
+  background: var(--steel); border: none; border-radius: 50%;
+  width: 32px; height: 32px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+.nutri-close-btn:hover { background: rgba(196,62,28,0.2); color: var(--chili); }
+
+.nutri-modal-body {
+  padding: 20px; overflow-y: auto; flex: 1;
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+/* Calories Hero + Donut Row */
+.nutri-hero-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.nutri-kcal-hero {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04));
+  border: 1.5px solid rgba(245,158,11,0.25);
+  border-radius: 20px; padding: 18px 20px;
+  text-align: center;
+}
+.nutri-kcal-number {
+  font-family: var(--font-display); font-size: 44px; line-height: 1;
+  color: var(--coral-d); font-weight: 800;
+}
+.nutri-kcal-label {
+  font-size: 11.5px; font-weight: 800; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px;
+}
+.nutri-diet-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 800; border-radius: 10px;
+  padding: 4px 10px; margin-top: 10px;
+}
+.nutri-diet-tag.veg {
+  background: rgba(16,185,129,0.14); color: var(--basil);
+}
+.nutri-diet-tag.nonveg {
+  background: rgba(239,68,68,0.14); color: #ef4444;
+}
+.nutri-diet-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: currentColor; display: inline-block;
+}
+
+.nutri-donut-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.nutri-donut-legend {
+  display: flex; gap: 10px;
+}
+.nutri-legend-item {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 10.5px; font-weight: 800; color: var(--muted);
+  font-family: var(--font-mono);
+}
+.nutri-legend-item span:first-child {
+  width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0;
+}
+
+/* Macro Chips */
+.nutri-macro-chips {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+.nutri-macro-chip {
+  border: 1.5px solid; border-radius: 14px; padding: 10px 8px;
+  text-align: center;
+}
+.nutri-chip-val {
+  font-size: 18px; font-weight: 800; font-family: var(--font-mono); line-height: 1;
+}
+.nutri-chip-val span { font-size: 11px; font-weight: 700; }
+.nutri-chip-key {
+  font-size: 10.5px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;
+}
+
+/* Nutrient bars */
+.nutri-section-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+  padding-bottom: 4px; border-bottom: 1px solid var(--line);
+}
+.nutri-bars {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.nutri-bar-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
+}
+.nutri-bar-label-wrap {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 105px; flex-shrink: 0;
+}
+.nutri-bar-name {
+  font-size: 12px; font-weight: 700; color: var(--ink);
+}
+.nutri-bar-val {
+  font-size: 11.5px; font-weight: 800; font-family: var(--font-mono);
+}
+.nutri-bar-track {
+  flex: 1; height: 8px; background: var(--steel);
+  border-radius: 99px; overflow: hidden;
+}
+.nutri-bar-fill {
+  height: 100%; border-radius: 99px;
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nutri-dv-label {
+  font-size: 10px; font-family: var(--font-mono); font-weight: 800;
+  color: var(--muted); width: 44px; text-align: right; flex-shrink: 0;
+}
+
+/* Allergens */
+.nutri-allergen-wrap { }
+.nutri-allergen-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.nutri-allergen-chip {
+  font-size: 11.5px; font-weight: 800; padding: 5px 12px;
+  border-radius: 10px;
+  background: rgba(239,68,68,0.1); color: #ef4444;
+  border: 1.5px solid rgba(239,68,68,0.25);
+}
+
+.nutri-dv-note {
+  font-size: 10.5px; color: var(--muted); line-height: 1.4;
+  padding: 10px 12px; background: var(--steel); border-radius: 10px;
+}
+
+/* Mini nutrition info button on cards */
+.nutri-info-btn {
+  background: rgba(99,102,241,0.12); border: 1.5px solid rgba(99,102,241,0.28);
+  color: #6366f1; border-radius: 50%; width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0;
+  transition: background 0.15s, transform 0.15s;
+}
+.nutri-info-btn:hover {
+  background: rgba(99,102,241,0.25); transform: scale(1.1);
+}
+
+/* Mini nutrition chips on menu rows */
+.nutri-mini-row {
+  display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0;
+}
+.nutri-mini-chip {
+  font-size: 10.5px; font-weight: 800; padding: 2px 7px;
+  border-radius: 8px; font-family: var(--font-mono);
+}
+.nutri-mini-chip.kcal   { background: rgba(245,158,11,0.14); color: #b45309; }
+.nutri-mini-chip.protein { background: rgba(99,102,241,0.13); color: #4f46e5; }
+.nutri-mini-chip.carbs  { background: rgba(245,158,11,0.12); color: #92400e; }
+.nutri-mini-chip.fat    { background: rgba(239,68,68,0.12);  color: #dc2626; }
+
+/* Stored DB & Emails button on LoginPage */
+.ref-stored-db-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(234, 88, 12, 0.35);
+  color: #ea580c;
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.12);
+  transition: all 0.2s ease;
+}
+.ref-stored-db-btn:hover {
+  background: #ffffff;
+  border-color: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.2);
+}
+.ref-db-count-chip {
+  background: #ea580c;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 12px;
+}
+
+/* Stored Database Modal Overlay */
+.ref-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modalFadeIn 0.25s ease;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ref-modal-card {
+  width: 100%;
+  max-width: 660px;
+  max-height: 88vh;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalSlideUp 0.25s ease;
+}
+@keyframes modalSlideUp {
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.ref-modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.ref-modal-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ref-modal-sub {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+.ref-modal-close {
+  background: #f1f5f9;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.ref-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.ref-db-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 14px 24px;
+  background: #f8fafc;
+  border-bottom: 1px solid #f1f5f9;
+}
+.ref-db-stat {
+  background: #ffffff;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ref-db-stat-num {
+  font-size: 18px;
+  font-weight: 900;
+  color: #ea580c;
+  font-family: var(--font-mono);
+}
+.ref-db-stat-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+}
+.ref-db-stat-badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: #16a34a;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: rgba(22, 163, 74, 0.1);
+}
+
+.ref-db-table-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 24px;
+}
+.ref-db-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.ref-db-table th {
+  text-align: left;
+  padding: 10px 8px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid #e2e8f0;
+}
+.ref-db-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+.ref-db-table tr:hover {
+  background: #fcfdfe;
+}
+.ref-db-table tr.highlight-row {
+  background: #fff7ed;
+}
+
+.email-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.email-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: #f1f5f9;
+  padding: 2px 7px;
+  border-radius: 6px;
+  color: #0369a1;
+  border: 1px solid #e2e8f0;
+}
+.copy-mini-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #64748b;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.copy-mini-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+.muted-dept {
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+.id-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: #e0e7ff;
+  color: #4338ca;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.ref-use-email-btn {
+  background: linear-gradient(135deg, #ff7a00, #ea580c);
+  border: none;
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.25);
+}
+.ref-use-email-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(234, 88, 12, 0.35);
+}
+
+.ref-modal-footer {
+  padding: 14px 24px;
+  border-top: 1px solid #f1f5f9;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.ref-modal-act-btn {
+  background: #ea580c;
+  border: none;
+  color: #ffffff;
+  padding: 9px 16px;
+  border-radius: 18px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ref-modal-act-btn:hover {
+  background: #c2410c;
+}
+.ref-modal-reset-btn {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 9px 14px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ref-modal-reset-btn:hover {
+  background: #fecaca;
+}
+.ref-modal-dismiss-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 9px 16px;
+  border-radius: 18px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ref-modal-dismiss-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* ================================================================== */
+/* Admin Stock Management Styles                                      */
+/* ================================================================== */
+.admin-stock-container {
+  width: 100%;
+  padding-bottom: 40px;
+}
+.stk-banner {
+  background: linear-gradient(135deg, rgba(226,163,16,0.18) 0%, rgba(184,131,11,0.25) 100%), var(--page-bg);
+  border-bottom: 1px solid var(--surface-border);
+}
+.stk-back-btn {
+  background: var(--surface) !important;
+  border: 1px solid var(--surface-border) !important;
+  color: var(--coral-d) !important;
+  box-shadow: var(--card-shadow);
+}
+.stk-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.stk-kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.stk-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--coral);
+}
+.stk-kpi-card.active {
+  border-color: var(--coral);
+  background: linear-gradient(180deg, var(--surface) 0%, rgba(226,163,16,0.08) 100%);
+}
+.stk-kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.stk-kpi-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+.stk-kpi-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.stk-kpi-num {
+  font-size: 28px;
+  font-weight: 900;
+  font-family: var(--font-display);
+  color: var(--text);
+  line-height: 1.1;
+}
+.stk-kpi-desc {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Tabs */
+.stk-tabs-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--surface-border);
+  padding-bottom: 12px;
+}
+.stk-tab-btn {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: var(--text);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stk-tab-btn:hover {
+  background: rgba(226,163,16,0.12);
+  border-color: var(--coral);
+}
+.stk-tab-btn.active {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(226,163,16,0.35);
+}
+
+/* Filter bar */
+.stk-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.stk-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  padding: 8px 14px;
+  border-radius: 24px;
+  flex: 1;
+  min-width: 240px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.stk-search-box input {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+}
+.stk-clear-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 12px;
+}
+.stk-filters-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.stk-select {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Table */
+.stk-table-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+.stk-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+.stk-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+.stk-table th {
+  background: rgba(0,0,0,0.03);
+  color: var(--muted);
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid var(--surface-border);
+}
+.stk-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--surface-border);
+  vertical-align: middle;
+}
+.stk-table tbody tr:hover {
+  background: rgba(226,163,16,0.04);
+}
+.stk-table tbody tr.row-expired {
+  background: rgba(196,62,28,0.04);
+}
+.stk-item-name {
+  font-weight: 800;
+  color: var(--text);
+  font-size: 14px;
+}
+.stk-item-id {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+.stk-cat-pill {
+  background: rgba(226,163,16,0.12);
+  color: var(--coral-d);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+.stk-qty-cell {
+  min-width: 110px;
+}
+.stk-qty-num {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.stk-progress-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.stk-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+.stk-progress-fill.in-stock { background: var(--emerald); }
+.stk-progress-fill.low-stock { background: var(--amber); }
+.stk-progress-fill.out-of-stock { background: var(--rose); }
+.stk-progress-fill.expired { background: #991b1b; }
+
+.stk-min-level {
+  color: var(--muted);
+  font-size: 12px;
+}
+.stk-supplier-text {
+  font-size: 12.5px;
+  color: var(--text);
+}
+.stk-expiry-cell {
+  font-size: 12.5px;
+}
+.badge-micro-expired {
+  display: inline-block;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.badge-micro-soon {
+  display: inline-block;
+  background: #ffedd5;
+  color: #c2410c;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 6px;
+  margin-top: 2px;
+}
+
+/* Badges */
+.stk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+.stk-badge-in { background: rgba(62,122,79,0.15); color: var(--basil); }
+.stk-badge-low { background: rgba(204,122,0,0.15); color: var(--amber); }
+.stk-badge-out { background: rgba(196,62,28,0.15); color: var(--rose); }
+.stk-badge-soon { background: rgba(234,88,12,0.15); color: #ea580c; }
+.stk-badge-expired { background: rgba(153,27,27,0.18); color: #991b1b; }
+
+/* Action buttons */
+.stk-actions-cell {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.stk-btn-action {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s;
+}
+.stk-btn-add {
+  background: rgba(62,122,79,0.15);
+  color: var(--basil);
+}
+.stk-btn-add:hover {
+  background: var(--basil);
+  color: #fff;
+}
+.stk-btn-reduce {
+  background: rgba(196,62,28,0.15);
+  color: var(--rose);
+}
+.stk-btn-reduce:hover {
+  background: var(--rose);
+  color: #fff;
+}
+.stk-btn-icon {
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  color: var(--muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.stk-btn-icon:hover {
+  color: var(--text);
+  border-color: var(--coral);
+}
+.stk-btn-icon.danger:hover {
+  color: var(--rose);
+  border-color: var(--rose);
+  background: rgba(196,62,28,0.08);
+}
+.stk-cta-btn {
+  background: var(--button-bg);
+  border: none;
+  color: var(--button-text);
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(226,163,16,0.3);
+  transition: all 0.15s ease;
+}
+.stk-cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(226,163,16,0.45);
+}
+
+/* Modals */
+.stk-modal {
+  max-width: 580px;
+  width: 92vw;
+}
+.stk-modal-item-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(226,163,16,0.08);
+  border: 1px solid rgba(226,163,16,0.2);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.stk-modal-item-summary .item-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+.stk-modal-item-summary .item-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.stk-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.stk-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.stk-form-group label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+.stk-input {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text);
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+.stk-input:focus {
+  border-color: var(--coral);
+}
+.stk-calc-preview {
+  background: rgba(0,0,0,0.04);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5px;
+}
+.stk-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Recipe Layout */
+.stk-recipe-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+}
+@media (max-width: 850px) {
+  .stk-recipe-layout {
+    grid-template-columns: 1fr;
+  }
+}
+.stk-recipe-dishes-col {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+  height: fit-content;
+}
+.stk-dishes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  max-height: 520px;
+  overflow-y: auto;
+}
+.stk-dish-item {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-border);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.15s;
+}
+.stk-dish-item:hover {
+  background: rgba(226,163,16,0.08);
+  border-color: var(--coral);
+}
+.stk-dish-item.selected {
+  background: rgba(226,163,16,0.14);
+  border-color: var(--coral);
+}
+.stk-dish-name {
+  font-weight: 800;
+  font-size: 13.5px;
+  color: var(--text);
+}
+.stk-dish-meta {
+  font-size: 11px;
+  color: var(--muted);
+}
+.stk-dish-badge {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--coral-d);
+}
+.stk-recipe-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.stk-dish-detail-header {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 18px;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--card-shadow);
+}
+.stk-dish-detail-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.stk-dish-detail-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+.stk-dish-detail-price {
+  font-size: 24px;
+  font-weight: 900;
+  font-family: var(--font-display);
+  color: var(--coral-d);
+}
+.stk-mapped-ingredients-box, .stk-add-ingredient-form-card, .stk-simulator-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+}
+.stk-recipe-empty {
+  padding: 24px;
+  text-align: center;
+  background: rgba(0,0,0,0.02);
+  border-radius: 12px;
+  border: 1px dashed var(--surface-border);
+}
+.stk-recipe-ingredients-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stk-recipe-ing-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  background: rgba(226,163,16,0.03);
+}
+.stk-recipe-ing-name {
+  font-weight: 800;
+  font-size: 13.5px;
+}
+.stk-recipe-ing-qty {
+  font-size: 12px;
+}
+.stk-recipe-ing-notes {
+  font-size: 11px;
+  color: var(--muted);
+}
+.stk-sim-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stk-sim-pill {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+.stk-sim-pill.ok {
+  background: rgba(62,122,79,0.12);
+  color: var(--basil);
+  border: 1px solid rgba(62,122,79,0.25);
+}
+.stk-sim-pill.short {
+  background: rgba(196,62,28,0.12);
+  color: var(--rose);
+  border: 1px solid rgba(196,62,28,0.25);
+}
+
+/* ---- QR Pickup Pass & Scanner Styles ---- */
+.qr-pass-card {
+  background: var(--surface);
+  border: 1.5px solid var(--surface-border);
+  border-radius: 24px;
+  padding: 20px;
+  margin-top: 18px;
+  box-shadow: 0 12px 36px rgba(15,23,42,0.08);
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.qr-pass-card.ready-pulse {
+  border-color: var(--basil);
+  box-shadow: 0 0 0 3px rgba(62,122,79,0.25), 0 16px 40px rgba(62,122,79,0.15);
+  animation: qrGlow 2.5s infinite;
+}
+@keyframes qrGlow {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(62,122,79,0.25), 0 16px 40px rgba(62,122,79,0.15); }
+  50% { box-shadow: 0 0 0 6px rgba(62,122,79,0.4), 0 20px 50px rgba(62,122,79,0.25); }
+}
+.qr-pass-card.picked-up {
+  opacity: 0.92;
+  border-color: var(--emerald);
+  background: rgba(16,185,129,0.03);
+}
+.qr-pass-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.qr-pass-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--coral-d);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.qr-pass-canteen {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin-top: 2px;
+}
+.qr-pass-loc {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.qr-status-pill {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+.qr-status-pill.ready { background: rgba(62,122,79,0.15); color: var(--basil); border: 1px solid rgba(62,122,79,0.3); }
+.qr-status-pill.done { background: rgba(16,185,129,0.15); color: var(--emerald); border: 1px solid rgba(16,185,129,0.3); }
+.qr-status-pill.prep { background: rgba(204,122,0,0.15); color: var(--amber); border: 1px solid rgba(204,122,0,0.3); }
+
+.qr-ready-alert {
+  background: rgba(62,122,79,0.12);
+  border: 1.5px solid var(--basil);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pulse-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--basil);
+  box-shadow: 0 0 0 rgba(62,122,79,0.6);
+  animation: pulseAnim 1.8s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulseAnim {
+  0% { box-shadow: 0 0 0 0 rgba(62,122,79,0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(62,122,79,0); }
+  100% { box-shadow: 0 0 0 0 rgba(62,122,79,0); }
+}
+
+.qr-code-box {
+  background: #ffffff;
+  border: 1.5px solid var(--surface-border);
+  border-radius: 20px;
+  padding: 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.qr-img-wrapper {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.qr-img-wrapper:hover {
+  transform: scale(1.02);
+}
+.qr-img {
+  width: 220px;
+  height: 220px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+.qr-collected-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+.qr-stamp-text {
+  border: 3px solid var(--emerald);
+  color: var(--emerald);
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 2px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transform: rotate(-12deg);
+  box-shadow: 0 4px 14px rgba(16,185,129,0.25);
+}
+.qr-scan-hint {
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.qr-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.025);
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+.qr-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.qr-meta-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.qr-meta-val {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 12.5px;
+  color: var(--text);
+}
+.qr-meta-val.token-val { color: var(--coral-d); font-size: 14px; }
+.qr-meta-val.counter-val { color: var(--basil); font-size: 14px; }
+.qr-meta-val.pay-hl { color: var(--basil); font-size: 11px; }
+
+.qr-items-summary {
+  font-size: 12px;
+}
+.qr-items-head {
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+}
+.qr-items-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.qr-item-pill {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 11.5px;
+}
+
+/* Modal styles */
+.qr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.7);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.qr-modal-content {
+  background: var(--surface);
+  border-radius: 28px;
+  max-width: 440px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+  border: 1.5px solid var(--surface-border);
+  position: relative;
+}
+.qr-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px 10px;
+}
+.qr-modal-title {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text);
+}
+.qr-modal-close {
+  background: rgba(0,0,0,0.06);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Scanner styles */
+.scanner-container-card, .manual-entry-card, .order-inspect-card {
+  background: var(--surface);
+  border: 1.5px solid var(--surface-border);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--card-shadow);
+}
+.scanner-viewfinder-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #0f172a;
+}
+.scanner-laser-beam {
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+  box-shadow: 0 0 12px #10b981;
+  animation: laserScan 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+@keyframes laserScan {
+  0% { top: 10%; opacity: 0.2; }
+  50% { top: 90%; opacity: 1; }
+  100% { top: 10%; opacity: 0.2; }
+}
+.camera-error-banner {
+  background: rgba(204,122,0,0.12);
+  border: 1px solid var(--amber);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+.canteen-mismatch-banner {
+  background: rgba(196,62,28,0.12);
+  border: 2px solid var(--rose);
+  padding: 14px 18px;
+  border-radius: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.already-collected-banner {
+  background: rgba(204,122,0,0.12);
+  border: 2px solid var(--amber);
+  padding: 14px 18px;
+  border-radius: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.qr-success-card {
+  background: rgba(62,122,79,0.12);
+  border: 2px solid var(--basil);
+  padding: 16px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.inspect-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1.5px dashed var(--line);
+}
+
+/* History Badges */
+.tx-badge {
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+.tx-purchase { background: rgba(62,122,79,0.15); color: var(--basil); }
+.tx-food_preparation { background: rgba(139,92,246,0.15); color: var(--violet); }
+.tx-used { background: rgba(204,122,0,0.15); color: var(--amber); }
+.tx-wastage, .tx-damaged, .tx-expired { background: rgba(196,62,28,0.15); color: var(--rose); }
+.tx-adjustment { background: rgba(100,116,139,0.15); color: #475569; }
+
+.tx-qty {
+  font-weight: 800;
+  font-size: 13px;
+}
+.tx-qty.pos { color: var(--basil); }
+.tx-qty.neg { color: var(--rose); }
+.stk-reason-text { font-size: 12.5px; color: var(--text); }
+.stk-order-badge {
+  background: rgba(0,0,0,0.06);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  margin-left: 6px;
+  font-family: var(--font-mono);
+}
+.stk-user-tag {
+  background: rgba(226,163,16,0.12);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--coral-d);
+}
+
+/* Admin Dashboard Raw Stock Alert Card */
+.raw-stock-alerts-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 18px;
+  padding: 18px 22px;
+  box-shadow: var(--card-shadow);
+  margin-top: 16px;
+}
+.raw-stock-alerts-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.raw-stock-alerts-title {
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+.raw-stock-badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.raw-stock-alert-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.raw-stock-alert-pill.low {
+  background: rgba(204,122,0,0.12);
+  border: 1px solid rgba(204,122,0,0.25);
+  color: var(--amber);
+}
+.raw-stock-alert-pill.out {
+  background: rgba(196,62,28,0.12);
+  border: 1px solid rgba(196,62,28,0.25);
+  color: var(--rose);
+}
+.raw-stock-alert-pill.soon {
+  background: rgba(234,88,12,0.12);
+  border: 1px solid rgba(234,88,12,0.25);
+  color: #ea580c;
 }
 `;

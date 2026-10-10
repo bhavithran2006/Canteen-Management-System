@@ -1,0 +1,464 @@
+/* ==========================================================================
+   Admin Menu Management Page Styling
+   Matches Campus Canteen Theme
+   ========================================================================== */
+
+.adm-menu-page {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--page-bg, #F6F3EA);
+  color: var(--text, #111827);
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  padding: 24px 32px 60px;
+  box-sizing: border-box;
+}
+
+.adm-menu-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.adm-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.adm-menu-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #B45309;
+}
+
+.adm-menu-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: #073B30;
+  margin: 2px 0 6px 0;
+  letter-spacing: -0.4px;
+}
+
+.adm-menu-sub {
+  font-size: 13px;
+  color: var(--text-muted, #64748B);
+  margin: 0;
+}
+
+.adm-add-dish-btn {
+  background: #073B30;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(7, 59, 48, 0.2);
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.adm-add-dish-btn:hover {
+  background: #0d4e40;
+  transform: translateY(-2px);
+}
+
+/* ── Controls ───────────────────────────────────────────────────────────── */
+.adm-menu-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.adm-cat-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adm-cat-pill {
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.08));
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted, #64748B);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-cat-pill:hover {
+  background: var(--surface-subtle, #F8F6F0);
+  color: var(--text, #111827);
+}
+
+.adm-cat-pill.active {
+  background: #F5B800;
+  color: #111827;
+  border-color: #F5B800;
+  box-shadow: 0 2px 8px rgba(245, 184, 0, 0.35);
+}
+
+.adm-menu-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.1));
+  border-radius: 20px;
+  padding: 6px 14px;
+  min-width: 280px;
+}
+
+.adm-menu-search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12.5px;
+  width: 100%;
+  color: var(--text, #111827);
+}
+
+/* ── Menu Grid ──────────────────────────────────────────────────────────── */
+.adm-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.adm-empty-menu {
+  grid-column: 1 / -1;
+  background: var(--surface, #ffffff);
+  border-radius: 20px;
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted, #64748B);
+}
+
+.adm-add-inline-btn {
+  margin-top: 12px;
+  background: #F5B800;
+  border: none;
+  color: #111827;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.adm-dish-card {
+  background: var(--surface, #ffffff);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 18px rgba(7, 59, 48, 0.04);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.07));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.adm-dish-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(7, 59, 48, 0.08);
+}
+
+.adm-dish-card.out-of-stock {
+  opacity: 0.75;
+  background: #FAFAFA;
+}
+
+.adm-dish-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adm-dish-cat-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adm-dish-cat-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #B45309;
+  background: rgba(245, 184, 0, 0.15);
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: capitalize;
+}
+
+.adm-veg-indicator {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.adm-veg-indicator.veg { color: #059669; }
+.adm-veg-indicator.non-veg { color: #DC2626; }
+
+.adm-dish-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adm-icon-btn {
+  background: var(--surface-subtle, #f1f5f9);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-icon-btn.edit { color: #073B30; }
+.adm-icon-btn.edit:hover { background: rgba(7, 59, 48, 0.1); }
+
+.adm-icon-btn.delete { color: #DC2626; }
+.adm-icon-btn.delete:hover { background: #FEF2F2; }
+
+.adm-dish-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.adm-dish-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text, #111827);
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.adm-dish-ta {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted, #64748B);
+}
+
+.adm-dish-desc {
+  font-size: 12px;
+  color: var(--text-muted, #64748B);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.adm-dish-nutrition-chips {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.adm-nutri-chip {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.adm-nutri-chip.cal { background: rgba(245, 184, 0, 0.14); color: #B45309; }
+.adm-nutri-chip.pro { background: rgba(59, 130, 246, 0.12); color: #2563EB; }
+.adm-nutri-chip.carb { background: rgba(16, 185, 129, 0.12); color: #059669; }
+
+/* Footer */
+.adm-dish-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--surface-border, rgba(7, 59, 48, 0.06));
+}
+
+.adm-price-tag {
+  font-size: 17px;
+  font-weight: 900;
+  color: #073B30;
+}
+
+.adm-stock-counter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adm-stock-label {
+  font-size: 11px;
+  color: var(--text-muted, #64748B);
+  font-weight: 700;
+}
+
+.adm-stock-stepper {
+  display: flex;
+  align-items: center;
+  background: var(--surface-subtle, #F8F6F0);
+  border-radius: 8px;
+  padding: 2px 4px;
+  gap: 4px;
+}
+
+.adm-step-btn {
+  background: #ffffff;
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.1));
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.adm-step-btn:hover:not(:disabled) {
+  background: #F5B800;
+}
+
+.adm-stock-val {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 0 4px;
+}
+
+.adm-stock-val.low { color: #D97706; }
+.adm-stock-val.out { color: #DC2626; }
+
+.adm-avail-toggle {
+  border: none;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-avail-toggle.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+
+.adm-avail-toggle.inactive {
+  background: rgba(239, 68, 68, 0.12);
+  color: #DC2626;
+}
+
+/* ── Modal Form ─────────────────────────────────────────────────────────── */
+.adm-dish-form {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.adm-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.adm-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.adm-form-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text, #1E293B);
+}
+
+.adm-form-input,
+.adm-form-select,
+.adm-form-textarea {
+  background: var(--surface-subtle, #FBF9F4);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.15));
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--text, #111827);
+  outline: none;
+}
+
+.adm-form-input:focus,
+.adm-form-select:focus,
+.adm-form-textarea:focus {
+  border-color: #073B30;
+  background: #ffffff;
+}
+
+.adm-radio-group {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.adm-radio-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.adm-modal-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--surface-border, rgba(7, 59, 48, 0.08));
+}
+
+.adm-cancel-modal-btn {
+  background: var(--surface-subtle, #f1f5f9);
+  border: none;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.adm-submit-dish-btn {
+  background: #F5B800;
+  border: none;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 8px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(245, 184, 0, 0.35);
+}
+
+.adm-submit-dish-btn:hover {
+  background: #e0a700;
+}

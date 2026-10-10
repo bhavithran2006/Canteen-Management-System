@@ -1,0 +1,603 @@
+/* ==========================================================================
+   Refactored Crowd Page Styling
+   Matches the modern Campus Canteen Crowd Density & Wait Times mockup:
+   - Anime canteen hero banner with "REAL-TIME MONITOR" and LIVE badge
+   - 3 Summary Stat Cards (Low, Medium, High counts)
+   - 3-Column Canteen Grid with photos, occupancy bars, wait times, seats
+   - Dark mode support
+   ========================================================================== */
+
+.ref-crowd-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 18px 24px 70px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+}
+
+/* ── HERO BANNER ────────────────────────────────────────────────────────── */
+.ref-crowd-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1024 / 185;
+  min-height: 155px;
+  max-height: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transform: translateZ(0);
+  isolation: isolate;
+  background-color: #1a2a22;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.ref-crowd-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Contrast Gradient Overlay */
+.ref-crowd-hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(14, 28, 22, 0.90) 0%,
+    rgba(14, 28, 22, 0.78) 32%,
+    rgba(14, 28, 22, 0.38) 56%,
+    rgba(0, 0, 0, 0.05) 75%,
+    transparent 100%
+  );
+}
+
+/* LIVE Status Badge on Top-Right */
+.ref-crowd-live-badge {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(16, 185, 129, 0.6);
+  background: rgba(6, 78, 59, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+  user-select: none;
+}
+
+.ref-crowd-live-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: crowdLivePulse 1.8s infinite;
+}
+
+@keyframes crowdLivePulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.ref-crowd-live-text {
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* Banner Text Content - Left Side */
+.ref-crowd-hero-text-wrap {
+  position: absolute;
+  left: 26px;
+  bottom: 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: 620px;
+  pointer-events: none;
+}
+
+.ref-crowd-hero-label {
+  font-size: 11.5px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f59e0b;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  margin-bottom: 2px;
+}
+
+.ref-crowd-hero-title {
+  font-size: clamp(22px, 3.1vw, 34px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+}
+
+.ref-crowd-hero-subtitle {
+  font-size: clamp(12px, 1.1vw, 14.5px);
+  color: rgba(255, 255, 255, 0.92);
+  margin: 4px 0 0 0;
+  font-weight: 500;
+  line-height: 1.35;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 640px) {
+  .ref-crowd-hero {
+    aspect-ratio: auto;
+    min-height: 175px;
+    max-height: none;
+  }
+  .ref-crowd-hero-text-wrap {
+    left: 16px;
+    bottom: 14px;
+    right: 16px;
+  }
+  .ref-crowd-hero-title {
+    font-size: 21px;
+  }
+  .ref-crowd-hero-subtitle {
+    font-size: 12px;
+  }
+}
+
+/* ── 3 STAT SUMMARY CARDS ───────────────────────────────────────────────── */
+.ref-crowd-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 860px) {
+  .ref-crowd-stats-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ref-crowd-stat-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.ref-crowd-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.ref-stat-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ref-stat-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ref-stat-avatar.low {
+  background-color: #ecfdf5;
+  color: #10b981;
+}
+
+.ref-stat-avatar.med {
+  background-color: #fffbeb;
+  color: #f59e0b;
+}
+
+.ref-stat-avatar.high {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+.ref-stat-count {
+  font-size: 32px;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.ref-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ref-stat-title {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.ref-stat-title.low { color: #16a34a; }
+.ref-stat-title.med { color: #d97706; }
+.ref-stat-title.high { color: #dc2626; }
+
+.ref-stat-subtitle {
+  font-size: 12.5px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.ref-stat-chevron {
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+}
+
+/* ── 3-COLUMN CANTEEN CARDS GRID ────────────────────────────────────────── */
+.ref-crowd-canteen-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .ref-crowd-canteen-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ref-crowd-canteen-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ref-canteen-card {
+  background: #ffffff;
+  border: 1px solid rgba(7, 59, 48, 0.08);
+  border-radius: 20px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 18px rgba(7, 59, 48, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  box-sizing: border-box;
+}
+
+.ref-canteen-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(7, 59, 48, 0.08);
+}
+
+/* Inset Top Row with Thumbnail on Left */
+.ref-canteen-head-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.ref-canteen-img-wrap {
+  width: 140px;
+  height: 96px;
+  min-width: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f1f5f9;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ref-canteen-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.ref-canteen-card:hover .ref-canteen-img {
+  transform: scale(1.04);
+}
+
+.ref-canteen-details-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.ref-canteen-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.ref-canteen-loc {
+  font-size: 12px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+/* Status Pill */
+.ref-canteen-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 800;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+/* Body */
+.ref-canteen-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ref-canteen-status-badge.low {
+  background-color: #ecfdf5;
+  color: #16a34a;
+}
+
+.ref-canteen-status-badge.med {
+  background-color: #fffbeb;
+  color: #d97706;
+}
+
+.ref-canteen-status-badge.high {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+/* Wait & Seats Row */
+.ref-canteen-metrics {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.ref-canteen-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Occupancy Progress Bar */
+.ref-canteen-occupancy-wrap {
+  margin-top: 18px;
+}
+
+.ref-occupancy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.ref-occupancy-track {
+  width: 100%;
+  height: 8px;
+  background-color: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ref-occupancy-bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ref-occupancy-bar.low {
+  background-color: #10b981;
+}
+
+.ref-occupancy-bar.med {
+  background-color: #f59e0b;
+}
+
+.ref-occupancy-bar.high {
+  background-color: #ef4444;
+}
+
+/* Card Footer */
+.ref-canteen-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ref-canteen-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.ref-canteen-live-tag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 800;
+  font-size: 11px;
+}
+
+.ref-canteen-live-tag.low { color: #16a34a; }
+.ref-canteen-live-tag.med { color: #d97706; }
+.ref-canteen-live-tag.high { color: #dc2626; }
+
+.ref-canteen-live-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* Live Estimate Banner Pill */
+.ref-canteen-update-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ref-canteen-update-notice.low {
+  background-color: #f0fdf4;
+  color: #166534;
+}
+
+.ref-canteen-update-notice.med {
+  background-color: #fffbeb;
+  color: #92400e;
+}
+
+.ref-canteen-update-notice.high {
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+/* Admin Quick Controls */
+.ref-admin-crowd-controls {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ref-admin-crowd-btn {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ref-admin-crowd-btn.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+/* ── DARK MODE ──────────────────────────────────────────────────────────── */
+.theme-dark .ref-crowd-stat-card,
+.theme-dark .ref-canteen-card {
+  background-color: #17261f;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .ref-stat-count,
+.theme-dark .ref-canteen-name {
+  color: #ffffff;
+}
+
+.theme-dark .ref-canteen-metrics {
+  color: #cbd5e1;
+}
+
+.theme-dark .ref-occupancy-track {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.theme-dark .ref-occupancy-header {
+  color: #94a3b8;
+}
+
+.theme-dark .ref-canteen-status-badge.low {
+  background-color: rgba(16, 185, 129, 0.15);
+}
+
+.theme-dark .ref-canteen-status-badge.med {
+  background-color: rgba(245, 158, 11, 0.15);
+}
+
+.theme-dark .ref-canteen-status-badge.high {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+.theme-dark .ref-canteen-update-notice.low {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+}
+
+.theme-dark .ref-canteen-update-notice.med {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+}
+
+.theme-dark .ref-canteen-update-notice.high {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+.theme-dark .ref-crowd-hero {
+  border: 2.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+}

@@ -1,0 +1,626 @@
+/* ==========================================================================
+   Admin Orders Page Styling
+   Campus Canteen Theme:
+   - Dark Forest Green (#073B30)
+   - Golden Yellow (#F5B800)
+   - Clean horizontal order cards
+   ========================================================================== */
+
+.adm-orders-page {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--page-bg, #F6F3EA);
+  color: var(--text, #111827);
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  padding: 24px 32px 60px;
+  box-sizing: border-box;
+}
+
+.adm-orders-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Top Header ─────────────────────────────────────────────────────────── */
+.adm-orders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.adm-orders-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #B45309;
+}
+
+.adm-orders-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: #073B30;
+  margin: 2px 0 6px 0;
+  letter-spacing: -0.4px;
+}
+
+.adm-orders-sub {
+  font-size: 13px;
+  color: var(--text-muted, #64748B);
+  margin: 0;
+}
+
+.adm-qr-shortcut-btn {
+  background: #073B30;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(7, 59, 48, 0.2);
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.adm-qr-shortcut-btn:hover {
+  background: #0d4e40;
+  transform: translateY(-2px);
+}
+
+/* ── Filter Bar ─────────────────────────────────────────────────────────── */
+.adm-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.adm-status-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adm-tab-pill {
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.08));
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted, #64748B);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-tab-pill:hover {
+  background: var(--surface-subtle, #F8F6F0);
+  color: var(--text, #111827);
+}
+
+.adm-tab-pill.active {
+  background: #F5B800;
+  color: #111827;
+  border-color: #F5B800;
+  box-shadow: 0 2px 8px rgba(245, 184, 0, 0.35);
+}
+
+.adm-search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.1));
+  border-radius: 20px;
+  padding: 6px 14px;
+  min-width: 280px;
+}
+
+.adm-search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12.5px;
+  width: 100%;
+  color: var(--text, #111827);
+}
+
+/* ── Orders List ────────────────────────────────────────────────────────── */
+.adm-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.adm-empty-orders {
+  background: var(--surface, #ffffff);
+  border-radius: 18px;
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted, #64748B);
+  font-size: 14px;
+}
+
+.adm-order-card {
+  background: var(--surface, #ffffff);
+  border-radius: 18px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 18px rgba(7, 59, 48, 0.04);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.07));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  transition: all 0.2s ease;
+}
+
+.adm-order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(7, 59, 48, 0.08);
+  border-color: rgba(245, 184, 0, 0.4);
+}
+
+.adm-card-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.adm-card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.adm-token-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adm-gold-token {
+  background: rgba(245, 184, 0, 0.22);
+  color: #B45309;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 8px;
+  letter-spacing: 0.03em;
+}
+
+.adm-ord-code {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: var(--text-muted, #64748B);
+  font-weight: 700;
+}
+
+.adm-card-canteen {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #073B30;
+  background: rgba(7, 59, 48, 0.07);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.adm-card-items-row {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--text, #0f172a);
+}
+
+.adm-items-bold {
+  color: var(--text, #0f172a);
+}
+
+.adm-card-meta-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted, #64748B);
+  flex-wrap: wrap;
+}
+
+.adm-customer-label {
+  font-weight: 600;
+  color: var(--text, #334155);
+}
+
+.adm-dot {
+  color: #CBD5E1;
+}
+
+.adm-time-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Secondary Actions Side */
+.adm-card-secondary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.adm-price-status-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.adm-order-total-price {
+  font-size: 18px;
+  font-weight: 900;
+  color: #073B30;
+  font-family: var(--font-display, inherit);
+}
+
+.adm-status-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.adm-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adm-details-btn {
+  background: #ffffff;
+  border: 1.5px solid var(--surface-border, rgba(7, 59, 48, 0.12));
+  color: var(--text, #334155);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-details-btn:hover {
+  background: var(--surface-subtle, #F8F6F0);
+  border-color: #073B30;
+  color: #073B30;
+}
+
+.adm-primary-advance-btn {
+  background: #F5B800;
+  border: none;
+  color: #111827;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(245, 184, 0, 0.35);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.adm-primary-advance-btn:hover {
+  background: #e0a700;
+  transform: translateY(-1px);
+}
+
+/* ── Modal / Sheet for Order Details & Tracking Timeline ────────────────── */
+.adm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.adm-modal-sheet {
+  background: var(--surface, #ffffff);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.adm-sheet-head {
+  padding: 22px 26px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--surface-border, rgba(7, 59, 48, 0.08));
+}
+
+.adm-modal-token-pill {
+  display: inline-block;
+  background: #F5B800;
+  color: #111827;
+  font-family: var(--font-mono, monospace);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.adm-sheet-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: #073B30;
+  margin: 0;
+}
+
+.adm-sheet-close {
+  background: var(--surface-subtle, #f1f5f9);
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #64748B;
+  transition: all 0.15s ease;
+}
+
+.adm-sheet-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.adm-sheet-body {
+  padding: 20px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Timeline */
+.adm-timeline-box {
+  background: var(--surface-subtle, #FBF9F4);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.07));
+  border-radius: 18px;
+  padding: 18px 20px;
+}
+
+.adm-timeline-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text-muted, #64748B);
+  margin-bottom: 14px;
+}
+
+.adm-tracking-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.adm-track-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  z-index: 2;
+  flex: 1;
+}
+
+.adm-step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #E2E8F0;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.adm-track-step.done .adm-step-circle {
+  background: #073B30;
+  color: #ffffff;
+}
+
+.adm-track-step.active .adm-step-circle {
+  background: #F5B800;
+  color: #111827;
+  box-shadow: 0 0 0 4px rgba(245, 184, 0, 0.25);
+}
+
+.adm-step-title {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--text, #111827);
+  letter-spacing: 0.3px;
+}
+
+.adm-step-desc {
+  font-size: 10px;
+  color: var(--text-muted, #64748B);
+}
+
+.adm-step-line {
+  height: 2px;
+  background: #CBD5E1;
+  flex: 1;
+  margin-top: -24px;
+  z-index: 1;
+}
+
+/* Detail Grid */
+.adm-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.adm-detail-col {
+  background: var(--surface-subtle, #FBF9F4);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.05));
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.adm-col-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted, #64748B);
+  letter-spacing: 0.5px;
+}
+
+.adm-col-val {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--text, #111827);
+}
+
+.adm-col-sub {
+  font-size: 11.5px;
+  color: var(--text-muted, #64748B);
+}
+
+/* Items Card */
+.adm-sheet-items-card {
+  background: var(--surface-subtle, #FBF9F4);
+  border: 1px solid var(--surface-border, rgba(7, 59, 48, 0.05));
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+.adm-items-head {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted, #64748B);
+  margin-bottom: 10px;
+}
+
+.adm-sheet-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 13.5px;
+  border-bottom: 1px dashed rgba(7, 59, 48, 0.08);
+}
+
+.adm-sheet-item-row:last-child {
+  border-bottom: none;
+}
+
+/* Status control buttons inside modal */
+.adm-sheet-status-control {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adm-control-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text, #111827);
+}
+
+.adm-control-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adm-stage-btn {
+  background: var(--surface, #ffffff);
+  border: 1.5px solid var(--surface-border, rgba(7, 59, 48, 0.12));
+  color: var(--text, #334155);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.adm-stage-btn:hover {
+  border-color: #073B30;
+  color: #073B30;
+}
+
+.adm-stage-btn.active {
+  background: #073B30;
+  color: #ffffff;
+  border-color: #073B30;
+}
+
+.adm-stage-btn.text-danger {
+  color: #DC2626;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.adm-stage-btn.text-danger:hover {
+  background: #FEF2F2;
+  border-color: #DC2626;
+}
+
+.adm-sheet-foot {
+  padding: 14px 26px 20px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--surface-border, rgba(7, 59, 48, 0.08));
+}
+
+.adm-close-sheet-btn {
+  background: var(--surface-subtle, #f1f5f9);
+  border: none;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.adm-close-sheet-btn:hover {
+  background: #e2e8f0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .adm-orders-page { padding: 16px 14px 40px; }
+  .adm-order-card { flex-direction: column; align-items: flex-start; }
+  .adm-card-secondary { align-items: flex-start; width: 100%; }
+  .adm-detail-grid { grid-template-columns: 1fr; }
+  .adm-tracking-steps { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .adm-step-line { display: none; }
+}
